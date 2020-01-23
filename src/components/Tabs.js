@@ -25,9 +25,9 @@ const Tabs = ({children}) => {
                 {children.map(({props}) => {
                     const {label, children} = props;
 
-                    if (label !== activeTab) return undefined;
-
-                    return children;
+                    return label !== activeTab
+                        ? undefined
+                        : children;
                 })}
             </div>
         </div>
