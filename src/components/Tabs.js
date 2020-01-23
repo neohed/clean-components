@@ -22,10 +22,12 @@ const Tabs = ({children}) => {
                 })}
             </ol>
             <div className="tab-content">
-                {children.map((child) => {
-                    if (child.props.label !== activeTab) return undefined;
+                {children.map(({props}) => {
+                    const {label, children} = props;
 
-                    return child.props.children;
+                    if (label !== activeTab) return undefined;
+
+                    return children;
                 })}
             </div>
         </div>
