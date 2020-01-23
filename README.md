@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Simple components I can use instead of monolithic frameworks.
 
+## Sources / Influences
+
+* Tab component originally based on: [alligator.io](https://alligator.io/react/tabs-component/)
+
 ## Available Scripts
 
 In the project directory, you can run:
