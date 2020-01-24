@@ -12,6 +12,7 @@ const Tabs = ({children}) => {
 
                     return (
                         <li
+                            key={label}
                             className={`tab-list-item${activeTab === label ? ' tab-list-active' : ''}`}
                             onClick={() => setActiveTab(label)}
                         >
