@@ -1,10 +1,11 @@
 import React from 'react'
 import './cleanButton.css'
 
-const CleanButton = ({text, clickHandler}) => (
+const CleanButton = ({text, id, clickHandler}) => (
     <button
+        value={id}
         className={'clean-button'}
-        onClick={clickHandler}
+        onClick={() => clickHandler(id)}
     >
         {
             text
