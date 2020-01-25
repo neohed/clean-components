@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Tabs.css'
+import './tabs.css'
 
 const Tabs = ({children}) => {
     const [activeTab, setActiveTab] = useState(children[0].props.label);

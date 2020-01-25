@@ -1,6 +1,7 @@
 import React from 'react';
 import Tabs from './components/Tabs'
 import './App.css';
+import CleanButton from "./components/CleanButton";
 
 function App() {
   return (
@@ -16,6 +17,13 @@ function App() {
           Nothing to see here, this tab is <em>extinct</em>!
         </div>
       </Tabs>
+      <br/>
+      <hr/>
+      <br/>
+      <CleanButton
+          text={'Clicked Button!'}
+          clickHandler={txt => console.log(txt)}
+      />
     </div>
   );
 }
