@@ -1,4 +1,5 @@
 import React from 'react'
+import img1 from '../image/PIA23606.jpg'
 import './scrollOver.css'
 
 const ScrollOver = () => (
@@ -6,14 +7,25 @@ const ScrollOver = () => (
         <div id="scroll-fixed" className="scroll-panel">
             Some content here...
         </div>
-        <div id="scroll-panel-1" className="scroll-panel">
-            Scrolling-Panel 1
-        </div>
-        <div id="scroll-panel-2" className="scroll-panel">
-            Scrolling-Panel 2
-        </div>
-        <div id="scroll-panel-3" className="scroll-panel">
-            Scrolling-Panel 3
+        <div id="scroll-relative" className="scroll-panel">
+            <div>
+                <img src={img1} alt="jupiter storm"/>
+            </div>
+            <div>
+                <div>Some other stuff!</div>
+                <div>Some other stuff!</div>
+                <div>Some other stuff!</div>
+                <div>Some other stuff!</div>
+            </div>
+            <div>
+                <img src={img1} alt="jupiter storm"/>
+            </div>
+            <div>
+                <div>Some other stuff!</div>
+                <div>Some other stuff!</div>
+                <div>Some other stuff!</div>
+                <div>Some other stuff!</div>
+            </div>
         </div>
     </div>
 );
