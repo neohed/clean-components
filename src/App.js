@@ -3,13 +3,13 @@ import {
     HashRouter as Router,
     Switch,
     Route,
-    Link
 } from 'react-router-dom';
 import TabDemo from './components/TabDemo'
 import FormDemo from './components/FormDemo'
 import './App.css';
 import RouterMenu from "./components/RouterMenu";
 import ScrollOver from "./components/ScrollOver";
+import ShrinkHeaderDemo from "./components/ShrinkHeaderDemo";
 
 function App() {
     return (
@@ -28,6 +28,9 @@ function App() {
                     </Route>
                     <Route path="/scroller">
                         <ScrollOver/>
+                    </Route>
+                    <Route path="/header">
+                        <ShrinkHeaderDemo/>
                     </Route>
                 </Switch>
             </Router>

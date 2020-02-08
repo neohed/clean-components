@@ -15,6 +15,9 @@ function RouterMenu() {
                 <li>
                     <Link to="scroller">Scroll</Link>
                 </li>
+                <li>
+                    <Link to="header">Header</Link>
+                </li>
             </ul>
         </div>
     );
