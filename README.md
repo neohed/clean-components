@@ -7,6 +7,7 @@ Simple components I can use instead of monolithic frameworks.
 ## Sources / Influences
 
 * Tab component originally based on: [alligator.io](https://alligator.io/react/tabs-component/)
+* Scroller from [SO](https://stackoverflow.com/questions/16688545/scroll-div-over-another-div)
 
 ## Available Scripts
 

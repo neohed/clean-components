@@ -1,39 +1,36 @@
-import React, {useState} from 'react';
-import Tabs from './components/Tabs'
-import CleanButton from "./components/CleanButton";
-import Checkbox from "./components/Checkbox";
+import React from 'react';
+import {
+    HashRouter as Router,
+    Switch,
+    Route,
+    Link
+} from 'react-router-dom';
+import TabDemo from './components/TabDemo'
+import FormDemo from './components/FormDemo'
 import './App.css';
+import RouterMenu from "./components/RouterMenu";
+import ScrollOver from "./components/ScrollOver";
 
 function App() {
-    const [isChecked, setIsChecked] = useState(false);
-
     return (
         <div className="App">
-            <Tabs>
-                <div label="Gator">
-                    See ya later, <em>Alligator</em>!
-                </div>
-                <div label="Croc">
-                    After 'while, <em>Crocodile</em>!
-                </div>
-                <div label="Sarcosuchus">
-                    Nothing to see here, this tab is <em>extinct</em>!
-                </div>
-            </Tabs>
-            <br/>
-            <hr/>
-            <Checkbox
-                id={'chk1'}
-                isChecked={isChecked}
-                label={'Click me!'}
-                changeHandler={(ctrl, checked) => setIsChecked(checked)}
-            />
-            <hr/>
-            <br/>
-            <CleanButton
-                text={'Clicked Button!'}
-                clickHandler={txt => console.log(txt)}
-            />
+            <Router>
+                <Switch>
+                    <Route exact path="/">
+                        <RouterMenu />
+                        <p>Click a link to see demo</p>
+                    </Route>
+                    <Route path="/tabs">
+                        <TabDemo/>
+                    </Route>
+                    <Route path="/form">
+                        <FormDemo/>
+                    </Route>
+                    <Route path="/scroller">
+                        <ScrollOver/>
+                    </Route>
+                </Switch>
+            </Router>
         </div>
     );
 }
