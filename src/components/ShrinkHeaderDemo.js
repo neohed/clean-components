@@ -7,18 +7,18 @@ const ShrinkHeaderDemo = () => (
         <ShrinkHeader
             title={'Night Sky'}
             startStyle={{
-                color: 'silver'
+                color: 'lemonchiffon'
             }}
             scrollStyle={{
                 color: 'black',
-                backgroundColor: 'silver'
+                backgroundColor: 'lavender'
             }}
         />
         <div style={{
             height: '1000px',
             padding: '15px 15px 2500px',
             fontSize: '30px',
-            background: `url(${background}) no-repeat`,
+            background: `LIGHTYELLOW url(${background}) no-repeat`,
             backgroundSize: '100% auto'
         }}>
         </div>

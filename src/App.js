@@ -9,6 +9,7 @@ import FormDemo from './components/FormDemo'
 import './App.css';
 import RouterMenu from "./components/RouterMenu";
 import ScrollOver from "./components/parallax/ScrollOver";
+import HeaderDemo from "./components/HeaderDemo";
 import ShrinkHeaderDemo from "./components/ShrinkHeaderDemo";
 import ShrinkHeaderDemo2 from "./components/ShrinkHeaderDemo2";
 
@@ -30,10 +31,13 @@ function App() {
                     <Route path="/scroller">
                         <ScrollOver/>
                     </Route>
-                    <Route path="/header">
+                    <Route path="/flexbox-header">
+                        <HeaderDemo/>
+                    </Route>
+                    <Route path="/header-shrink-1">
                         <ShrinkHeaderDemo/>
                     </Route>
-                    <Route path="/header2">
+                    <Route path="/header-shrink-2">
                         <ShrinkHeaderDemo2/>
                     </Route>
                 </Switch>

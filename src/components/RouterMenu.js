@@ -16,10 +16,13 @@ function RouterMenu() {
                     <Link to="scroller">Scroll</Link>
                 </li>
                 <li>
-                    <Link to="header">Header Transparent</Link>
+                    <Link to="flexbox-header">Flexbox Header</Link>
                 </li>
                 <li>
-                    <Link to="header2">Header Padding</Link>
+                    <Link to="header-shrink-1">Header Transparent</Link>
+                </li>
+                <li>
+                    <Link to="header-shrink-2">Header Padding</Link>
                 </li>
             </ul>
         </div>

@@ -43,26 +43,18 @@ body {
     color: #62debe;
     background: #14604c;
 }
-.dropdown ul {
-    display: none;
-}
-.dropdown:hover ul {
-    list-style: none;
-    display: block;
-}
-.dropdown:hover ul li a {
-    text-decoration: none;
-    padding: 20px;
-}
 .actions {
     margin-left: auto;
     display: flex;
     align-items: center;
     margin-right: 10px;
 }
-.sign-out-link {
-    color: #62debe;
+.actions a {
+    color: white;
     font-size: 0.8rem;
-    margin-left: 10px;
-    text-transform: uppercase;
+}
+.register-link {
+}
+.log-in-link {
+    margin: 0 14px 0 14px;
 }

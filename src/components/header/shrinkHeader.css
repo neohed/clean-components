@@ -1,17 +1,15 @@
 .shrinking-header {
     background-color: transparent;
-    padding: 50px 10px; /* Some padding */
-    text-align: center; /* Centered text */
-    font-size: 90px; /* Big font size */
+    padding: 50px 10px;
+    text-align: center;
+    font-size: 90px;
     font-weight: bold;
-    position: fixed; /* Fixed position - sit on top of the page */
+    position: fixed;
     top: 0;
-    width: 100%; /* Full width */
-    transition: 0.2s; /* Add a transition effect (when scrolling - and font size is decreased) */
+    width: 100%;
+    transition: 0.2s;
 }
 
 .shrunken-head {
     font-size: 30px;
-    background-color: #f1f1f1;
-    border-bottom: 1px solid black;
 }
