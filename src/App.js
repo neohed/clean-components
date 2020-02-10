@@ -8,7 +8,7 @@ import TabDemo from './components/TabDemo'
 import FormDemo from './components/FormDemo'
 import './App.css';
 import RouterMenu from "./components/RouterMenu";
-import ScrollOver from "./components/ScrollOver";
+import ScrollOver from "./components/parallax/ScrollOver";
 import ShrinkHeaderDemo from "./components/ShrinkHeaderDemo";
 import ShrinkHeaderDemo2 from "./components/ShrinkHeaderDemo2";
 

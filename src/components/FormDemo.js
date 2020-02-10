@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import Checkbox from "./Checkbox";
-import CleanButton from "./CleanButton";
+import Checkbox from "./inputs/Checkbox";
+import CleanButton from "./inputs/CleanButton";
 
 const FormDemo = () => {
     const [isChecked, setIsChecked] = useState(false);

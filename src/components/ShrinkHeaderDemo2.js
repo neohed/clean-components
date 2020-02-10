@@ -1,5 +1,5 @@
 import React from 'react';
-import ShrinkHeader from "./ShrinkHeader";
+import ShrinkHeader from "./header/ShrinkHeader";
 import background from '../image/Joshua_Tree_National_Park_Night_Sky.jpg'
 
 const ShrinkHeaderDemo2 = () => (

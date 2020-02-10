@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import useEventListener from '../utility/useEventListener'
+import useEventListener from '../../utility/useEventListener'
 import './shrinkHeader.css'
 
 const ShrinkHeader = ({title, startStyle, scrollStyle}) => {
@@ -9,11 +9,9 @@ const ShrinkHeader = ({title, startStyle, scrollStyle}) => {
     useEventListener('scroll', () => {
         if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
             headerRef.current.className = 'shrinking-header shrunken-head';
-console.log('make scrollStyle');
             setHeaderStyle(scrollStyle)
         } else {
             headerRef.current.className = 'shrinking-header';
-console.log('make startStyle');
             setHeaderStyle(startStyle)
         }
     });
