@@ -16,7 +16,10 @@ function RouterMenu() {
                     <Link to="scroller">Scroll</Link>
                 </li>
                 <li>
-                    <Link to="header">Header</Link>
+                    <Link to="header">Header Transparent</Link>
+                </li>
+                <li>
+                    <Link to="header2">Header Padding</Link>
                 </li>
             </ul>
         </div>

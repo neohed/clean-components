@@ -10,6 +10,7 @@ import './App.css';
 import RouterMenu from "./components/RouterMenu";
 import ScrollOver from "./components/ScrollOver";
 import ShrinkHeaderDemo from "./components/ShrinkHeaderDemo";
+import ShrinkHeaderDemo2 from "./components/ShrinkHeaderDemo2";
 
 function App() {
     return (
@@ -31,6 +32,9 @@ function App() {
                     </Route>
                     <Route path="/header">
                         <ShrinkHeaderDemo/>
+                    </Route>
+                    <Route path="/header2">
+                        <ShrinkHeaderDemo2/>
                     </Route>
                 </Switch>
             </Router>

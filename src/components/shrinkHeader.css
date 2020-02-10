@@ -1,7 +1,6 @@
 .shrinking-header {
-    background-color: white;
+    background-color: transparent;
     padding: 50px 10px; /* Some padding */
-    color: black;
     text-align: center; /* Centered text */
     font-size: 90px; /* Big font size */
     font-weight: bold;
