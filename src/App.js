@@ -12,6 +12,7 @@ import ScrollOver from "./components/parallax/ScrollOver";
 import HeaderDemo from "./components/HeaderDemo";
 import ShrinkHeaderDemo from "./components/ShrinkHeaderDemo";
 import ShrinkHeaderDemo2 from "./components/ShrinkHeaderDemo2";
+import AspectImage from "./components/AspectImage";
 
 function App() {
     return (
