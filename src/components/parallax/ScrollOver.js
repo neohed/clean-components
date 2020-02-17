@@ -3,7 +3,7 @@ import img1 from '../../image/PIA23606.jpg'
 import './scrollOver.css'
 
 const ScrollOver = () => (
-    <div id="scroll-wrapper">
+    <div>
         <div id="scroll-fixed" className="scroll-panel">
             Some content here...
         </div>
