@@ -11,5 +11,26 @@ Simple components I can use instead of monolithic frameworks.
 
 ## Todo
 
+* Responsiveness: https://developers.google.com/web/fundamentals/design-and-ux/responsive
+
+* Media queries:
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+
+* Components to add:
+  - 4 image panels, responsive (4 full width, 2 by 2, 1 wide)
+  - Video card - image, category, title, instructor
+  - video player embedded
+  - 3 column panel
 * Change shrink header to be "transparent" with image underneath, text floating.  Then becoming opaque.
 * Add images, etc (other components) to parallax scroller!

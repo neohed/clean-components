@@ -1,0 +1,34 @@
+.row {
+    width: 100%;
+}
+
+@media screen and (min-width: 800px) {
+    .row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .column-1, .column-2, .column-3 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .column-1 {
+        flex: 1
+    }
+
+    .column-2 {
+        flex: 2
+    }
+
+    .column-3 {
+        flex: 3
+    }
+}
+
+/* demo styles */
+
+.silver {
+    background-color: silver;
+}

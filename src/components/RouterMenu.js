@@ -24,6 +24,9 @@ function RouterMenu() {
                 <li>
                     <Link to="header-shrink-2">Header Padding</Link>
                 </li>
+                <li>
+                    <Link to="two-columns">Two Columns</Link>
+                </li>
             </ul>
         </div>
     );

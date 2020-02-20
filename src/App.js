@@ -12,6 +12,7 @@ import ScrollOver from "./components/parallax/ScrollOver";
 import HeaderDemo from "./components/HeaderDemo";
 import ShrinkHeaderDemo from "./components/ShrinkHeaderDemo";
 import ShrinkHeaderDemo2 from "./components/ShrinkHeaderDemo2";
+import TwoColumns from "./components/columns/TwoColumns";
 import AspectImage from "./components/AspectImage";
 
 function App() {
@@ -40,6 +41,9 @@ function App() {
                     </Route>
                     <Route path="/header-shrink-2">
                         <ShrinkHeaderDemo2/>
+                    </Route>
+                    <Route path="/two-columns">
+                        <TwoColumns/>
                     </Route>
                 </Switch>
             </Router>
