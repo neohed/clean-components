@@ -27,6 +27,9 @@ function RouterMenu() {
                 <li>
                     <Link to="two-columns">Two Columns</Link>
                 </li>
+                <li>
+                    <Link to="center">Center</Link>
+                </li>
             </ul>
         </div>
     );

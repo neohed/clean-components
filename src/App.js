@@ -13,6 +13,7 @@ import HeaderDemo from "./components/HeaderDemo";
 import ShrinkHeaderDemo from "./components/ShrinkHeaderDemo";
 import ShrinkHeaderDemo2 from "./components/ShrinkHeaderDemo2";
 import TwoColumns from "./components/columns/TwoColumns";
+import CenterDemo from './components/CenterDemo'
 import AspectImage from "./components/AspectImage";
 
 function App() {
@@ -44,6 +45,9 @@ function App() {
                     </Route>
                     <Route path="/two-columns">
                         <TwoColumns/>
+                    </Route>
+                    <Route path="/center">
+                        <CenterDemo/>
                     </Route>
                 </Switch>
             </Router>
