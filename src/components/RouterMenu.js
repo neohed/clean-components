@@ -30,6 +30,9 @@ function RouterMenu() {
                 <li>
                     <Link to="center">Center</Link>
                 </li>
+                <li>
+                    <Link to="auto-complete">Auto-Complete</Link>
+                </li>
             </ul>
         </div>
     );
