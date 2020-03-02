@@ -23,15 +23,11 @@ class AutoComplete extends React.Component {
     }
 
     onAddition = (tag) => {
-        console.log('onAddition', {tag});
-
         const tags = [...this.state.tags, tag];
         this.setState({ tags })
     };
 
     onDelete = (index) => {
-        console.log('onDelete', {index});
-
         const tags = this.state.tags.slice(0);
         tags.splice(index, 1);
         this.setState({ tags })
