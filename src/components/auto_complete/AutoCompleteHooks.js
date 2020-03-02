@@ -4,7 +4,7 @@ import './react-tags.css'
 
 const suggestions = [
     {id: 3, name: "Bananas"},
-    {id: 4, name: "Mangos"},
+    {id: 4, name: "Mangoes"},
     {id: 5, name: "Lemons"},
     {id: 6, name: "Apricots"}
 ];
