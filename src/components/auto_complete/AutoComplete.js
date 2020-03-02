@@ -22,17 +22,6 @@ class AutoComplete extends React.Component {
         }
     }
 
-    handleDelete = (index) => {
-        const tags = this.state.tags.slice(0);
-        tags.splice(index, 1);
-        this.setState({ tags })
-    };
-
-    handleAddition = (tag) => {
-        const tags = [].concat(this.state.tags, tag);
-        this.setState({ tags })
-    };
-
     onAddition = (tag) => {
         console.log('onAddition', {tag});
 
@@ -55,8 +44,7 @@ class AutoComplete extends React.Component {
                 onDelete={this.onDelete}
                 tags={this.state.tags}
                 suggestions={this.state.suggestions}
-                handleDelete={this.handleDelete.bind(this)}
-                handleAddition={this.handleAddition.bind(this)} />
+            />
         )
     }
 }

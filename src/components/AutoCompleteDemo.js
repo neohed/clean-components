@@ -1,9 +1,9 @@
 import React from 'react'
-import AutoComplete from "./auto_complete/AutoComplete";
+import AutoCompleteHooks from "./auto_complete/AutoCompleteHooks";
 
 const AutoCompleteDemo = () => {
     return (
-        <AutoComplete/>
+        <AutoCompleteHooks/>
     )
 };
 
