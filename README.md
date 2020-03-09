@@ -11,6 +11,8 @@ Simple components I can use instead of monolithic frameworks.
 
 ## Todo
 
+* Create better "menu" / demo page showing off things...
+* Checkbox multi select in expander.
 * Responsiveness: https://developers.google.com/web/fundamentals/design-and-ux/responsive
 
 * Media queries:
