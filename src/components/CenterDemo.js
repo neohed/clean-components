@@ -1,5 +1,6 @@
 import React from 'react';
 import CenterElement from "./layout/CenterElement";
+import FakeButton from "./inputs/FakeButton";
 
 const CenterDemo = () => (
     <CenterElement
@@ -13,6 +14,9 @@ const CenterDemo = () => (
         <button>
             Click Me
         </button>
+        <FakeButton
+            text={'Clickable'}
+        />
         <div>
             A div
         </div>
