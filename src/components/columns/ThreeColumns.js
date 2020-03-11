@@ -7,10 +7,10 @@ const ThreeColumns = () => {
                 <div className='column-1'>
                     First column
                 </div>
-                <div className='column-2 silver'>
+                <div className='column-3 silver'>
                     Second column
                 </div>
-                <div className='column-3'>
+                <div className='column-1'>
                     Third column
                 </div>
             </div>

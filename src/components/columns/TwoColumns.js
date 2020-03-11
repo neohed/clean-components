@@ -8,7 +8,7 @@ const TwoColumns = () => {
                 <div className='column-1'>
                     First column
                 </div>
-                <div className='column-2 silver'>
+                <div className='column-1 silver'>
                     Second column
                 </div>
             </div>
