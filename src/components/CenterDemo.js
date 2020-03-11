@@ -2,14 +2,23 @@ import React from 'react';
 import CenterElement from "./layout/CenterElement";
 
 const CenterDemo = () => (
-    <CenterElement>
+    <CenterElement
+        style={{
+            border: '1px solid black',
+            width: '250px',
+            padding: '8px',
+            marginTop: '24px',
+            borderRadius: '3px',
+        }}>
         <button>
             Click Me
         </button>
-        <div style={{width: '80px'}}>
+        <div>
             A div
         </div>
-        <p style={{width: '80px'}}>A p tag</p>
+        <p>
+            A p tag
+        </p>
     </CenterElement>
 );
 

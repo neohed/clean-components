@@ -1,9 +1,9 @@
 import React from 'react';
 import './centerElement.css'
 
-const CenterElement = ({children}) => {
+const CenterElement = ({children, ...rest}) => {
     return (
-        <div className='center'>
+        <div className='center' {...rest}>
             {
                 children
             }
