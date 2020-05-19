@@ -31,8 +31,6 @@ Simple components to use instead of monolithic frameworks.
 
 * Components to add:
   - 4 image panels, responsive (4 full width, 2 by 2, 1 wide)
-  - Video card - image, category, title, instructor
   - video player embedded
-  - 3 column panel
 * Change shrink header to be "transparent" with image underneath, text floating.  Then becoming opaque.
-* Add images, etc (other components) to parallax scroller!
+* Add images, etc (other components) to parallax scroller.
