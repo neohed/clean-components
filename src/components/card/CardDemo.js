@@ -16,6 +16,7 @@ const CardDemo = () => (
             altText={'A man with sparks flying from his head'}
             body={<p>Some text, bla bla bla!</p>}
             footer={<p>Some links.</p>}
+            url={'https://www.neohed.com/'}
         />
         <CardTemplate1
             title={'That Card'}
@@ -23,6 +24,7 @@ const CardDemo = () => (
             altText={'A woman sat with laptop on yoga mat'}
             body={<p>Some text, bla bla bla!</p>}
             footer={<p>Some links.</p>}
+            url={'https://www.neohed.com/'}
         />
     </div>
 );
