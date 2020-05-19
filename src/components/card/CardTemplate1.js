@@ -34,21 +34,19 @@ const CardTemplate1 = ({
                     title
                 }
             </h2>
-            <div>
-                <img
-                    src={image}
-                    alt={altText}
-                    style={{
-                        maxWidth: '100%'
-                    }}
-                />
-                <div style={{
-                    padding: '8px'
-                }}>
-                    {
-                        body
-                    }
-                </div>
+            <img
+                src={image}
+                alt={altText}
+                style={{
+                    maxWidth: '100%'
+                }}
+            />
+            <div style={{
+                padding: '8px'
+            }}>
+                {
+                    body
+                }
             </div>
         </a>
         <div style={{
