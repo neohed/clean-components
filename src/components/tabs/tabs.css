@@ -1,3 +1,7 @@
+/*
+    Based on: https://alligator.io/react/tabs-component/
+*/
+
 .tab-list {
     border-bottom: 1px solid #ccc;
     padding-left: 0;
