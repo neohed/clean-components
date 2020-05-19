@@ -34,6 +34,9 @@ function RouterMenu() {
                 <li>
                     <Link to="auto-complete">Auto-Complete</Link>
                 </li>
+                <li>
+                    <Link to="card">Card</Link>
+                </li>
             </ul>
         </div>
     );

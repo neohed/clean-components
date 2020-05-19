@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # clean-components
 
-Simple components I can use instead of monolithic frameworks.
+Simple components to use instead of monolithic frameworks.
 
 ## Sources / Influences
 

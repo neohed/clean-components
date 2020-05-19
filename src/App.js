@@ -15,6 +15,7 @@ import ShrinkHeaderDemo2 from "./components/ShrinkHeaderDemo2";
 import TwoColumns from "./components/columns/TwoColumns";
 import CenterDemo from './components/CenterDemo'
 import AutoCompleteDemo from "./components/AutoCompleteDemo";
+import CardDemo from './components/card/CardDemo'
 //import AspectImage from "./components/AspectImage";
 
 function App() {
@@ -52,6 +53,9 @@ function App() {
                     </Route>
                     <Route path="/auto-complete">
                         <AutoCompleteDemo/>
+                    </Route>
+                    <Route path="/card">
+                        <CardDemo/>
                     </Route>
                 </Switch>
             </Router>
