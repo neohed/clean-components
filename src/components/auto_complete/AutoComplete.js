@@ -77,9 +77,9 @@ const Suggestions = ({searchText = '', cursorPosition}) => {
         return ''
     }
     const lowerSearchWord = searchWord.toLowerCase();
-    const matches = suggestions.filter(element =>
-        element.name === lowerSearchWord ||
-        element.name.startsWith(lowerSearchWord)
+    const matches = suggestions.filter(({name}) =>
+        name === lowerSearchWord ||
+        name.startsWith(lowerSearchWord)
     );
 
     return (
