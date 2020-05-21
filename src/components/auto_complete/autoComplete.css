@@ -5,3 +5,7 @@
 .autocomplete-container input {
     width: 350px;
 }
+
+.autocomplete-suggestions {
+    list-style: none;
+}

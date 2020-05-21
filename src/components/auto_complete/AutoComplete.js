@@ -83,7 +83,7 @@ const Suggestions = ({searchText = '', cursorPosition}) => {
     );
 
     return (
-        <ul>
+        <ul className='autocomplete-suggestions'>
             {
                 matches.map(({id, name}) => <li key={id}>{name}</li>)
             }
