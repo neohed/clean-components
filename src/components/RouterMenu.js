@@ -33,7 +33,7 @@ function RouterMenu() {
                     <Link to="center">Center</Link>
                 </li>
                 <li>
-                    <Link to="auto-complete">Auto-Complete</Link>
+                    <Link to="auto-complete">Auto Complete</Link>
                 </li>
                 <li>
                     <Link to="card">Card</Link>
