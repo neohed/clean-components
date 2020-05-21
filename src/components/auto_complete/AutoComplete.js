@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import TextInput from '../inputs/TextInput'
 import './autoComplete.css'
 
 const suggestions = [
@@ -46,26 +45,33 @@ function formatStringForSearch(text) {
 
 const AutoComplete = () => {
     const [searchText, setSearchText] = useState('');
+    const [cursorPosition, setCursorPosition] = useState(0);
 
     return (
         <div className='autocomplete-container'>
-            <TextInput
+            <input
+                type='text'
                 value={searchText}
-                changeHandler={({target}) => {
+                onChange={({target}) => {
                     const text = target.value;
-                    setSearchText(text);
+                    setCursorPosition(target.selectionStart);
+                    setSearchText(text)
                 }}
             />
-            <Suggestions searchText={searchText}/>
+            <Suggestions
+                searchText={searchText}
+                cursorPosition={cursorPosition}
+            />
         </div>
     )
 };
 
-const Suggestions = ({searchText = ''}) => {
-    const searchWord = getWordBehindCursor(searchText);
-    const offsetText = getOffsetText(searchText); //todo use this to calculate suggestions box x offset.
+const Suggestions = ({searchText = '', cursorPosition}) => {
+    const searchTextBeforeCursor = searchText.substring(0, cursorPosition);
+    const searchWord = getWordBehindCursor(searchTextBeforeCursor);
+    const offsetText = getOffsetText(searchTextBeforeCursor); //todo use this to calculate suggestions box x offset.
 
-    console.log({searchText, searchWord, offsetText});
+    console.log({searchText, searchWord, offsetText, cursorPosition});
 
     if (searchWord === '') {
         return ''
