@@ -15,7 +15,7 @@ const suggestions = [
     {id: 11, name: "leopards"},
     {id: 12, name: "apprise"},
     {id: 13, name: "melting"},
-    {id: 13, name: "applause"},
+    {id: 14, name: "applause"},
 ];
 
 function showSuggestions(text = '') {
