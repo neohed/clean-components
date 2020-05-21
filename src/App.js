@@ -25,7 +25,6 @@ function App() {
                 <Switch>
                     <Route exact path="/">
                         <RouterMenu />
-                        <p>Click a link to see demo</p>
                     </Route>
                     <Route path="/tabs">
                         <TabDemo/>
