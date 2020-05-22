@@ -18,6 +18,7 @@ const suggestions = [
     {id: 14, name: "apparent"},
 ];
 
+//todo move these functions to autoCompleteUtil.js file
 function showSuggestions(text = '') {
     return text.length > 0
 }
@@ -47,7 +48,7 @@ const AutoComplete = () => {
     const searchInput = useRef(null);
     const [searchText, setSearchText] = useState('');
     const [cursorPosition, setCursorPosition] = useState(0);
-    const [suggestionsShowing, setSuggestionsShowing] = useState(false);
+    const [showSuggestions, setShowSuggestions] = useState(false);
 
     //todo finish this then extract to custom hook.
     useEffect(() => {
@@ -60,12 +61,12 @@ const AutoComplete = () => {
 
     return (
         <div className='autocomplete-container'>
-            <div className='autocomplete-input-container' style={suggestionsShowing ? {
+            <div className='autocomplete-input-container' style={showSuggestions ? {
                 borderBottomRightRadius: '0',
                 borderBottomLeftRadius: '0',
                 borderBottom: 'none'
             } : {}}>
-                <div style={suggestionsShowing ? {borderBottom: '1px solid #dedede'} : {}}>
+                <div style={showSuggestions ? {borderBottom: '1px solid #dedede'} : {}}>
                     <input
                         className='autocomplete-input'
                         ref={searchInput}
@@ -82,14 +83,22 @@ const AutoComplete = () => {
             <Suggestions
                 searchText={searchText}
                 cursorPosition={cursorPosition}
-                setSuggestionsShowing={setSuggestionsShowing}
+                suggestionsShowing={showSuggestions}
+                setShowSuggestions={setShowSuggestions}
                 setSearchText={setSearchText}
+                searchInput={searchInput.current}
             />
         </div>
     )
 };
 
-const Suggestions = ({searchText = '', cursorPosition, setSuggestionsShowing, setSearchText}) => {
+const Suggestions = ({
+    searchText = '',
+    cursorPosition,
+    setShowSuggestions,
+    setSearchText,
+    searchInput
+}) => {
     const searchTextBeforeCursor = searchText.substring(0, cursorPosition);
     const searchWord = getWordBehindCursor(searchTextBeforeCursor);
     const offsetText = getOffsetText(searchTextBeforeCursor); //todo use this to calculate x offset for suggestions.
@@ -108,7 +117,7 @@ const Suggestions = ({searchText = '', cursorPosition, setSuggestionsShowing, se
     if (matches.length === 0) {
         return null
     }
-    setSuggestionsShowing(true)
+    setShowSuggestions(true)
 
     return (
         <div className='autocomplete-suggestions-container'>
@@ -121,11 +130,12 @@ const Suggestions = ({searchText = '', cursorPosition, setSuggestionsShowing, se
                         <li
                             key={id}
                             onClick={() => {
-                                setSuggestionsShowing(false);
+                                setShowSuggestions(false);
                                 matches.length = 0;
                                 setSearchText(
                                     searchText.substring(0, searchText.lastIndexOf(searchWord)) + name + ' '
-                                )
+                                );
+                                searchInput.focus()
                             }}
                         >
                             {
