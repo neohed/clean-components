@@ -33,7 +33,7 @@ function getOffsetText(text = '') {
 
 function getWordBehindCursor(text = '') {
     if (text === '' || text[text.length - 1] === ' ') {
-        return null
+        return ''
     }
 
     return text.substring(text.lastIndexOf(' ') + 1)
