@@ -25,7 +25,7 @@ function showSuggestions(text = '') {
 function getOffsetText(text = '') {
     const lastSpaceIndex = text.lastIndexOf(' ');
     if (!lastSpaceIndex) {
-        return null
+        return ''
     }
 
     return text.substr(0, lastSpaceIndex + 1)
