@@ -66,16 +66,17 @@ const AutoComplete = () => {
                 borderBottomLeftRadius: '0',
                 borderBottom: 'none'
             } : {}}>
-                <div style={showSuggestions ? {borderBottom: '1px solid #dedede'} : {}}>
+                <div style={showSuggestions ? { borderBottom: '1px solid #dedede' } : {}}>
                     <input
                         className='autocomplete-input'
-                        ref={searchInput}
                         type='text'
+                        ref={searchInput}
                         value={searchText}
                         onChange={({target}) => {
                             const text = target.value;
                             setCursorPosition(target.selectionStart);
-                            setSearchText(text)
+                            setSearchText(text);
+                            setShowSuggestions(false)
                         }}
                     />
                 </div>
@@ -87,6 +88,7 @@ const AutoComplete = () => {
                 setShowSuggestions={setShowSuggestions}
                 setSearchText={setSearchText}
                 searchInput={searchInput.current}
+                showSuggestions={showSuggestions}
             />
         </div>
     )
@@ -97,7 +99,8 @@ const Suggestions = ({
     cursorPosition,
     setShowSuggestions,
     setSearchText,
-    searchInput
+    searchInput,
+    showSuggestions
 }) => {
     const searchTextBeforeCursor = searchText.substring(0, cursorPosition);
     const searchWord = getWordBehindCursor(searchTextBeforeCursor);
@@ -120,7 +123,7 @@ const Suggestions = ({
     setShowSuggestions(true)
 
     return (
-        <div className='autocomplete-suggestions-container'>
+        <div className='autocomplete-suggestions-container' style={{ visibility: showSuggestions ? 'visible' : 'hidden' }}>
             <ul
                 className='autocomplete-suggestions-list'
                 style={{ marginBlockStart: '0' }}
@@ -130,11 +133,10 @@ const Suggestions = ({
                         <li
                             key={id}
                             onClick={() => {
-                                setShowSuggestions(false);
-                                matches.length = 0;
                                 setSearchText(
                                     searchText.substring(0, searchText.lastIndexOf(searchWord)) + name + ' '
                                 );
+                                setShowSuggestions(false);
                                 searchInput.focus()
                             }}
                         >
