@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import './autoComplete.css'
 
 const suggestions = [
@@ -44,32 +44,53 @@ function formatStringForSearch(text) {
 }
 
 const AutoComplete = () => {
+    const searchInput = useRef(null);
     const [searchText, setSearchText] = useState('');
     const [cursorPosition, setCursorPosition] = useState(0);
+    const [suggestionsShowing, setSuggestionsShowing] = useState(false);
+
+    useEffect(() => {
+        const searchInputStyles = window.getComputedStyle(searchInput.current);
+        const computedFontSize = searchInputStyles.getPropertyValue("font-size");
+        const computedPadding = searchInputStyles.getPropertyValue("padding");
+
+        console.log({computedFontSize, computedPadding})
+    }, [searchInput])
 
     return (
         <div className='autocomplete-container'>
-            <input
-                type='text'
-                value={searchText}
-                onChange={({target}) => {
-                    const text = target.value;
-                    setCursorPosition(target.selectionStart);
-                    setSearchText(text)
-                }}
-            />
+            <div className='autocomplete-input-container' style={suggestionsShowing ? {
+                borderBottomRightRadius: '0',
+                borderBottomLeftRadius: '0',
+                borderBottom: 'none'
+            } : {}}>
+                <div style={suggestionsShowing ? {borderBottom: '1px solid #dedede'} : {}}>
+                    <input
+                        className='autocomplete-input'
+                        ref={searchInput}
+                        type='text'
+                        value={searchText}
+                        onChange={({target}) => {
+                            const text = target.value;
+                            setCursorPosition(target.selectionStart);
+                            setSearchText(text)
+                        }}
+                    />
+                </div>
+            </div>
             <Suggestions
                 searchText={searchText}
                 cursorPosition={cursorPosition}
+                setSuggestionsShowing={setSuggestionsShowing}
             />
         </div>
     )
 };
 
-const Suggestions = ({searchText = '', cursorPosition}) => {
+const Suggestions = ({searchText = '', cursorPosition, setSuggestionsShowing}) => {
     const searchTextBeforeCursor = searchText.substring(0, cursorPosition);
     const searchWord = getWordBehindCursor(searchTextBeforeCursor);
-    const offsetText = getOffsetText(searchTextBeforeCursor); //todo use this to calculate x offset for suggestions box.
+    const offsetText = getOffsetText(searchTextBeforeCursor); //todo use this to calculate x offset for suggestions.
 
     console.log({searchText, searchWord, offsetText, cursorPosition});
 
@@ -81,13 +102,30 @@ const Suggestions = ({searchText = '', cursorPosition}) => {
         name === lowerSearchWord ||
         name.startsWith(lowerSearchWord)
     );
+    setSuggestionsShowing(matches.length > 0)
 
     return (
-        <ul className='autocomplete-suggestions'>
-            {
-                matches.map(({id, name}) => <li key={id}>{name}</li>)
-            }
-        </ul>
+        <div className='autocomplete-suggestions-container'>
+            <ul
+                className='autocomplete-suggestions-list'
+                style={{ marginBlockStart: '0' }}
+            >
+                {
+                    matches.map(({id, name}) =>
+                        <li
+                            key={id}
+                            onClick={() => {
+                                setSuggestionsShowing(false)
+                            }}
+                        >
+                            {
+                                name
+                            }
+                        </li>
+                    )
+                }
+            </ul>
+        </div>
     )
 };
 
