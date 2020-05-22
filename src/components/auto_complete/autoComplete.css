@@ -53,4 +53,10 @@
 .autocomplete-suggestions-list li {
     white-space: nowrap;
     font-size: 1em;
+    padding: 2px;
+}
+
+.autocomplete-suggestions-list li:hover {
+    background-color: #dddddd;
+    cursor: pointer;
 }

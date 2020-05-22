@@ -15,11 +15,10 @@ export default AutoCompleteDemo;
 /*
     TODO
 
+    * Close suggestions when clicking away from control.
     * Hide suggestions list after selection.
-    * Find way to communicate to parent component when suggestions are showing.
-    * When suggestions showing, change search input border radius to top corners only and change bottom border to not
-      full width, like google.
-    * Make part of autocomplete suggestion text not yet typed, bold - like google.
+    * Make part of autocomplete suggestion text not yet typed, bold.
     * Add search spyglass SVG icon to start of input
     * Add X SVG to end of input to clear
+    * Position text li in line with start of current word.
  */

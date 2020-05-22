@@ -83,12 +83,13 @@ const AutoComplete = () => {
                 searchText={searchText}
                 cursorPosition={cursorPosition}
                 setSuggestionsShowing={setSuggestionsShowing}
+                setSearchText={setSearchText}
             />
         </div>
     )
 };
 
-const Suggestions = ({searchText = '', cursorPosition, setSuggestionsShowing}) => {
+const Suggestions = ({searchText = '', cursorPosition, setSuggestionsShowing, setSearchText}) => {
     const searchTextBeforeCursor = searchText.substring(0, cursorPosition);
     const searchWord = getWordBehindCursor(searchTextBeforeCursor);
     const offsetText = getOffsetText(searchTextBeforeCursor); //todo use this to calculate x offset for suggestions.
@@ -103,7 +104,11 @@ const Suggestions = ({searchText = '', cursorPosition, setSuggestionsShowing}) =
         name === lowerSearchWord ||
         name.startsWith(lowerSearchWord)
     );
-    setSuggestionsShowing(matches.length > 0)
+
+    if (matches.length === 0) {
+        return null
+    }
+    setSuggestionsShowing(true)
 
     return (
         <div className='autocomplete-suggestions-container'>
@@ -116,7 +121,11 @@ const Suggestions = ({searchText = '', cursorPosition, setSuggestionsShowing}) =
                         <li
                             key={id}
                             onClick={() => {
-                                setSuggestionsShowing(false)
+                                setSuggestionsShowing(false);
+                                matches.length = 0;
+                                setSearchText(
+                                    searchText.substring(0, searchText.lastIndexOf(searchWord)) + name + ' '
+                                )
                             }}
                         >
                             {
