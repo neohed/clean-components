@@ -25,7 +25,7 @@ function showSuggestions(text = '') {
 function getOffsetText(text = '') {
     const lastSpaceIndex = text.lastIndexOf(' ');
     if (!lastSpaceIndex) {
-        return ''
+        return null
     }
 
     return text.substr(0, lastSpaceIndex + 1)
@@ -33,7 +33,7 @@ function getOffsetText(text = '') {
 
 function getWordBehindCursor(text = '') {
     if (text === '' || text[text.length - 1] === ' ') {
-        return ''
+        return null
     }
 
     return text.substring(text.lastIndexOf(' ') + 1)
@@ -74,7 +74,7 @@ const Suggestions = ({searchText = '', cursorPosition}) => {
     console.log({searchText, searchWord, offsetText, cursorPosition});
 
     if (searchWord === '') {
-        return ''
+        return null
     }
     const lowerSearchWord = searchWord.toLowerCase();
     const matches = suggestions.filter(({name}) =>
