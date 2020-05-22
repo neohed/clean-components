@@ -69,7 +69,7 @@ const AutoComplete = () => {
 const Suggestions = ({searchText = '', cursorPosition}) => {
     const searchTextBeforeCursor = searchText.substring(0, cursorPosition);
     const searchWord = getWordBehindCursor(searchTextBeforeCursor);
-    const offsetText = getOffsetText(searchTextBeforeCursor); //todo use this to calculate suggestions box x offset.
+    const offsetText = getOffsetText(searchTextBeforeCursor); //todo use this to calculate x offset for suggestions box.
 
     console.log({searchText, searchWord, offsetText, cursorPosition});
 
