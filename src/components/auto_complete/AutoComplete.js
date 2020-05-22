@@ -15,7 +15,7 @@ const suggestions = [
     {id: 11, name: "leopards"},
     {id: 12, name: "apprise"},
     {id: 13, name: "melting"},
-    {id: 14, name: "applause"},
+    {id: 14, name: "apparent"},
 ];
 
 function showSuggestions(text = '') {
@@ -49,6 +49,7 @@ const AutoComplete = () => {
     const [cursorPosition, setCursorPosition] = useState(0);
     const [suggestionsShowing, setSuggestionsShowing] = useState(false);
 
+    //todo finish this then extract to custom hook.
     useEffect(() => {
         const searchInputStyles = window.getComputedStyle(searchInput.current);
         const computedFontSize = searchInputStyles.getPropertyValue("font-size");

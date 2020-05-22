@@ -15,6 +15,7 @@
 .autocomplete-input {
     width: 334px;
     padding: 12px 0 12px 0;
+    font-size: 1em;
 }
 
 .autocomplete-input, .autocomplete-input:focus {
@@ -49,4 +50,5 @@
 
 .autocomplete-suggestions-list li {
     white-space: nowrap;
+    font-size: 1em;
 }
