@@ -53,9 +53,9 @@ const AutoComplete = () => {
     useEffect(() => {
         const searchInputStyles = window.getComputedStyle(searchInput.current);
         const computedFontSize = searchInputStyles.getPropertyValue("font-size");
-        const computedPadding = searchInputStyles.getPropertyValue("padding");
+        const computedFontFamily = searchInputStyles.getPropertyValue("font-family");
 
-        console.log({computedFontSize, computedPadding})
+        console.log({computedFontSize, computedFontFamily})
     }, [searchInput])
 
     return (

@@ -29,6 +29,8 @@
     height: auto;
     width: auto;
     white-space: nowrap;
+    margin: 0;
+    padding: 0;
 }
 
 .autocomplete-suggestions-container {

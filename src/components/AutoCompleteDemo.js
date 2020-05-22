@@ -15,7 +15,7 @@ export default AutoCompleteDemo;
 /*
     TODO
 
-    * Standardise font size in search input and suggestions list.
+    * Hide suggestions list after selection.
     * Find way to communicate to parent component when suggestions are showing.
     * When suggestions showing, change search input border radius to top corners only and change bottom border to not
       full width, like google.
