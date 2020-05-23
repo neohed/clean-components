@@ -40,15 +40,29 @@ function getWordBehindCursor(text = '') {
     return text.substring(text.lastIndexOf(' ') + 1)
 }
 
+function setCaretPosition(element, caretPos) {
+    if (element.createTextRange) {
+        const range = element.createTextRange();
+        range.move('character', caretPos);
+        range.select();
+    } else {
+        if (element.selectionStart) {
+            element.focus();
+            element.setSelectionRange(caretPos, caretPos);
+        } else
+            element.focus();
+    }
+}
+
 function formatStringForSearch(text) {
     //todo Use regex to replace multiple whitespaces with a single whitespace.
 }
 
 const AutoComplete = () => {
     const searchInput = useRef(null);
-    const [searchText, setSearchText] = useState('');
+    const [inputText, setInputText] = useState('');
     const [cursorPosition, setCursorPosition] = useState(0);
-    const [showSuggestions, setShowSuggestions] = useState(false);
+    const [showingSuggestions, setShowingSuggestions] = useState(false);
 
     //todo finish this then extract to custom hook.
     useEffect(() => {
@@ -61,69 +75,67 @@ const AutoComplete = () => {
 
     return (
         <div className='autocomplete-container'>
-            <div className='autocomplete-input-container' style={showSuggestions ? {
+            <div className='autocomplete-input-container' style={showingSuggestions ? {
                 borderBottomRightRadius: '0',
                 borderBottomLeftRadius: '0',
                 borderBottom: 'none'
             } : {}}>
-                <div style={showSuggestions ? { borderBottom: '1px solid #dedede' } : {}}>
+                <div style={showingSuggestions ? { borderBottom: '1px solid #dedede' } : {}}>
                     <input
                         className='autocomplete-input'
                         type='text'
                         ref={searchInput}
-                        value={searchText}
+                        value={inputText}
                         onChange={({target}) => {
                             const text = target.value;
                             setCursorPosition(target.selectionStart);
-                            setSearchText(text);
-                            setShowSuggestions(false)
+                            setInputText(text);
                         }}
                     />
                 </div>
             </div>
             <Suggestions
-                searchText={searchText}
+                inputText={inputText}
                 cursorPosition={cursorPosition}
-                suggestionsShowing={showSuggestions}
-                setShowSuggestions={setShowSuggestions}
-                setSearchText={setSearchText}
+                setShowingSuggestions={setShowingSuggestions}
+                setInputText={setInputText}
                 searchInput={searchInput.current}
-                showSuggestions={showSuggestions}
             />
         </div>
     )
 };
 
 const Suggestions = ({
-    searchText = '',
-    cursorPosition,
-    setShowSuggestions,
-    setSearchText,
-    searchInput,
-    showSuggestions
-}) => {
-    const searchTextBeforeCursor = searchText.substring(0, cursorPosition);
+                         inputText = '',
+                         cursorPosition,
+                         setShowingSuggestions,
+                         setInputText,
+                         searchInput
+                     }) => {
+    const searchTextBeforeCursor = inputText.substring(0, cursorPosition);
     const searchWord = getWordBehindCursor(searchTextBeforeCursor);
     const offsetText = getOffsetText(searchTextBeforeCursor); //todo use this to calculate x offset for suggestions.
 
-    console.log({searchText, searchWord, offsetText, cursorPosition});
+    console.log({inputText, searchWord, offsetText, cursorPosition});
 
     if (searchWord === '') {
-        return null
+        //return null
     }
     const lowerSearchWord = searchWord.toLowerCase();
-    const matches = suggestions.filter(({name}) =>
-        name === lowerSearchWord ||
-        name.startsWith(lowerSearchWord)
-    );
+    const matches = searchWord === ''
+        ? []
+        : suggestions.filter(({name}) =>
+            name === lowerSearchWord ||
+            name.startsWith(lowerSearchWord)
+        );
 
     if (matches.length === 0) {
-        return null
+        //return null
     }
-    setShowSuggestions(true)
+    setShowingSuggestions(true)
 
     return (
-        <div className='autocomplete-suggestions-container' style={{ visibility: showSuggestions ? 'visible' : 'hidden' }}>
+        <div className='autocomplete-suggestions-container'>
             <ul
                 className='autocomplete-suggestions-list'
                 style={{ marginBlockStart: '0' }}
@@ -133,10 +145,10 @@ const Suggestions = ({
                         <li
                             key={id}
                             onClick={() => {
-                                setSearchText(
-                                    searchText.substring(0, searchText.lastIndexOf(searchWord)) + name + ' '
-                                );
-                                setShowSuggestions(false);
+                                const newInputText = inputText.substring(0, inputText.lastIndexOf(searchWord)) + name + ' ';
+                                setInputText(newInputText);
+                                setShowingSuggestions(false);
+                                setCaretPosition(searchInput, newInputText.length);
                                 searchInput.focus()
                             }}
                         >
