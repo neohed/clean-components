@@ -1,7 +1,6 @@
 /*
     Based on: https://alligator.io/react/tabs-component/
 */
-
 import React, { useState } from 'react';
 import './tabs.css'
 

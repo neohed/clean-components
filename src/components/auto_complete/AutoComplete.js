@@ -60,11 +60,11 @@ const AutoComplete = () => {
                 <Suggestions
                     inputText={inputText}
                     cursorPosition={cursorPosition}
+                    computedFontStyles={computedFontStyles}
+                    searchInput={searchInput.current}
                     setCanShowSuggestions={setCanShowSuggestions}
                     setShowingSuggestions={setShowingSuggestions}
                     setInputText={setInputText}
-                    searchInput={searchInput.current}
-                    computedFontStyles={computedFontStyles}
                 />
             }
         </div>
@@ -104,12 +104,12 @@ const Suggestions = ({
     const offsetText = getOffsetText(searchTextBeforeCursor);
     const offsetTextWidth = useDetermineInputWidthFromText(offsetText, computedFontStyles);
 
-    //TIP: console.log isn't just for debugging. It is also useful to keep an eye on key variables while we develop our code.
+    //TIP: console.log isn't just for debugging. It's also useful to watch important variables during development.
     console.log({inputText, searchWord, offsetText, offsetTextWidth, cursorPosition});
 
-    //Sentinel value empty string indicates early termination.
+    //Sentinel value "empty string" indicates early termination.
     if (searchWord === '') {
-        return null // Not empty string which would cause React to render an empty text node.
+        return null // return null, not "empty string" which would cause React to render an empty text node.
     }
     const lowerSearchWord = searchWord.toLowerCase();
     const matches = searchWord === ''
