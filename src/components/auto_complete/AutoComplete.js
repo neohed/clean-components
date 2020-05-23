@@ -1,4 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react'
+import useGetComputedFontStyles from './useGetComputedFontStyles'
 import './autoComplete.css'
 
 const suggestions = [
@@ -36,6 +37,28 @@ function getWordBehindCursor(text = '') {
     return text.substring(text.lastIndexOf(' ') + 1)
 }
 
+function determineInputWidthFromText(text, styles) {
+    const tempElement = document.createElement("span");
+    document.body.appendChild(tempElement);
+
+    Object.entries({
+        height: 'auto',
+        width: 'auto',
+        position: 'absolute',
+        whiteSpace: 'no-wrap',
+        margin: '0',
+        padding: '0',
+        ...styles
+    }).forEach(([key, value]) =>
+        tempElement.style[key] = value
+    )
+
+    tempElement.innerHTML = text;
+    const width = Math.ceil(tempElement.clientWidth);
+    document.body.removeChild(tempElement);
+
+    return width
+}
 function formatStringForSearch(text) {
     //todo Use regex to replace multiple whitespaces with a single whitespace.
 }
@@ -46,15 +69,7 @@ const AutoComplete = () => {
     const [cursorPosition, setCursorPosition] = useState(0);
     const [canShowSuggestions, setCanShowSuggestions] = useState(true);
     const [showingSuggestions, setShowingSuggestions] = useState(false);
-
-    //todo finish this then extract to custom hook.
-    useEffect(() => {
-        const searchInputStyles = window.getComputedStyle(searchInput.current);
-        const computedFontSize = searchInputStyles.getPropertyValue("font-size");
-        const computedFontFamily = searchInputStyles.getPropertyValue("font-family");
-
-        console.log({computedFontSize, computedFontFamily})
-    }, [searchInput])
+    const computedFontStyles = useGetComputedFontStyles(searchInput);
 
     return (
         <div className='autocomplete-container'>
@@ -87,6 +102,7 @@ const AutoComplete = () => {
                     setShowingSuggestions={setShowingSuggestions}
                     setInputText={setInputText}
                     searchInput={searchInput.current}
+                    computedFontStyles={computedFontStyles}
                 />
             }
         </div>
@@ -99,12 +115,22 @@ const Suggestions = ({
                          setShowingSuggestions,
                          setCanShowSuggestions,
                          setInputText,
-                         searchInput
+                         searchInput,
+                         computedFontStyles
                      }) => {
+    const inputMeasure = useRef(null);
     const searchTextBeforeCursor = inputText.substring(0, cursorPosition);
     const searchWord = getWordBehindCursor(searchTextBeforeCursor);
     const offsetText = getOffsetText(searchTextBeforeCursor); //todo use this to calculate x offset for suggestions.
 
+    useEffect(() => {
+        const element = inputMeasure.current;
+
+        if (element) {
+            const width = determineInputWidthFromText(inputText, computedFontStyles)
+            console.log('width: ' + width)
+        }
+    })
     console.log({inputText, searchWord, offsetText, cursorPosition});
 
     if (searchWord === '') {
@@ -121,6 +147,7 @@ const Suggestions = ({
     if (matches.length === 0) {
         return null
     }
+
     setShowingSuggestions(true)
 
     return (
@@ -149,6 +176,15 @@ const Suggestions = ({
                     )
                 }
             </ul>
+            <span>
+                <input
+                    readOnly={true}
+                    ref={inputMeasure}
+                    value={inputText}
+                    className='autocomplete-container-input-measure'
+                    style={computedFontStyles}
+                />
+            </span>
         </div>
     )
 };

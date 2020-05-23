@@ -24,11 +24,6 @@
 }
 
 .autocomplete-container-input-measure {
-    position: absolute;
-    visibility: hidden;
-    height: auto;
-    width: auto;
-    white-space: nowrap;
     margin: 0;
     padding: 0;
 }
