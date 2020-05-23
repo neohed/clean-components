@@ -142,7 +142,9 @@ const Suggestions = ({
                             key={id}
                             onClick={() => {
                                 setInputText(
-                                    inputText.substring(0, inputText.lastIndexOf(searchWord)) + name + ' '
+                                    inputText.substring(0, inputText.lastIndexOf(searchWord))
+                                    + name
+                                    + ' '
                                 );
                                 setCanShowSuggestions(false);
                                 setShowingSuggestions(false);
