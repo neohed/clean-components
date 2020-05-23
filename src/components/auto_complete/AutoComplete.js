@@ -40,20 +40,6 @@ function getWordBehindCursor(text = '') {
     return text.substring(text.lastIndexOf(' ') + 1)
 }
 
-function setCaretPosition(element, caretPos) {
-    if (element.createTextRange) {
-        const range = element.createTextRange();
-        range.move('character', caretPos);
-        range.select();
-    } else {
-        if (element.selectionStart) {
-            element.focus();
-            element.setSelectionRange(caretPos, caretPos);
-        } else
-            element.focus();
-    }
-}
-
 function formatStringForSearch(text) {
     //todo Use regex to replace multiple whitespaces with a single whitespace.
 }
@@ -62,6 +48,7 @@ const AutoComplete = () => {
     const searchInput = useRef(null);
     const [inputText, setInputText] = useState('');
     const [cursorPosition, setCursorPosition] = useState(0);
+    const [canShowSuggestions, setCanShowSuggestions] = useState(true);
     const [showingSuggestions, setShowingSuggestions] = useState(false);
 
     //todo finish this then extract to custom hook.
@@ -89,18 +76,23 @@ const AutoComplete = () => {
                         onChange={({target}) => {
                             const text = target.value;
                             setCursorPosition(target.selectionStart);
+                            setCanShowSuggestions(true);
                             setInputText(text);
                         }}
                     />
                 </div>
             </div>
-            <Suggestions
-                inputText={inputText}
-                cursorPosition={cursorPosition}
-                setShowingSuggestions={setShowingSuggestions}
-                setInputText={setInputText}
-                searchInput={searchInput.current}
-            />
+            {
+                canShowSuggestions &&
+                <Suggestions
+                    inputText={inputText}
+                    cursorPosition={cursorPosition}
+                    setCanShowSuggestions={setCanShowSuggestions}
+                    setShowingSuggestions={setShowingSuggestions}
+                    setInputText={setInputText}
+                    searchInput={searchInput.current}
+                />
+            }
         </div>
     )
 };
@@ -109,6 +101,7 @@ const Suggestions = ({
                          inputText = '',
                          cursorPosition,
                          setShowingSuggestions,
+                         setCanShowSuggestions,
                          setInputText,
                          searchInput
                      }) => {
@@ -119,7 +112,7 @@ const Suggestions = ({
     console.log({inputText, searchWord, offsetText, cursorPosition});
 
     if (searchWord === '') {
-        //return null
+        return null
     }
     const lowerSearchWord = searchWord.toLowerCase();
     const matches = searchWord === ''
@@ -130,7 +123,7 @@ const Suggestions = ({
         );
 
     if (matches.length === 0) {
-        //return null
+        return null
     }
     setShowingSuggestions(true)
 
@@ -147,8 +140,8 @@ const Suggestions = ({
                             onClick={() => {
                                 const newInputText = inputText.substring(0, inputText.lastIndexOf(searchWord)) + name + ' ';
                                 setInputText(newInputText);
+                                setCanShowSuggestions(false);
                                 setShowingSuggestions(false);
-                                setCaretPosition(searchInput, newInputText.length);
                                 searchInput.focus()
                             }}
                         >
