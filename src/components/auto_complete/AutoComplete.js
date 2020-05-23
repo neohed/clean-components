@@ -19,10 +19,6 @@ const suggestions = [
 ];
 
 //todo move these functions to autoCompleteUtil.js file
-function showSuggestions(text = '') {
-    return text.length > 0
-}
-
 function getOffsetText(text = '') {
     const lastSpaceIndex = text.lastIndexOf(' ');
     if (!lastSpaceIndex) {
@@ -138,8 +134,9 @@ const Suggestions = ({
                         <li
                             key={id}
                             onClick={() => {
-                                const newInputText = inputText.substring(0, inputText.lastIndexOf(searchWord)) + name + ' ';
-                                setInputText(newInputText);
+                                setInputText(
+                                    inputText.substring(0, inputText.lastIndexOf(searchWord)) + name + ' '
+                                );
                                 setCanShowSuggestions(false);
                                 setShowingSuggestions(false);
                                 searchInput.focus()
