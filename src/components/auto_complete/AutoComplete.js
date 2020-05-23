@@ -83,10 +83,12 @@ const Suggestions = ({
     const offsetText = getOffsetText(searchTextBeforeCursor); //todo use this to calculate x offset for suggestions.
     const offsetTextWidth = useDetermineInputWidthFromText(offsetText, computedFontStyles);
 
+    //TIP: console.log isn't just for debugging. It is also useful to keep an eye on key variables while we develop our code.
     console.log({inputText, searchWord, offsetText, offsetTextWidth, cursorPosition});
 
+    //Sentinel value empty string indicates early termination.
     if (searchWord === '') {
-        return null
+        return null // Not empty string which would cause React to render an empty text node.
     }
     const lowerSearchWord = searchWord.toLowerCase();
     const matches = searchWord === ''
@@ -96,6 +98,7 @@ const Suggestions = ({
             name.startsWith(lowerSearchWord)
         );
 
+    //Sentinel value of empty array indicates early termination.
     if (matches.length === 0) {
         return null
     }
