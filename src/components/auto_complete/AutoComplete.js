@@ -2,9 +2,8 @@ import React, {useState, useRef} from 'react'
 import { getOffsetText, getWordBehindCursor } from './autoCompleteUtils'
 import useGetComputedFontStyles from './useGetComputedFontStyles'
 import useDetermineInputWidthFromText from "./useDetermineInputWidthFromText";
-import searchIcon from './SearchIcon'
-import './autoComplete.css'
 import SearchIcon from "./SearchIcon";
+import './autoComplete.css'
 
 const suggestions = [
     {id: 1, name: "apples"},
