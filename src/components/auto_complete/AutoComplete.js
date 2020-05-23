@@ -82,7 +82,7 @@ const Suggestions = ({
                      }) => {
     const searchTextBeforeCursor = inputText.substring(0, cursorPosition);
     const searchWord = getWordBehindCursor(searchTextBeforeCursor);
-    const offsetText = getOffsetText(searchTextBeforeCursor); //todo use this to calculate x offset for suggestions.
+    const offsetText = getOffsetText(searchTextBeforeCursor);
     const offsetTextWidth = useDetermineInputWidthFromText(offsetText, computedFontStyles);
 
     //TIP: console.log isn't just for debugging. It is also useful to keep an eye on key variables while we develop our code.
@@ -113,7 +113,7 @@ const Suggestions = ({
                 className='autocomplete-suggestions-list'
                 style={{
                     marginBlockStart: '0',
-                    paddingLeft: `${offsetTextWidth + 38}px`
+                    paddingLeft: `${Math.min(260, 38 + offsetTextWidth)}px`
                 }}
             >
                 {
