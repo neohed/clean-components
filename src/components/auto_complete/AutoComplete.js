@@ -136,7 +136,6 @@ const Suggestions = ({
                 }}
             >
                 {
-
                     matches.map(({id, name}) =>
                         <li
                             key={id}
