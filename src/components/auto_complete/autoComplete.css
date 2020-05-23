@@ -4,12 +4,18 @@
 
 .autocomplete-input-container {
     padding: 0 8px 0 8px;
-    border: 1px solid #dedede;
+    border: 1px solid #9AA0A6;
     border-radius: 12px;
+    background-color: white;
+}
+
+.autocomplete-input-container > div {
+    display: flex;
+    flex-direction: row;
 }
 
 .autocomplete-input-container, .autocomplete-suggestions-container {
-    width: 350px;
+    width: 400px;
 }
 
 .autocomplete-input {
