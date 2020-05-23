@@ -16,6 +16,5 @@ export default AutoCompleteDemo;
     TODO:
 
     * Close suggestions when clicking away from control.
-    * Make part of autocomplete suggestion text not yet typed, bold.
     * Add X SVG to end of input to clear
  */

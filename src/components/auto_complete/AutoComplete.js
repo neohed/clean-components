@@ -71,6 +71,25 @@ const AutoComplete = () => {
     )
 };
 
+function renderSuggestion(searchWord, suggestionWord) {
+    const searchWordLength = searchWord.length;
+
+    if (searchWordLength === suggestionWord.length) {
+        return suggestionWord
+    } else {
+        return <>
+            {
+                searchWord
+            }
+            <span style={{fontWeight: 'bold'}}>
+                {
+                    suggestionWord.substring(searchWordLength)
+                }
+            </span>
+        </>
+    }
+}
+
 const Suggestions = ({
                          inputText = '',
                          cursorPosition,
@@ -117,6 +136,7 @@ const Suggestions = ({
                 }}
             >
                 {
+
                     matches.map(({id, name}) =>
                         <li
                             key={id}
@@ -130,7 +150,7 @@ const Suggestions = ({
                             }}
                         >
                             {
-                                name
+                                renderSuggestion(searchWord, name)
                             }
                         </li>
                     )
