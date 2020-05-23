@@ -36,9 +36,9 @@
 
 .autocomplete-suggestions-container {
     padding: 0 8px 12px 8px;
-    border-bottom: 1px #dedede solid;
-    border-right: 1px #dedede solid;
-    border-left: 1px #dedede solid;
+    border-bottom: 1px #9AA0A6 solid;
+    border-right: 1px #9AA0A6 solid;
+    border-left: 1px #9AA0A6 solid;
     border-bottom-right-radius: 12px;
     border-bottom-left-radius: 12px;
 }

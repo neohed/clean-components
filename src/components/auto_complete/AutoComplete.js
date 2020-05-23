@@ -39,7 +39,7 @@ const AutoComplete = () => {
                 borderBottomLeftRadius: '0',
                 borderBottom: 'none'
             } : {}}>
-                <div style={showingSuggestions ? { borderBottom: '1px solid #dedede' } : {}}>
+                <div style={showingSuggestions ? { borderBottom: '1px solid #9AA0A6' } : {}}>
                     <SearchIcon />
                     <input
                         className='autocomplete-input'
@@ -111,7 +111,10 @@ const Suggestions = ({
         <div className='autocomplete-suggestions-container'>
             <ul
                 className='autocomplete-suggestions-list'
-                style={{ marginBlockStart: '0' }}
+                style={{
+                    marginBlockStart: '0',
+                    paddingLeft: `${offsetTextWidth + 38}px`
+                }}
             >
                 {
                     matches.map(({id, name}) =>
