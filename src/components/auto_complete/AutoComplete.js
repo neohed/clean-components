@@ -98,20 +98,19 @@ const AutoComplete = () => {
 const Suggestion = ({searchWord, suggestionWord}) => {
     const searchWordLength = searchWord.length;
 
-    if (searchWordLength === suggestionWord.length) {
-        return suggestionWord
-    } else {
-        return <>
-            {
-                searchWord
-            }
+    return <>
+        {
+            searchWord
+        }
+        {
+            searchWordLength < suggestionWord.length &&
             <span style={{fontWeight: 'bold'}}>
                 {
                     suggestionWord.substring(searchWordLength)
                 }
             </span>
-        </>
-    }
+        }
+    </>
 }
 
 const Suggestions = ({
