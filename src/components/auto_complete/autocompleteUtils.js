@@ -1,5 +1,7 @@
+const ESCAPE = 27;
+
 function isEscapeKeyCode(keyCode) {
-    return keyCode === 27
+    return keyCode === ESCAPE
 }
 
 function getOffsetText(text = '') {
@@ -47,6 +49,7 @@ function formatStringForSearch(text) {
 }
 
 export {
+    ESCAPE,
     isEscapeKeyCode,
     getOffsetText,
     getWordBehindCursor,

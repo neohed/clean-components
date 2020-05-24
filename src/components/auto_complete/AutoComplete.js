@@ -1,5 +1,5 @@
 import React, {useRef, useState, useCallback} from 'react'
-import { isEscapeKeyCode, getOffsetText, getWordBehindCursor } from './autoCompleteUtils'
+import { ESCAPE, isEscapeKeyCode, getOffsetText, getWordBehindCursor } from './autoCompleteUtils'
 import useGetComputedFontStyles from './useGetComputedFontStyles'
 import useDetermineInputWidthFromText from "./useDetermineInputWidthFromText";
 import useAddEventListener from "./useAddEventListener";
@@ -26,7 +26,8 @@ const suggestions = [
 ];
 
 const AutoComplete = () => {
-    const searchInput = useRef(null);
+    const autoComplete = useRef();
+    const searchInput = useRef();
     const [inputText, setInputText] = useState('');
     const [cursorPosition, setCursorPosition] = useState(0);
     const [canShowSuggestions, setCanShowSuggestions] = useState(true);
@@ -34,18 +35,30 @@ const AutoComplete = () => {
     const [lastKeyCode, setLastKeyCode] = useState(0);
     const computedFontStyles = useGetComputedFontStyles(searchInput);
 
-    const escFunction = useCallback((event) => {
+    const escapePressedCallback = useCallback((event) => {
         const keyCode = event.keyCode;
         setLastKeyCode(keyCode);
         if(isEscapeKeyCode(keyCode)) {
             setCanShowSuggestions(false)
         }
-    }, []);
+    }, [])
 
-    useAddEventListener('keydown', escFunction);
+    const mouseClickCallback = useCallback((event) => {
+        if (autoComplete.current.contains(event.target)) {
+            setLastKeyCode(ESCAPE) // HACK Use the same logic path as pressing the scape key.
+            setCanShowSuggestions(false)
+        }
+    }, [])
+
+    useAddEventListener('keydown', escapePressedCallback);
+    useAddEventListener('mousedown', mouseClickCallback);
+
     const useSuggestionsStyle = !isEscapeKeyCode(lastKeyCode) && showingSuggestions;
     return (
-        <div className='autocomplete-container'>
+        <div
+            ref={autoComplete}
+            className='autocomplete-container'
+        >
             <div className='autocomplete-input-container' style={useSuggestionsStyle ? {
                 borderBottomRightRadius: '0',
                 borderBottomLeftRadius: '0',

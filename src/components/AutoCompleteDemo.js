@@ -12,9 +12,3 @@ const AutoCompleteDemo = () => {
 };
 
 export default AutoCompleteDemo;
-/*
-    TODO:
-
-    * Close suggestions when clicking away from control.
-    * Add X SVG to end of input to clear
- */
