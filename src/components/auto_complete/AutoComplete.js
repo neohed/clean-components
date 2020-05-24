@@ -44,6 +44,7 @@ const AutoComplete = () => {
     }, [])
 
     const mouseClickCallback = useCallback((event) => {
+        console.log(event.target);
         if (autoComplete.current.contains(event.target)) {
             setLastKeyCode(ESCAPE) // HACK Use the same logic path as pressing the scape key.
             setCanShowSuggestions(false)
@@ -51,7 +52,7 @@ const AutoComplete = () => {
     }, [])
 
     useAddEventListener('keydown', escapePressedCallback);
-    useAddEventListener('mousedown', mouseClickCallback);
+    useAddEventListener('click', mouseClickCallback);
 
     const useSuggestionsStyle = !isEscapeKeyCode(lastKeyCode) && showingSuggestions;
     return (
