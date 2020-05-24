@@ -1,12 +1,11 @@
 import React, {useRef, useState, useCallback} from 'react'
-import { getOffsetText, getWordBehindCursor } from './autoCompleteUtils'
+import { isEscapeKeyCode, getOffsetText, getWordBehindCursor } from './autoCompleteUtils'
 import useGetComputedFontStyles from './useGetComputedFontStyles'
 import useDetermineInputWidthFromText from "./useDetermineInputWidthFromText";
 import useAddEventListener from "./useAddEventListener";
 import SearchIcon from "./SearchIcon";
 import './autoComplete.css'
 
-const ESCAPE_KEY_CODE = 27;
 const suggestions = [
     {id: 1, name: "apples"},
     {id: 2, name: "pears"},
@@ -32,26 +31,27 @@ const AutoComplete = () => {
     const [cursorPosition, setCursorPosition] = useState(0);
     const [canShowSuggestions, setCanShowSuggestions] = useState(true);
     const [showingSuggestions, setShowingSuggestions] = useState(false);
+    const [lastKeyCode, setLastKeyCode] = useState(0);
     const computedFontStyles = useGetComputedFontStyles(searchInput);
 
     const escFunction = useCallback((event) => {
-        if(event.keyCode === ESCAPE_KEY_CODE) {
-            console.log('done')
-            setShowingSuggestions(false)
+        const keyCode = event.keyCode;
+        setLastKeyCode(keyCode);
+        if(isEscapeKeyCode(keyCode)) {
             setCanShowSuggestions(false)
         }
     }, []);
 
     useAddEventListener('keydown', escFunction);
-console.log({canShowSuggestions, showingSuggestions})
+    const useSuggestionsStyle = !isEscapeKeyCode(lastKeyCode) && showingSuggestions;
     return (
         <div className='autocomplete-container'>
-            <div className='autocomplete-input-container' style={showingSuggestions ? {
+            <div className='autocomplete-input-container' style={useSuggestionsStyle ? {
                 borderBottomRightRadius: '0',
                 borderBottomLeftRadius: '0',
                 borderBottom: 'none'
             } : {}}>
-                <div style={showingSuggestions ? { borderBottom: '1px solid #9AA0A6' } : {}}>
+                <div style={useSuggestionsStyle ? { borderBottom: '1px solid #9AA0A6' } : {}}>
                     <SearchIcon />
                     <input
                         className='autocomplete-input'
@@ -61,7 +61,6 @@ console.log({canShowSuggestions, showingSuggestions})
                         onChange={({target}) => {
                             const text = target.value;
                             setCursorPosition(target.selectionStart);
-                            console.log('setCanShowSuggestions(true)')
                             setCanShowSuggestions(true);
                             setInputText(text);
                         }}

@@ -1,3 +1,7 @@
+function isEscapeKeyCode(keyCode) {
+    return keyCode === 27
+}
+
 function getOffsetText(text = '') {
     const lastSpaceIndex = text.lastIndexOf(' ');
     if (!lastSpaceIndex) {
@@ -43,6 +47,7 @@ function formatStringForSearch(text) {
 }
 
 export {
+    isEscapeKeyCode,
     getOffsetText,
     getWordBehindCursor,
     determineInputWidthFromText,
