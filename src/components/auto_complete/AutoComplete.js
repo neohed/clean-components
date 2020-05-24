@@ -87,7 +87,6 @@ const AutoComplete = () => {
                     cursorPosition={cursorPosition}
                     computedFontStyles={computedFontStyles}
                     searchInput={searchInput.current}
-                    setCanShowSuggestions={setCanShowSuggestions}
                     setShowingSuggestions={setShowingSuggestions}
                     setInputText={setInputText}
                 />
@@ -119,7 +118,6 @@ const Suggestions = ({
                          inputText = '',
                          cursorPosition,
                          setShowingSuggestions,
-                         setCanShowSuggestions,
                          setInputText,
                          searchInput,
                          computedFontStyles
@@ -169,7 +167,6 @@ const Suggestions = ({
                                     + name
                                     + ' '
                                 );
-                                setCanShowSuggestions(false);
                                 setShowingSuggestions(false);
                                 searchInput.focus()
                             }}
