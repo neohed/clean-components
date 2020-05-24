@@ -95,7 +95,7 @@ const AutoComplete = () => {
     )
 };
 
-function renderSuggestion(searchWord, suggestionWord) {
+const Suggestion = ({searchWord, suggestionWord}) => {
     const searchWordLength = searchWord.length;
 
     if (searchWordLength === suggestionWord.length) {
@@ -171,9 +171,10 @@ const Suggestions = ({
                                 searchInput.focus()
                             }}
                         >
-                            {
-                                renderSuggestion(searchWord, name)
-                            }
+                            <Suggestion
+                                searchWord={searchWord}
+                                suggestionWord={name}
+                            />
                         </li>
                     )
                 }
