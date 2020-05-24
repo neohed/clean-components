@@ -130,7 +130,7 @@ const Suggestions = ({
     const offsetTextWidth = useDetermineInputWidthFromText(offsetText, computedFontStyles);
 
     //TIP: console.log isn't just for debugging. It's also useful to watch important variables during development.
-    console.log({inputText, searchWord, offsetText, offsetTextWidth, cursorPosition});
+    console.debug({inputText, searchWord, offsetText, offsetTextWidth, cursorPosition});
 
     //Sentinel value "empty string" indicates early termination.
     if (searchWord === '') {
