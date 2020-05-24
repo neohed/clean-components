@@ -148,7 +148,6 @@ const Suggestions = ({
     if (matches.length === 0) {
         return null
     }
-console.log('set show true')
     setShowingSuggestions(true)
 
     return (
