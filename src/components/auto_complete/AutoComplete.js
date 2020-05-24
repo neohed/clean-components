@@ -1,10 +1,12 @@
-import React, {useState, useRef} from 'react'
+import React, {useRef, useState, useCallback} from 'react'
 import { getOffsetText, getWordBehindCursor } from './autoCompleteUtils'
 import useGetComputedFontStyles from './useGetComputedFontStyles'
 import useDetermineInputWidthFromText from "./useDetermineInputWidthFromText";
+import useAddEventListener from "./useAddEventListener";
 import SearchIcon from "./SearchIcon";
 import './autoComplete.css'
 
+const ESCAPE_KEY_CODE = 27;
 const suggestions = [
     {id: 1, name: "apples"},
     {id: 2, name: "pears"},
@@ -32,6 +34,16 @@ const AutoComplete = () => {
     const [showingSuggestions, setShowingSuggestions] = useState(false);
     const computedFontStyles = useGetComputedFontStyles(searchInput);
 
+    const escFunction = useCallback((event) => {
+        if(event.keyCode === ESCAPE_KEY_CODE) {
+            console.log('done')
+            setShowingSuggestions(false)
+            setCanShowSuggestions(false)
+        }
+    }, []);
+
+    useAddEventListener('keydown', escFunction);
+console.log({canShowSuggestions, showingSuggestions})
     return (
         <div className='autocomplete-container'>
             <div className='autocomplete-input-container' style={showingSuggestions ? {
@@ -49,6 +61,7 @@ const AutoComplete = () => {
                         onChange={({target}) => {
                             const text = target.value;
                             setCursorPosition(target.selectionStart);
+                            console.log('setCanShowSuggestions(true)')
                             setCanShowSuggestions(true);
                             setInputText(text);
                         }}
@@ -123,7 +136,7 @@ const Suggestions = ({
     if (matches.length === 0) {
         return null
     }
-
+console.log('set show true')
     setShowingSuggestions(true)
 
     return (
