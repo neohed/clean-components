@@ -153,7 +153,7 @@ const Suggestions = ({
                 className='autocomplete-suggestions-list'
                 style={{
                     marginBlockStart: '0',
-                    paddingLeft: `${Math.min(260, 38 + offsetTextWidth)}px`
+                    paddingLeft: `${Math.min(260, 28 + offsetTextWidth)}px`
                 }}
             >
                 {
