@@ -44,8 +44,10 @@ function determineInputWidthFromText(text, styles) {
     return width
 }
 
-function formatStringForSearch(text) {
-    return text.replace(/\s+/g, ' ')
+function formatStringForSearch(text = '') {
+    return text
+        .trim()
+        .replace(/\s+/g, ' ')
 }
 
 export {
