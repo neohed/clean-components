@@ -53,7 +53,10 @@ const AutoComplete = () => {
     useAddEventListener('keydown', escapePressedCallback);
     useAddEventListener('click', mouseClickCallback);
 
-    const useSuggestionsStyle = !isEscapeKeyCode(lastKeyCode) && showingSuggestions;
+    const useSuggestionsStyle = !isEscapeKeyCode(lastKeyCode)
+        && showingSuggestions
+        && inputText.length > 0;
+
     return (
         <div
             ref={autoComplete}
@@ -140,9 +143,11 @@ const Suggestions = ({
             name === lowerSearchWord ||
             name.startsWith(lowerSearchWord)
         );
-
+console.log('here')
     //Sentinel value of empty array indicates early termination.
     if (matches.length === 0) {
+console.log('about to exit')
+        setShowingSuggestions(false)
         return null
     }
     setShowingSuggestions(true)
