@@ -77,7 +77,7 @@ const AutoComplete = () => {
                         onChange={({target}) => {
                             const text = target.value;
                             setCursorPosition(target.selectionStart);
-                            setHideSuggestions(true);
+                            setHideSuggestions(false);
                             setInputText(text);
                         }}
                     />
