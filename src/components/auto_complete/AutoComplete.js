@@ -30,7 +30,7 @@ const AutoComplete = () => {
     const searchInput = useRef();
     const [inputText, setInputText] = useState('');
     const [cursorPosition, setCursorPosition] = useState(0);
-    const [canShowSuggestions, setCanShowSuggestions] = useState(true);
+    const [hideSuggestions, setHideSuggestions] = useState(false);
     const [showingSuggestions, setShowingSuggestions] = useState(false);
     const [lastKeyCode, setLastKeyCode] = useState(0);
     const computedFontStyles = useGetComputedFontStyles(searchInput);
@@ -39,14 +39,14 @@ const AutoComplete = () => {
         const keyCode = event.keyCode;
         setLastKeyCode(keyCode);
         if(isEscapeKeyCode(keyCode)) {
-            setCanShowSuggestions(false)
+            setHideSuggestions(true)
         }
     }, [])
 
     const mouseClickCallback = useCallback((event) => {
         if (autoComplete.current.contains(event.target)) {
             setLastKeyCode(ESCAPE) // HACK Use the same logic path as pressing the scape key.
-            setCanShowSuggestions(false)
+            setHideSuggestions(true)
         }
     }, [])
 
@@ -77,14 +77,14 @@ const AutoComplete = () => {
                         onChange={({target}) => {
                             const text = target.value;
                             setCursorPosition(target.selectionStart);
-                            setCanShowSuggestions(true);
+                            setHideSuggestions(true);
                             setInputText(text);
                         }}
                     />
                 </div>
             </div>
             {
-                canShowSuggestions &&
+                !hideSuggestions &&
                 <Suggestions
                     inputText={inputText}
                     cursorPosition={cursorPosition}
