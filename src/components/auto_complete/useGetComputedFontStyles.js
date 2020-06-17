@@ -1,11 +1,9 @@
 import {useState, useEffect} from "react";
 
-function useGetComputedFontStyles(targetElementRef) {
+function useGetComputedFontStyles(element) {
     const [computedStyles, setComputedStyles] = useState({});
 
     useEffect(() => {
-        const element = targetElementRef.current;
-
         if (element) {
             const searchInputStyles = window.getComputedStyle(element);
             const fontSize = searchInputStyles.getPropertyValue("font-size");
@@ -16,7 +14,7 @@ function useGetComputedFontStyles(targetElementRef) {
                 fontSize
             })
         }
-    }, [targetElementRef])
+    }, [element])
 
     return computedStyles
 }

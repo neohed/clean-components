@@ -33,7 +33,6 @@ const AutoComplete = () => {
     const [hideSuggestions, setHideSuggestions] = useState(false);
     const [showingSuggestions, setShowingSuggestions] = useState(false);
     const [lastKeyCode, setLastKeyCode] = useState(0);
-    const computedFontStyles = useGetComputedFontStyles(searchInput);
 
     const escapePressedCallback = useCallback((event) => {
         const keyCode = event.keyCode;
@@ -88,7 +87,6 @@ const AutoComplete = () => {
                 <Suggestions
                     inputText={inputText}
                     cursorPosition={cursorPosition}
-                    computedFontStyles={computedFontStyles}
                     searchInput={searchInput.current}
                     setShowingSuggestions={setShowingSuggestions}
                     setInputText={setInputText}
@@ -122,12 +120,11 @@ const Suggestions = ({
                          setShowingSuggestions,
                          setInputText,
                          searchInput,
-                         computedFontStyles
                      }) => {
     const searchTextBeforeCursor = inputText.substring(0, cursorPosition);
     const searchWord = getWordBehindCursor(searchTextBeforeCursor);
     const offsetText = getOffsetText(searchTextBeforeCursor);
-    const offsetTextWidth = useDetermineInputWidthFromText(offsetText, computedFontStyles);
+    const offsetTextWidth = useDetermineInputWidthFromText(offsetText, useGetComputedFontStyles(searchInput));
 
     //TIP: console.log isn't just for debugging. It's also useful to watch important variables during development.
     console.debug({inputText, searchWord, offsetText, offsetTextWidth, cursorPosition});
