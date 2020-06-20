@@ -1,9 +1,12 @@
 import React from 'react';
-import './centerElement.css'
 
 const CenterElement = ({children, ...rest}) => {
     return (
-        <div className='center' {...rest}>
+        <div style={{
+            margin: 'auto',
+            width: '200px',
+            textAlign: 'center',
+        }} {...rest}>
             {
                 children
             }

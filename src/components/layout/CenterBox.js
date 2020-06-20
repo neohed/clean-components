@@ -1,9 +1,13 @@
 import React from 'react';
-import './centerBox.css'
 
 const CenterBox = ({children, ...rest}) => {
     return (
-        <div className='center-box-container' {...rest}>
+        <div style={{
+            width: '100%',
+            maxWidth: '90vw',
+            margin: '0 auto',
+            padding: '40px',
+        }} {...rest}>
             {
                 children
             }
