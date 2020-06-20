@@ -9,7 +9,6 @@ function renderDivs() {
             <div
                 key={i}
                 style={{
-                    position: 'relative',
                     margin: '10px',
                     padding: '8px',
                     width: '200px',
