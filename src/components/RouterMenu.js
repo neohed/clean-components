@@ -30,6 +30,9 @@ function RouterMenu() {
                     <Link to="two-columns">Two Columns</Link>
                 </li>
                 <li>
+                    <Link to="center-box">Center Box</Link>
+                </li>
+                <li>
                     <Link to="center">Center</Link>
                 </li>
                 <li>

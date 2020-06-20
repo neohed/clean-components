@@ -1,7 +1,7 @@
 import React from 'react'
 import CardTemplate1 from './CardTemplate1'
-import image1 from './crazy-thoughts.jpeg'
-import image2 from './sat-at-computer-2048.jpg'
+import image1 from '../../image/crazy-thoughts.jpeg'
+import image2 from '../../image/sat-at-computer-2048.jpg'
 
 const CardDemo = () => (
     <div

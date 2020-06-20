@@ -16,6 +16,7 @@ import TwoColumns from "./components/columns/TwoColumns";
 import CenterDemo from './components/CenterDemo'
 import AutoCompleteDemo from "./components/AutoCompleteDemo";
 import CardDemo from './components/card/CardDemo'
+import CenterBoxDemo from './components/CenterBoxDemo'
 //import AspectImage from "./components/AspectImage";
 
 function App() {
@@ -46,6 +47,9 @@ function App() {
                     </Route>
                     <Route path="/two-columns">
                         <TwoColumns/>
+                    </Route>
+                    <Route path="/center-box">
+                        <CenterBoxDemo/>
                     </Route>
                     <Route path="/center">
                         <CenterDemo/>
