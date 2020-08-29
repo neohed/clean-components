@@ -41,6 +41,9 @@ function RouterMenu() {
                 <li>
                     <Link to="card">Card</Link>
                 </li>
+                <li>
+                    <Link to="layout-header-main">Layout Header Main</Link>
+                </li>
             </ul>
         </div>
     );

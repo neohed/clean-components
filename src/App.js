@@ -17,6 +17,7 @@ import CenterDemo from './components/CenterDemo'
 import AutoCompleteDemo from "./components/AutoCompleteDemo";
 import CardDemo from './components/card/CardDemo'
 import CenterBoxDemo from './components/CenterBoxDemo'
+import LayoutHeaderMainDemo from './components/LayoutHeaderMainDemo'
 //import AspectImage from "./components/AspectImage";
 
 function App() {
@@ -59,6 +60,9 @@ function App() {
                     </Route>
                     <Route path="/card">
                         <CardDemo/>
+                    </Route>
+                    <Route path="/layout-header-main">
+                        <LayoutHeaderMainDemo />
                     </Route>
                 </Switch>
             </Router>

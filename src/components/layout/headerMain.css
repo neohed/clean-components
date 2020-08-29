@@ -1,0 +1,30 @@
+.layout-container {
+    display: grid;
+    grid-template-areas:
+            "header"
+            "content";
+    grid-template-columns: 420px;
+    grid-template-rows: auto 1fr;
+
+    height: 100vh;
+    grid-gap: 10px;
+
+    background-color: #fff;
+    color: #444;
+}
+
+.box {
+    background-color: #444;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.header {
+    grid-area: header;
+    background-color: #999;
+    height: 80px;
+}
+
+.content {
+    grid-area: content;
+}
