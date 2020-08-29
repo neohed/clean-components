@@ -3,7 +3,6 @@
     grid-template-areas:
             "header"
             "content";
-    grid-template-columns: 420px;
     grid-template-rows: auto 1fr;
 
     height: 100vh;
