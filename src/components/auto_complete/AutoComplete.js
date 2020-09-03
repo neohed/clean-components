@@ -126,9 +126,6 @@ const Suggestions = ({
     const offsetText = getOffsetText(searchTextBeforeCursor);
     const offsetTextWidth = useDetermineInputWidthFromText(offsetText, useGetComputedFontStyles(searchInput));
 
-    //TIP: console.log isn't just for debugging. It's also useful to watch important variables during development.
-    console.debug({inputText, searchWord, offsetText, offsetTextWidth, cursorPosition});
-
     //Sentinel value "empty string" indicates early termination.
     if (searchWord === '') {
         return null // return null, not "empty string" which would cause React to render an empty text node.
