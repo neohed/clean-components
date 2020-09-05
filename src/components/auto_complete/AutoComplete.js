@@ -54,12 +54,12 @@ const AutoComplete = () => {
     useAddEventListener('click', mouseClickCallback);
 
     useEffect(() => {
-        if (hideSuggestions || isEscapeKeyCode(lastKeyCode) || !showingSuggestions || inputText.length === 0) {
+        if (isEscapeKeyCode(lastKeyCode) || !showingSuggestions || inputText.length === 0) {
             setUseSuggestionsStyle(false)
         } else {
             setUseSuggestionsStyle(true)
         }
-    }, [hideSuggestions, lastKeyCode, showingSuggestions, inputText, setUseSuggestionsStyle])
+    }, [lastKeyCode, showingSuggestions, inputText, setUseSuggestionsStyle])
 
     return (
         <div
