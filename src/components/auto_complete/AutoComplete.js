@@ -6,34 +6,16 @@ import useAddEventListener from "./useAddEventListener";
 import SearchIcon from "./SearchIcon";
 import './autoComplete.css'
 
-const suggestions = [
-    {id: 1, name: "apples"},
-    {id: 2, name: "pears"},
-    {id: 3, name: "bananas"},
-    {id: 4, name: "mangoes"},
-    {id: 5, name: "lemons"},
-    {id: 6, name: "apricots"},
-    {id: 7, name: "melons"},
-    {id: 8, name: "applause"},
-    {id: 9, name: "bandannas"},
-    {id: 10, name: "mangroves"},
-    {id: 11, name: "leopards"},
-    {id: 12, name: "apprise"},
-    {id: 13, name: "melting"},
-    {id: 14, name: "apparent"},
-    {id: 15, name: "lotus"},
-    {id: 16, name: "peony"},
-];
-
-const AutoComplete = () => {
+const AutoComplete = ({
+    searchTextCallback,
+    suggestions = [],
+}) => {
     const autoComplete = useRef();
     const searchInput = useRef();
     const [inputText, setInputText] = useState('');
     const [cursorPosition, setCursorPosition] = useState(0);
     const [hideSuggestions, setHideSuggestions] = useState(false);
-    const [showingSuggestions, setShowingSuggestions] = useState(false);
     const [lastKeyCode, setLastKeyCode] = useState(0);
-    const [useSuggestionsStyle, setUseSuggestionsStyle] = useState(false);
 
     const escapePressedCallback = useCallback((event) => {
         const keyCode = event.keyCode;
@@ -53,25 +35,43 @@ const AutoComplete = () => {
     useAddEventListener('keydown', escapePressedCallback);
     useAddEventListener('click', mouseClickCallback);
 
+    const searchTextBeforeCursor = inputText.substring(0, cursorPosition);
+    const searchWord = getWordBehindCursor(searchTextBeforeCursor);
+    const [matches, setMatches] = useState([]);
+
     useEffect(() => {
-        if (isEscapeKeyCode(lastKeyCode) || !showingSuggestions || inputText.length === 0) {
-            setUseSuggestionsStyle(false)
-        } else {
-            setUseSuggestionsStyle(true)
+        if (searchWord !== '' && suggestions.length > 0) {
+            const lowerSearchWord = searchWord.toLowerCase();
+            setMatches(searchWord === ''
+                ? []
+                : suggestions.filter(({name}) =>
+                    name === lowerSearchWord ||
+                    name.startsWith(lowerSearchWord)
+                ));
         }
-    }, [lastKeyCode, showingSuggestions, inputText, setUseSuggestionsStyle])
+    }, [searchWord, suggestions, setMatches])
+
+    const displaySuggestions = useCallback(() => {
+        console.log({escape: isEscapeKeyCode(lastKeyCode), hideSuggestions, matches: matches.length})
+        return !isEscapeKeyCode(lastKeyCode)
+            && !hideSuggestions
+            && matches.length > 0
+    }, [lastKeyCode, hideSuggestions, matches])
+
+    const offsetText = getOffsetText(searchTextBeforeCursor);
+    const offsetTextWidth = useDetermineInputWidthFromText(offsetText, useGetComputedFontStyles(searchInput.current));
 
     return (
         <div
             ref={autoComplete}
             className='autocomplete-container'
         >
-            <div className='autocomplete-input-container' style={useSuggestionsStyle ? {
+            <div className='autocomplete-input-container' style={displaySuggestions() ? {
                 borderBottomRightRadius: '0',
                 borderBottomLeftRadius: '0',
                 borderBottom: 'none'
             } : {}}>
-                <div style={useSuggestionsStyle ? { borderBottom: '1px solid #9AA0A6' } : {}}>
+                <div style={displaySuggestions() ? { borderBottom: '1px solid #9AA0A6' } : {}}>
                     <SearchIcon />
                     <input
                         className='autocomplete-input'
@@ -90,10 +90,12 @@ const AutoComplete = () => {
             {
                 !hideSuggestions &&
                 <Suggestions
+                    matches={matches}
                     inputText={inputText}
-                    cursorPosition={cursorPosition}
+                    searchWord={searchWord}
+                    offsetTextWidth={offsetTextWidth}
                     searchInput={searchInput.current}
-                    setShowingSuggestions={setShowingSuggestions}
+                    setHideSuggestions={setHideSuggestions}
                     setInputText={setInputText}
                 />
             }
@@ -120,34 +122,14 @@ const Suggestion = ({searchWord, suggestionWord}) => {
 }
 
 const Suggestions = ({
-                         inputText = '',
-                         cursorPosition,
-                         setShowingSuggestions,
-                         setInputText,
-                         searchInput,
-                     }) => {
-    const [matches, setMatches] = useState([]);
-    const searchTextBeforeCursor = inputText.substring(0, cursorPosition);
-    const searchWord = getWordBehindCursor(searchTextBeforeCursor);
-    const offsetText = getOffsetText(searchTextBeforeCursor);
-    const offsetTextWidth = useDetermineInputWidthFromText(offsetText, useGetComputedFontStyles(searchInput));
-
-    useEffect(() => {
-        if (searchWord !== '' && suggestions.length > 0) {
-            const lowerSearchWord = searchWord.toLowerCase();
-            setMatches(searchWord === ''
-                ? []
-                : suggestions.filter(({name}) =>
-                    name === lowerSearchWord ||
-                    name.startsWith(lowerSearchWord)
-                ));
-
-            setShowingSuggestions(true)
-        } else {
-            setShowingSuggestions(false)
-        }
-    }, [searchWord, suggestions, setMatches, setShowingSuggestions])
-
+    matches,
+    inputText = '',
+    searchWord,
+    offsetTextWidth,
+    setHideSuggestions,
+    setInputText,
+    searchInput,
+}) => {
     return (
         <div
             style={{visibility: matches.length > 0 ? 'visible' : 'hidden'}}
@@ -170,7 +152,7 @@ const Suggestions = ({
                                     + name
                                     + ' '
                                 );
-                                setShowingSuggestions(false);
+                                setHideSuggestions(true);
                                 searchInput.focus()
                             }}
                         >
