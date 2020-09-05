@@ -1,4 +1,4 @@
-import React, {useRef, useState, useCallback} from 'react'
+import React, {useRef, useState, useCallback, useEffect} from 'react'
 import { ESCAPE, isEscapeKeyCode, getOffsetText, getWordBehindCursor } from './autoCompleteUtils'
 import useGetComputedFontStyles from './useGetComputedFontStyles'
 import useDetermineInputWidthFromText from "./useDetermineInputWidthFromText";
@@ -33,6 +33,7 @@ const AutoComplete = () => {
     const [hideSuggestions, setHideSuggestions] = useState(false);
     const [showingSuggestions, setShowingSuggestions] = useState(false);
     const [lastKeyCode, setLastKeyCode] = useState(0);
+    const [useSuggestionsStyle, setUseSuggestionsStyle] = useState(false);
 
     const escapePressedCallback = useCallback((event) => {
         const keyCode = event.keyCode;
@@ -52,9 +53,13 @@ const AutoComplete = () => {
     useAddEventListener('keydown', escapePressedCallback);
     useAddEventListener('click', mouseClickCallback);
 
-    const useSuggestionsStyle = !isEscapeKeyCode(lastKeyCode)
-        && showingSuggestions
-        && inputText.length > 0;
+    useEffect(() => {
+        if (hideSuggestions || isEscapeKeyCode(lastKeyCode) || !showingSuggestions || inputText.length === 0) {
+            setUseSuggestionsStyle(false)
+        } else {
+            setUseSuggestionsStyle(true)
+        }
+    }, [hideSuggestions, lastKeyCode, showingSuggestions, inputText, setUseSuggestionsStyle])
 
     return (
         <div
@@ -121,32 +126,33 @@ const Suggestions = ({
                          setInputText,
                          searchInput,
                      }) => {
+    const [matches, setMatches] = useState([]);
     const searchTextBeforeCursor = inputText.substring(0, cursorPosition);
     const searchWord = getWordBehindCursor(searchTextBeforeCursor);
     const offsetText = getOffsetText(searchTextBeforeCursor);
     const offsetTextWidth = useDetermineInputWidthFromText(offsetText, useGetComputedFontStyles(searchInput));
 
-    //Sentinel value "empty string" indicates early termination.
-    if (searchWord === '') {
-        return null // return null, not "empty string" which would cause React to render an empty text node.
-    }
-    const lowerSearchWord = searchWord.toLowerCase();
-    const matches = searchWord === ''
-        ? []
-        : suggestions.filter(({name}) =>
-            name === lowerSearchWord ||
-            name.startsWith(lowerSearchWord)
-        );
+    useEffect(() => {
+        if (searchWord !== '' && suggestions.length > 0) {
+            const lowerSearchWord = searchWord.toLowerCase();
+            setMatches(searchWord === ''
+                ? []
+                : suggestions.filter(({name}) =>
+                    name === lowerSearchWord ||
+                    name.startsWith(lowerSearchWord)
+                ));
 
-    //Sentinel value of empty array indicates early termination.
-    if (matches.length === 0) {
-        setShowingSuggestions(false)
-        return null
-    }
-    setShowingSuggestions(true)
+            setShowingSuggestions(true)
+        } else {
+            setShowingSuggestions(false)
+        }
+    }, [searchWord, suggestions, setMatches, setShowingSuggestions])
 
     return (
-        <div className='autocomplete-suggestions-container'>
+        <div
+            style={{visibility: matches.length > 0 ? 'visible' : 'hidden'}}
+            className='autocomplete-suggestions-container'
+        >
             <ul
                 className='autocomplete-suggestions-list'
                 style={{
