@@ -1,5 +1,5 @@
-import React, {useRef, useState, useCallback, useEffect} from 'react'
-import { ESCAPE, isEscapeKeyCode, getOffsetText, getWordBehindCursor } from './autoCompleteUtils'
+import React, {useRef, useState, useEffect} from 'react'
+import { isEscapeKeyCode, getOffsetText, getWordBehindCursor } from './autoCompleteUtils'
 import useGetComputedFontStyles from './useGetComputedFontStyles'
 import useDetermineInputWidthFromText from "./useDetermineInputWidthFromText";
 import useAddEventListener from "./useAddEventListener";
@@ -15,24 +15,18 @@ const AutoComplete = ({
     const [inputText, setInputText] = useState('');
     const [cursorPosition, setCursorPosition] = useState(0);
     const [hideSuggestions, setHideSuggestions] = useState(false);
-    const [lastKeyCode, setLastKeyCode] = useState(0);
 
-    const escapePressedCallback = useCallback((event) => {
+    useAddEventListener('keydown', (event) => {
         const keyCode = event.keyCode;
-        setLastKeyCode(keyCode);
         if(isEscapeKeyCode(keyCode)) {
             setHideSuggestions(true)
         }
-    }, [])
-
-    const mouseClickCallback = useCallback((event) => {
+    });
+    useAddEventListener('click', (event) => {
         if (autoComplete.current.contains(event.target)) {
             setHideSuggestions(true)
         }
-    }, [])
-
-    useAddEventListener('keydown', escapePressedCallback);
-    useAddEventListener('click', mouseClickCallback);
+    });
 
     const searchTextBeforeCursor = inputText.substring(0, cursorPosition);
     const searchWord = getWordBehindCursor(searchTextBeforeCursor);
