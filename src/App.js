@@ -18,6 +18,7 @@ import AutoCompleteDemo from "./components/AutoCompleteDemo";
 import CardDemo from './components/card/CardDemo'
 import CenterBoxDemo from './components/CenterBoxDemo'
 import LayoutHeaderMainDemo from './components/LayoutHeaderMainDemo'
+import AsManyAsFitDemo from "./components/AsManyAsFitDemo";
 //import AspectImage from "./components/AspectImage";
 
 function App() {
@@ -63,6 +64,9 @@ function App() {
                     </Route>
                     <Route path="/layout-header-main">
                         <LayoutHeaderMainDemo />
+                    </Route>
+                    <Route path="/as-many-as-fit">
+                        <AsManyAsFitDemo />
                     </Route>
                 </Switch>
             </Router>

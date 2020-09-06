@@ -44,6 +44,9 @@ function RouterMenu() {
                 <li>
                     <Link to="layout-header-main">Layout Header Main</Link>
                 </li>
+                <li>
+                    <Link to="as-many-as-fit">Layout AsManyAsFit</Link>
+                </li>
             </ul>
         </div>
     );
