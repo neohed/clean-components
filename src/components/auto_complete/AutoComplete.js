@@ -35,9 +35,7 @@ const AutoComplete = ({
     useEffect(() => {
         if (searchWord !== '' && suggestions.length > 0) {
             const lowerSearchWord = searchWord.toLowerCase();
-            setMatches(searchWord === ''
-                ? []
-                : suggestions.filter(({name}) =>
+            setMatches(suggestions.filter(({name}) =>
                     name === lowerSearchWord ||
                     name.startsWith(lowerSearchWord)
                 ));
