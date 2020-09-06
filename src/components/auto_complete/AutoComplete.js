@@ -50,27 +50,21 @@ const AutoComplete = ({
         }
     }, [searchWord, suggestions, setMatches])
 
-    const displaySuggestions = useCallback(() => {
-        console.log({escape: isEscapeKeyCode(lastKeyCode), hideSuggestions, matches: matches.length})
-        return !isEscapeKeyCode(lastKeyCode)
-            && !hideSuggestions
-            && matches.length > 0
-    }, [lastKeyCode, hideSuggestions, matches])
-
     const offsetText = getOffsetText(searchTextBeforeCursor);
     const offsetTextWidth = useDetermineInputWidthFromText(offsetText, useGetComputedFontStyles(searchInput.current));
+    const displaySuggestions = !hideSuggestions && matches.length > 0;
 
     return (
         <div
             ref={autoComplete}
             className='autocomplete-container'
         >
-            <div className='autocomplete-input-container' style={displaySuggestions() ? {
+            <div className='autocomplete-input-container' style={displaySuggestions ? {
                 borderBottomRightRadius: '0',
                 borderBottomLeftRadius: '0',
                 borderBottom: 'none'
             } : {}}>
-                <div style={displaySuggestions() ? { borderBottom: '1px solid #9AA0A6' } : {}}>
+                <div style={displaySuggestions ? { borderBottom: '1px solid #9AA0A6' } : {}}>
                     <SearchIcon />
                     <input
                         className='autocomplete-input'
