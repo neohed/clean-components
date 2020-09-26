@@ -40,7 +40,7 @@ const AutoComplete = ({
                     name.startsWith(lowerSearchWord)
                 ));
         }
-    }, [searchWord, suggestions, setMatches])
+    }, [searchWord, suggestions])
 
     const offsetText = getOffsetText(searchTextBeforeCursor);
     const offsetTextWidth = useDetermineInputWidthFromText(offsetText, useGetComputedFontStyles(searchInput.current));
