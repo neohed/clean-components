@@ -18,7 +18,8 @@ const AutoComplete = ({
     const [matches, setMatches] = useState([]);
     const [searchWord, setSearchWord] = useState('');
     const [offsetText, setOffsetText] = useState('');
-    const handleSearchTextUpdate = (text, newCursorPosition) => {
+    const [highlightIndex, setHighlightIndex] = useState(-1);
+    const handleTextUpdate = (text, newCursorPosition) => {
         setInputText(text);
         searchTextCallback(
             formatStringForSearch(text)
@@ -31,6 +32,13 @@ const AutoComplete = ({
             input.focus();
             input.setSelectionRange(newCursorPosition, newCursorPosition);
         }
+    }
+    const handlePartialTextUpdate = (name) => {
+        const newInputText = mergeSuggestionIntoInput(inputText, cursorPosition, searchWord, name);
+        const newCursorPosition = cursorPosition + newInputText.length - inputText.length;
+        handleTextUpdate(newInputText, newCursorPosition);
+        setHideSuggestions(true);
+        setHighlightIndex(-1)
     }
 
     useAddEventListener('keydown', (event) => {
@@ -47,7 +55,6 @@ const AutoComplete = ({
     }, [inputText, cursorPosition])
 
     useEffect(() => {
-        //console.log({searchWord})searchWord !== '' &&
         if (suggestions.length > 0) {
             const lowerSearchWord = searchWord.toLowerCase();
             const matches = suggestions.filter(({name}) => {
@@ -68,20 +75,14 @@ const AutoComplete = ({
     const offsetTextWidth = useDetermineInputWidthFromText(offsetText, useGetComputedFontStyles(searchInput.current));
     const displaySuggestions = !hideSuggestions && matches.length > 0;
 
-
-    const [highlightIndex, setHighlightIndex] = useState(-1);
     const keyDownHandlers = {
-        ArrowDown: () => {
-            setHighlightIndex(highlightIndex + 1)
-        },
+        ArrowDown: () => setHighlightIndex(highlightIndex + 1),
         ArrowUp: () => {
             if (highlightIndex > -1) {
                 setHighlightIndex(highlightIndex - 1)
             }
         },
-        Enter: () => {
-            console.log('enter')
-        },
+        Enter: () => handlePartialTextUpdate(matches[highlightIndex].name),
     };
 
     return (
@@ -110,7 +111,7 @@ const AutoComplete = ({
                             const text = target.value;
                             setCursorPosition(target.selectionStart);
                             setHideSuggestions(false);
-                            handleSearchTextUpdate(text);
+                            handleTextUpdate(text);
                         }}
                     />
                 </div>
@@ -121,12 +122,7 @@ const AutoComplete = ({
                     matches={matches}
                     searchWord={searchWord}
                     offsetTextWidth={offsetTextWidth}
-                    updateSearchText={(name) => {
-                        const newInputText = mergeSuggestionIntoInput(inputText, cursorPosition, searchWord, name);
-                        const newCursorPosition = cursorPosition + newInputText.length - inputText.length;
-                        handleSearchTextUpdate(newInputText, newCursorPosition);
-                        setHideSuggestions(true)
-                    }}
+                    updateSearchText={handlePartialTextUpdate}
                     highlightIndex={highlightIndex}
                     setHighlightIndex={setHighlightIndex}
                 />
