@@ -76,7 +76,7 @@ const AutoComplete = ({
     const displaySuggestions = !hideSuggestions && matches.length > 0;
 
     const keyDownHandlers = {
-        ArrowDown: () => setHighlightIndex(highlightIndex + 1),
+        ArrowDown: () => setHighlightIndex((highlightIndex + 1) % matches.length),
         ArrowUp: () => {
             if (highlightIndex > -1) {
                 setHighlightIndex(highlightIndex - 1)
