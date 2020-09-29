@@ -45,11 +45,30 @@ const AutoComplete = ({
     const offsetText = getOffsetText(searchTextBeforeCursor);
     const offsetTextWidth = useDetermineInputWidthFromText(offsetText, useGetComputedFontStyles(searchInput.current));
     const displaySuggestions = !hideSuggestions && matches.length > 0;
+    const [highlightIndex, setHighlightIndex] = useState(-1);
+    const keyDownHandlers = {
+        ArrowDown: () => {
+            setHighlightIndex(highlightIndex + 1)
+        },
+        ArrowUp: () => {
+            if (highlightIndex > -1) {
+                setHighlightIndex(highlightIndex - 1)
+            }
+        },
+        Enter: () => {
+            console.log('enter')
+        },
+    };
 
     return (
         <div
             ref={autoComplete}
             className='autocomplete-container'
+            onKeyDown={({key}) => {
+                if (displaySuggestions && keyDownHandlers[key]) {
+                    keyDownHandlers[key]();
+                }
+            }}
         >
             <div className='autocomplete-input-container' style={displaySuggestions ? {
                 borderBottomRightRadius: '0',
@@ -76,12 +95,18 @@ const AutoComplete = ({
                 !hideSuggestions &&
                 <Suggestions
                     matches={matches}
-                    inputText={inputText}
                     searchWord={searchWord}
                     offsetTextWidth={offsetTextWidth}
                     searchInput={searchInput.current}
                     setHideSuggestions={setHideSuggestions}
-                    setInputText={setInputText}
+                    setInputText={(name) =>
+                        setInputText(
+                            inputText.substring(0, inputText.lastIndexOf(searchWord))
+                            + name
+                            + ' '
+                        )}
+                    highlightIndex={highlightIndex}
+                    setHighlightIndex={setHighlightIndex}
                 />
             }
         </div>
@@ -108,12 +133,13 @@ const Suggestion = ({searchWord, suggestionWord}) => {
 
 const Suggestions = ({
     matches,
-    inputText = '',
     searchWord,
     offsetTextWidth,
     setHideSuggestions,
     setInputText,
     searchInput,
+    highlightIndex,
+    setHighlightIndex,
 }) => {
     return (
         <div
@@ -126,20 +152,20 @@ const Suggestions = ({
                     marginBlockStart: '0',
                     paddingLeft: `${Math.min(260, 28 + offsetTextWidth)}px`
                 }}
+                onMouseOver={() => setHighlightIndex(-1)}
             >
                 {
-                    matches.map(({id, name}) =>
+                    matches.map(({id, name}, i) =>
                         <li
                             key={id}
                             onClick={() => {
-                                setInputText(
-                                    inputText.substring(0, inputText.lastIndexOf(searchWord))
-                                    + name
-                                    + ' '
-                                );
+                                setInputText(name);
                                 setHideSuggestions(true);
                                 searchInput.focus()
                             }}
+                            style={(i === highlightIndex) ? {
+                                backgroundColor:  '#ddd'
+                            } : {}}
                         >
                             <Suggestion
                                 searchWord={searchWord}

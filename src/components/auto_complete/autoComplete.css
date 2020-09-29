@@ -60,6 +60,6 @@
 }
 
 .autocomplete-suggestions-list li:hover {
-    background-color: #dddddd;
+    background-color: #ddd;
     cursor: pointer;
 }
