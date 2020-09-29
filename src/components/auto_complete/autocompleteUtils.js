@@ -50,6 +50,12 @@ function formatStringForSearch(text = '') {
         .replace(/\s+/g, ' ')
 }
 
+function mergeSuggestionIntoInput(inputText, cursorPosition, matchedText, replacementText) {
+    return inputText.substring(0, cursorPosition - matchedText.length)
+        + replacementText
+        + (inputText.substring(cursorPosition, inputText.length) || ' ')
+}
+
 export {
     ESCAPE,
     isEscapeKeyCode,
@@ -57,4 +63,5 @@ export {
     getWordBehindCursor,
     determineInputWidthFromText,
     formatStringForSearch,
+    mergeSuggestionIntoInput,
 }

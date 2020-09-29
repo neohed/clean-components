@@ -1,5 +1,5 @@
 import React, {useRef, useState, useEffect} from 'react'
-import { isEscapeKeyCode, getOffsetText, getWordBehindCursor } from './autoCompleteUtils'
+import { isEscapeKeyCode, getOffsetText, getWordBehindCursor, mergeSuggestionIntoInput, formatStringForSearch } from './autoCompleteUtils'
 import useGetComputedFontStyles from './useGetComputedFontStyles'
 import useDetermineInputWidthFromText from "./useDetermineInputWidthFromText";
 import useAddEventListener from "./useAddEventListener";
@@ -14,7 +14,24 @@ const AutoComplete = ({
     const searchInput = useRef();
     const [inputText, setInputText] = useState('');
     const [cursorPosition, setCursorPosition] = useState(0);
-    const [hideSuggestions, setHideSuggestions] = useState(false);
+    const [hideSuggestions, setHideSuggestions] = useState(true);
+    const [matches, setMatches] = useState([]);
+    const [searchWord, setSearchWord] = useState('');
+    const [offsetText, setOffsetText] = useState('');
+    const handleSearchTextUpdate = (text, newCursorPosition) => {
+        setInputText(text);
+        searchTextCallback(
+            formatStringForSearch(text)
+        );
+
+        //BUG The cursor position doesn't seem to get updated
+        if (newCursorPosition !== undefined) {
+            setCursorPosition(newCursorPosition);
+            const input = searchInput.current;
+            input.focus();
+            input.setSelectionRange(newCursorPosition, newCursorPosition);
+        }
+    }
 
     useAddEventListener('keydown', (event) => {
         const keyCode = event.keyCode;
@@ -22,29 +39,36 @@ const AutoComplete = ({
             setHideSuggestions(true)
         }
     });
-    useAddEventListener('click', (event) => {
-        if (autoComplete.current.contains(event.target)) {
-            setHideSuggestions(true)
-        }
-    });
-
-    const searchTextBeforeCursor = inputText.substring(0, cursorPosition);
-    const searchWord = getWordBehindCursor(searchTextBeforeCursor);
-    const [matches, setMatches] = useState([]);
 
     useEffect(() => {
-        if (searchWord !== '' && suggestions.length > 0) {
+        const searchTextBeforeCursor = inputText.substring(0, cursorPosition);
+        setSearchWord(getWordBehindCursor(searchTextBeforeCursor));
+        setOffsetText(getOffsetText(searchTextBeforeCursor));
+    }, [inputText, cursorPosition])
+
+    useEffect(() => {
+        //console.log({searchWord})searchWord !== '' &&
+        if (suggestions.length > 0) {
             const lowerSearchWord = searchWord.toLowerCase();
-            setMatches(suggestions.filter(({name}) =>
-                    name === lowerSearchWord ||
-                    name.startsWith(lowerSearchWord)
-                ));
+            const matches = suggestions.filter(({name}) => {
+                if (!name) {
+                    return false
+                }
+                const lowerName = name.toLowerCase();
+
+                return lowerName === lowerSearchWord ||
+                    lowerName.startsWith(lowerSearchWord)
+            });
+            setMatches(matches.length === 0
+                ? suggestions
+                : matches);
         }
     }, [searchWord, suggestions])
 
-    const offsetText = getOffsetText(searchTextBeforeCursor);
     const offsetTextWidth = useDetermineInputWidthFromText(offsetText, useGetComputedFontStyles(searchInput.current));
     const displaySuggestions = !hideSuggestions && matches.length > 0;
+
+
     const [highlightIndex, setHighlightIndex] = useState(-1);
     const keyDownHandlers = {
         ArrowDown: () => {
@@ -86,7 +110,7 @@ const AutoComplete = ({
                             const text = target.value;
                             setCursorPosition(target.selectionStart);
                             setHideSuggestions(false);
-                            setInputText(text);
+                            handleSearchTextUpdate(text);
                         }}
                     />
                 </div>
@@ -97,18 +121,58 @@ const AutoComplete = ({
                     matches={matches}
                     searchWord={searchWord}
                     offsetTextWidth={offsetTextWidth}
-                    searchInput={searchInput.current}
-                    setHideSuggestions={setHideSuggestions}
-                    setInputText={(name) =>
-                        setInputText(
-                            inputText.substring(0, inputText.lastIndexOf(searchWord))
-                            + name
-                            + ' '
-                        )}
+                    updateSearchText={(name) => {
+                        const newInputText = mergeSuggestionIntoInput(inputText, cursorPosition, searchWord, name);
+                        const newCursorPosition = cursorPosition + newInputText.length - inputText.length;
+                        handleSearchTextUpdate(newInputText, newCursorPosition);
+                        setHideSuggestions(true)
+                    }}
                     highlightIndex={highlightIndex}
                     setHighlightIndex={setHighlightIndex}
                 />
             }
+        </div>
+    )
+};
+
+const Suggestions = ({
+    matches,
+    searchWord,
+    offsetTextWidth,
+    updateSearchText,
+    highlightIndex,
+    setHighlightIndex,
+}) => {
+    return (
+        <div
+            style={{visibility: matches.length > 0 ? 'visible' : 'hidden'}}
+            className='autocomplete-suggestions-container'
+        >
+            <ul
+                className='autocomplete-suggestions-list'
+                style={{
+                    marginBlockStart: '0',
+                    paddingLeft: `${Math.min(260, 28 + offsetTextWidth)}px`
+                }}
+                onMouseOver={() => setHighlightIndex(-1)}
+            >
+                {
+                    matches.map(({id, name}, i) =>
+                        <li
+                            key={id}
+                            onClick={() => updateSearchText(name)}
+                            style={(i === highlightIndex) ? {
+                                backgroundColor:  '#ddd'
+                            } : {}}
+                        >
+                            <Suggestion
+                                searchWord={searchWord}
+                                suggestionWord={name}
+                            />
+                        </li>
+                    )
+                }
+            </ul>
         </div>
     )
 };
@@ -130,53 +194,5 @@ const Suggestion = ({searchWord, suggestionWord}) => {
         }
     </>
 }
-
-const Suggestions = ({
-    matches,
-    searchWord,
-    offsetTextWidth,
-    setHideSuggestions,
-    setInputText,
-    searchInput,
-    highlightIndex,
-    setHighlightIndex,
-}) => {
-    return (
-        <div
-            style={{visibility: matches.length > 0 ? 'visible' : 'hidden'}}
-            className='autocomplete-suggestions-container'
-        >
-            <ul
-                className='autocomplete-suggestions-list'
-                style={{
-                    marginBlockStart: '0',
-                    paddingLeft: `${Math.min(260, 28 + offsetTextWidth)}px`
-                }}
-                onMouseOver={() => setHighlightIndex(-1)}
-            >
-                {
-                    matches.map(({id, name}, i) =>
-                        <li
-                            key={id}
-                            onClick={() => {
-                                setInputText(name);
-                                setHideSuggestions(true);
-                                searchInput.focus()
-                            }}
-                            style={(i === highlightIndex) ? {
-                                backgroundColor:  '#ddd'
-                            } : {}}
-                        >
-                            <Suggestion
-                                searchWord={searchWord}
-                                suggestionWord={name}
-                            />
-                        </li>
-                    )
-                }
-            </ul>
-        </div>
-    )
-};
 
 export default AutoComplete;
