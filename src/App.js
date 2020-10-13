@@ -19,6 +19,7 @@ import CardDemo from './components/card/CardDemo'
 import CenterBoxDemo from './components/CenterBoxDemo'
 import LayoutHeaderMainDemo from './components/LayoutHeaderMainDemo'
 import AsManyAsFitDemo from "./components/AsManyAsFitDemo";
+import SimpleHeader from "./components/header/SimpleHeader";
 //import AspectImage from "./components/AspectImage";
 
 function App() {
@@ -37,6 +38,9 @@ function App() {
                     </Route>
                     <Route path="/scroller">
                         <ScrollOver/>
+                    </Route>
+                    <Route path="/simple-header">
+                        <SimpleHeader/>
                     </Route>
                     <Route path="/flexbox-header">
                         <HeaderDemo/>

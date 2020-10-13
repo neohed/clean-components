@@ -1,0 +1,10 @@
+.site-header {
+    background: #131415;
+    color: #efefef;
+    display: flex;
+    align-items: center;
+}
+
+.header-active {
+    background: #382d68;
+}
