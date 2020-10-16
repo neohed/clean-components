@@ -18,6 +18,9 @@ function RouterMenu() {
                     <Link to="scroller">Scroll</Link>
                 </li>
                 <li>
+                    <Link to="scroll-parallax">Scroll Parallax</Link>
+                </li>
+                <li>
                     <Link to="simple-header">Simple Flexbox Header</Link>
                 </li>
                 <li>
