@@ -13,18 +13,21 @@ function offset(el) {
 
 const imageHeight = 3361;
 const imageOffset = -190;
+const direction = -1; // -1 == scroll image up, 1 === scroll image down.
 
 //TODO Create reverse effect: image starts at end and scrolls up not down (offsetY at max negative and reduces)
 
 const ScrollParallax = () => {
     const viewportRef = useRef();
     const [initialTop, setInitialTop] = useState(0);
-    const [backgroundPositionY, setBackgroundPositionY] = useState(imageOffset)
+    const [backgroundPositionY, setBackgroundPositionY] = useState(0)
 
     useEffect(() => {
         if (viewportRef.current) {
             const vp = viewportRef.current;
+            const viewportHeight = vp.clientHeight;
             const {top} = offset(vp);
+            setBackgroundPositionY(direction === -1 ? imageOffset : -(imageHeight - viewportHeight));
             setInitialTop(top)
         }
     }, [viewportRef])
@@ -32,14 +35,16 @@ const ScrollParallax = () => {
     useEventListener('scroll', () => {
         if (viewportRef.current) {
             const vp = viewportRef.current;
-            const {top} = offset(vp);
             const viewportHeight = vp.clientHeight;
+            const {top} = offset(vp);
 
             if (top + viewportHeight > 0) {
                 const remainingImageHeight = imageHeight + imageOffset - viewportHeight;
                 const ratio = remainingImageHeight / (initialTop + viewportHeight);
-                const offset = Math.floor(-(remainingImageHeight - (initialTop + top) * ratio) + imageOffset);
-                setBackgroundPositionY(offset);
+                const offset = direction === -1
+                    ? remainingImageHeight - (initialTop + top) * ratio
+                    : (initialTop + top) * ratio;
+                setBackgroundPositionY(imageOffset - Math.floor(offset));
             }
         }
     });
