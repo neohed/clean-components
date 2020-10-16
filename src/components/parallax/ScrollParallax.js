@@ -15,8 +15,6 @@ const imageHeight = 3361;
 const imageOffset = -190;
 const direction = -1; // -1 == scroll image up, 1 === scroll image down.
 
-//TODO Create reverse effect: image starts at end and scrolls up not down (offsetY at max negative and reduces)
-
 const ScrollParallax = () => {
     const viewportRef = useRef();
     const [initialTop, setInitialTop] = useState(0);
@@ -27,8 +25,8 @@ const ScrollParallax = () => {
             const vp = viewportRef.current;
             const viewportHeight = vp.clientHeight;
             const {top} = offset(vp);
-            setBackgroundPositionY(direction === -1 ? imageOffset : -(imageHeight - viewportHeight));
             setInitialTop(top)
+            setBackgroundPositionY(direction === -1 ? imageOffset : -(imageHeight - viewportHeight));
         }
     }, [viewportRef])
 
