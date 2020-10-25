@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import useEventListener from "../../utility/useEventListener";
+import './timeline.css';
 import {DateTime} from 'luxon';
 
 /*
@@ -8,7 +9,7 @@ import {DateTime} from 'luxon';
  */
 
 function makeHeader(dateOrigin, cellCount) {
-    const monthCells = [], dayCells = [];
+    const monthCells = [<th/>], dayCells = [<th/>];
     const start = dateOrigin.minus({days: Math.floor(cellCount * showPrevDays)});
     let currentMonth = start.month, monthIndex = 0;
     for (let i = 0; i < cellCount; i++) {
@@ -20,11 +21,13 @@ function makeHeader(dateOrigin, cellCount) {
         );
 
         if (newDate.month !== currentMonth || i === cellCount - 1) {
+            const isLastCell = (i === cellCount - 1);
+
             monthCells.push(
-                <th colSpan={i - monthIndex}>
+                <th colSpan={i - monthIndex + (isLastCell ? 1 : 0)}>
                     {
                         newDate.minus({
-                            month: (newDate.month !== currentMonth) ? 1 : 0
+                            month: isLastCell ? 0 : 1
                         }).toFormat('MMMM y')
                     }
                 </th>
@@ -48,7 +51,36 @@ function makeHeader(dateOrigin, cellCount) {
     </thead>
 }
 
+function makeRow(time, cellCount) {
+    const cells = [
+        <td className='time-cell'>
+            {
+                time
+            }
+        </td>
+    ];
+    for (let i = 0; i < cellCount; i++) {
+        cells.push(<td />)
+    }
+
+    return cells
+}
+
+function makeRows(cellCount) {
+    const rows = [];
+    for (let i = 0; i < 24; i++) {
+        rows.push(<tr>
+            {
+                makeRow(('00' + i).slice(-2) + ':00', cellCount)
+            }
+        </tr>)
+    }
+
+    return rows
+}
+
 const showPrevDays = .2;
+const timeColumnWidth = 100;
 const cellWidth = 60;
 //const tomorrow = now.plus({days: 1});
 
@@ -59,7 +91,7 @@ const Timeline = ({dateOrigin}) => {
     function updateDimensions() {
         if (containerRef.current) {
             const {offsetWidth} = containerRef.current;
-            setCellCount(Math.floor(offsetWidth / cellWidth))
+            setCellCount(Math.floor((offsetWidth - timeColumnWidth) / cellWidth))
         }
     }
 
@@ -78,10 +110,15 @@ const Timeline = ({dateOrigin}) => {
             }}
             ref={containerRef}
         >
-            <caption>{cellCount}</caption>
+            <caption>Calendar</caption>
             {
                 makeHeader(dateOrigin, cellCount)
             }
+            <tbody>
+            {
+                makeRows(cellCount)
+            }
+            </tbody>
         </table>
     );
 };
