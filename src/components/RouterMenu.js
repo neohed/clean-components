@@ -53,6 +53,9 @@ function RouterMenu() {
                 <li>
                     <Link to="as-many-as-fit">Layout AsManyAsFit</Link>
                 </li>
+                <li>
+                    <Link to="timeline">Timeline</Link>
+                </li>
             </ul>
         </div>
     );

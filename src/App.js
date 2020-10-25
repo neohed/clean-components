@@ -21,6 +21,7 @@ import LayoutHeaderMainDemo from './components/LayoutHeaderMainDemo'
 import AsManyAsFitDemo from "./components/AsManyAsFitDemo";
 import SimpleHeader from "./components/header/SimpleHeader";
 import ScrollParallax from "./components/parallax/ScrollParallax";
+import TimeLineDemo from "./components/TimeLineDemo";
 //import AspectImage from "./components/AspectImage";
 
 function App() {
@@ -75,6 +76,9 @@ function App() {
                     </Route>
                     <Route path="/as-many-as-fit">
                         <AsManyAsFitDemo />
+                    </Route>
+                    <Route path="/timeline">
+                        <TimeLineDemo />
                     </Route>
                 </Switch>
             </Router>
