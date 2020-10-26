@@ -25,3 +25,8 @@ tr:nth-child(even) {
     padding-right: 12px;
     font-weight: bold;
 }
+
+.date-today {
+    background-color: #2C5F2D;
+    color: #FFE77A;
+}

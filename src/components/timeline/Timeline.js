@@ -3,6 +3,13 @@ import useEventListener from "../../utility/useEventListener";
 import './timeline.css';
 import {DateTime} from 'luxon';
 
+const today = DateTime.local();
+
+function isToday(dt) {
+    return dt.year === today.year
+        && dt.month === today.month
+        && dt.day === today.day
+}
 /*
  * https://adrianroselli.com/2017/11/hey-its-still-ok-to-use-tables.html
  * https://www.the-art-of-web.com/html/table-markup/
@@ -15,7 +22,7 @@ function makeHeader(dateOrigin, cellCount) {
     for (let i = 0; i < cellCount; i++) {
         const newDate = start.plus({days: i});
         dayCells.push(
-            <th>{
+            <th className={isToday(newDate) ? 'date-today' : ''}>{
                 newDate.toFormat('dd')
             }</th>
         );
