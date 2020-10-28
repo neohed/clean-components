@@ -1,0 +1,20 @@
+.bg-offset {
+    margin-top: 30px;
+}
+
+.bg-right {
+    background: url("../../image/Joshua_Tree_National_Park_Night_Sky.jpg") no-repeat center;
+    background-position-x: 180px;
+    color: white;
+}
+
+.bg-left {
+    background: url("../../image/Joshua_Tree_National_Park_Night_Sky.jpg") no-repeat;
+    background-size: calc(100% - 180px);
+    color: white;
+}
+
+.bg-section {
+    padding: 24px;
+    height: 600px;
+}

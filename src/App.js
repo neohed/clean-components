@@ -22,6 +22,7 @@ import AsManyAsFitDemo from "./components/AsManyAsFitDemo";
 import SimpleHeader from "./components/header/SimpleHeader";
 import ScrollParallax from "./components/parallax/ScrollParallax";
 import TimeLineDemo from "./components/TimeLineDemo";
+import BackgroundOffset from "./components/backgrounds/BackgroundOffset";
 //import AspectImage from "./components/AspectImage";
 
 function App() {
@@ -79,6 +80,9 @@ function App() {
                     </Route>
                     <Route path="/timeline">
                         <TimeLineDemo />
+                    </Route>
+                    <Route path="/background-offset">
+                        <BackgroundOffset />
                     </Route>
                 </Switch>
             </Router>

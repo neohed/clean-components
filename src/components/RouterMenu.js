@@ -56,6 +56,9 @@ function RouterMenu() {
                 <li>
                     <Link to="timeline">Timeline</Link>
                 </li>
+                <li>
+                    <Link to="background-offset">Background Offset</Link>
+                </li>
             </ul>
         </div>
     );

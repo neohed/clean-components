@@ -14,7 +14,10 @@ function isToday(dt) {
  * https://adrianroselli.com/2017/11/hey-its-still-ok-to-use-tables.html
  * https://www.the-art-of-web.com/html/table-markup/
  */
-
+/*
+ * https://moment.github.io/luxon/docs/manual/formatting
+ * https://moment.github.io/luxon/docs/manual/tour.html
+ */
 function makeHeader(dateOrigin, cellCount) {
     const monthCells = [<th/>], dayCells = [<th/>];
     const start = dateOrigin.minus({days: Math.floor(cellCount * showPrevDays)});
