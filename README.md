@@ -4,6 +4,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Simple components to use instead of monolithic frameworks.
 
+## Splines
+
+* https://www.particleincell.com/2012/bezier-splines/
+* https://www.cssscript.com/svg-waves-wavery/
+* http://owl3d.com/svg/Splines/Splines_to_SVG.html
+* http://owl3d.com/svg/Splines/Splines_to_SVG2.html
+* https://www.tutorialspoint.com/How-to-create-SVG-graphics-using-JavaScript
+* https://github.com/dowrow/bezier-spline-js
+* https://www.vis4.net/blog/2013/09/mastering-multi-hued-color-scales/
+
+Try creating a single demo / API doc / playground page with live DnD editing.
+
 ## Sources / Influences
 
 * Tab component originally based on: [alligator.io](https://alligator.io/react/tabs-component/)
@@ -11,6 +23,7 @@ Simple components to use instead of monolithic frameworks.
 
 ## Todo
 
+* Add "zoom" effect - mouseover causes the image to expand slightly.
 * Create better "menu" / demo page showing off things...
 * Checkbox multi select in expander.
 * Responsiveness: https://developers.google.com/web/fundamentals/design-and-ux/responsive
