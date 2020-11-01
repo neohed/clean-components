@@ -12,7 +12,7 @@ function offset(el) {
 }
 
 const imageHeight = 3361;
-const imageOffset = -190;
+const imageOffset = 0;//-190;
 const direction = -1; // -1 == scroll image up, 1 === scroll image down.
 
 const ScrollParallax = () => {
@@ -26,7 +26,7 @@ const ScrollParallax = () => {
             const viewportHeight = vp.clientHeight;
             const {top} = offset(vp);
             setInitialTop(top)
-            setBackgroundPositionY(direction === -1 ? imageOffset : -(imageHeight - viewportHeight));
+            setBackgroundPositionY(direction === -1 ? imageOffset : viewportHeight - imageHeight);
         }
     }, [viewportRef])
 
@@ -38,10 +38,11 @@ const ScrollParallax = () => {
 
             if (top + viewportHeight > 0) {
                 const remainingImageHeight = imageHeight + imageOffset - viewportHeight;
-                const ratio = remainingImageHeight / (initialTop + viewportHeight);
+                const ratio = remainingImageHeight / (initialTop + viewportHeight);//
+                const delta = (initialTop - top) * ratio;
                 const offset = direction === -1
-                    ? remainingImageHeight - (initialTop + top) * ratio
-                    : (initialTop + top) * ratio;
+                    ? delta
+                    : remainingImageHeight - delta;
                 setBackgroundPositionY(imageOffset - Math.floor(offset));
             }
         }
@@ -49,7 +50,7 @@ const ScrollParallax = () => {
 
     return (
         <div>
-            <div className="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis cumque
+            <div className="top-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis cumque
                 debitis fugiat impedit molestias.
             </div>
             <div

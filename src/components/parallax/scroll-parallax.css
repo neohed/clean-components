@@ -1,8 +1,13 @@
+.top-content {
+    height: 600px;
+}
+
 .content {
-    height: 400px;
+    height: 500px;
 }
 
 .parallax-viewport {
+    background-color: hotpink;
     background-image: url('../../image/City_skyline_2020.jpg');
     background-size: initial;
     background-position-x: center;

@@ -1,6 +1,6 @@
 import React from 'react'
 import img1 from '../../image/PIA23606.jpg'
-import './scrollOver.css'
+import './scroll-over.css'
 
 const ScrollOver = () => (
     <div>
