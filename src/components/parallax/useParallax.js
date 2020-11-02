@@ -31,7 +31,11 @@ function useParallax(imageHeight, imageOffset, direction, speed) {
             setBackgroundPositionY(direction === -1 ? imageOffset : height - imageHeight);
         }
     }, [
-        viewportRef
+        viewportRef,
+        imageHeight,
+        imageOffset,
+        direction,
+        speed
     ]);
 
     useEventListener('scroll', () => {
