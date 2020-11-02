@@ -14,10 +14,13 @@ function offset(el) {
 const imageHeight = 3361;
 const imageOffset = 0;//-190;
 const direction = -1; // -1 == scroll image up, 1 === scroll image down.
+const speed = 1;
 
 const ScrollParallax = () => {
     const viewportRef = useRef();
     const [initialTop, setInitialTop] = useState(0);
+    const [remainingImageHeight, setRemainingImageHeight] = useState(imageHeight)
+    const [ratio, setRatio] = useState(1)
     const [backgroundPositionY, setBackgroundPositionY] = useState(0)
 
     useEffect(() => {
@@ -26,6 +29,9 @@ const ScrollParallax = () => {
             const viewportHeight = vp.clientHeight;
             const {top} = offset(vp);
             setInitialTop(top)
+            const rih = imageHeight + imageOffset - viewportHeight;
+            setRemainingImageHeight(rih);
+            setRatio(rih / (top + viewportHeight) * speed);
             setBackgroundPositionY(direction === -1 ? imageOffset : viewportHeight - imageHeight);
         }
     }, [viewportRef])
@@ -35,15 +41,16 @@ const ScrollParallax = () => {
             const vp = viewportRef.current;
             const viewportHeight = vp.clientHeight;
             const {top} = offset(vp);
-
             if (top + viewportHeight > 0) {
-                const remainingImageHeight = imageHeight + imageOffset - viewportHeight;
-                const ratio = remainingImageHeight / (initialTop + viewportHeight);//
                 const delta = (initialTop - top) * ratio;
                 const offset = direction === -1
                     ? delta
                     : remainingImageHeight - delta;
-                setBackgroundPositionY(imageOffset - Math.floor(offset));
+                const floorOffset = Math.floor(offset);
+
+                if (floorOffset < remainingImageHeight) {
+                    setBackgroundPositionY(imageOffset - floorOffset);
+                }
             }
         }
     });
