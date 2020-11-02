@@ -18,18 +18,22 @@ const speed = 1;
 
 const ScrollParallax = () => {
     const viewportRef = useRef();
-    const [initialTop, setInitialTop] = useState(0);
-    const [remainingImageHeight, setRemainingImageHeight] = useState(imageHeight)
-    const [ratio, setRatio] = useState(1)
+    const [parallaxConstants, setParallaxConstants] = useState({
+        top: 0,
+        imageOverlap: imageHeight,
+        ratio: 1
+    });
     const [backgroundPositionY, setBackgroundPositionY] = useState(0)
 
     useEffect(() => {
         if (viewportRef.current) {
             const {top, height} = getElementInfo(viewportRef);
-            setInitialTop(top)
-            const rih = imageHeight + imageOffset - height;
-            setRemainingImageHeight(rih);
-            setRatio(rih / (top + height) * speed);
+            const imageOverlap = imageHeight + imageOffset - height;
+            setParallaxConstants({
+                top,
+                imageOverlap,
+                ratio: imageOverlap / (top + height) * speed
+            })
             setBackgroundPositionY(direction === -1 ? imageOffset : height - imageHeight);
         }
     }, [viewportRef])
@@ -38,13 +42,13 @@ const ScrollParallax = () => {
         if (viewportRef.current) {
             const {top, height} = getElementInfo(viewportRef);
             if (top + height > 0) {
-                const delta = (initialTop - top) * ratio;
+                const delta = (parallaxConstants.top - top) * parallaxConstants.ratio;
                 const offset = direction === -1
                     ? delta
-                    : remainingImageHeight - delta;
+                    : parallaxConstants.imageOverlap - delta;
                 const floorOffset = Math.floor(offset);
 
-                if (floorOffset < remainingImageHeight) {
+                if (floorOffset < parallaxConstants.imageOverlap) {
                     setBackgroundPositionY(imageOffset - floorOffset);
                 }
             }
