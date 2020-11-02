@@ -17,7 +17,22 @@ function useParallax(imageHeight, imageOffset, direction, speed) {
         imageOverlap: imageHeight,
         ratio: 1
     });
-    const [backgroundPositionY, setBackgroundPositionY] = useState(0)
+    const [backgroundPositionY, setBackgroundPositionY] = useState(0);
+
+    useEffect(() => {
+        if (viewportRef.current) {
+            const {top, height} = getElementInfo(viewportRef);
+            const imageOverlap = imageHeight + imageOffset - height;
+            setParallaxConstants({
+                top,
+                imageOverlap,
+                ratio: imageOverlap / (top + height) * speed
+            })
+            setBackgroundPositionY(direction === -1 ? imageOffset : height - imageHeight);
+        }
+    }, [
+        viewportRef
+    ]);
 
     useEventListener('scroll', () => {
         if (viewportRef.current) {
@@ -35,21 +50,6 @@ function useParallax(imageHeight, imageOffset, direction, speed) {
             }
         }
     });
-
-    useEffect(() => {
-        if (viewportRef.current) {
-            const {top, height} = getElementInfo(viewportRef);
-            const imageOverlap = imageHeight + imageOffset - height;
-            setParallaxConstants({
-                top,
-                imageOverlap,
-                ratio: imageOverlap / (top + height) * speed
-            })
-            setBackgroundPositionY(direction === -1 ? imageOffset : height - imageHeight);
-        }
-    }, [
-        viewportRef
-    ])
 
     return [
         viewportRef,
