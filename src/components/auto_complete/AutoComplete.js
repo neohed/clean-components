@@ -66,9 +66,7 @@ const AutoComplete = ({
                 return lowerName === lowerSearchWord ||
                     lowerName.startsWith(lowerSearchWord)
             });
-            setMatches(matches.length === 0
-                ? suggestions
-                : matches);
+            setMatches(matches);
         }
     }, [searchWord, suggestions])
 
