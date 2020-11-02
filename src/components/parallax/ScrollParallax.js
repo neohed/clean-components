@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import useParallax from "./useParallax";
 import './scroll-parallax.css'
 
@@ -8,8 +8,7 @@ const direction = -1; // -1 == scroll image up, 1 === scroll image down.
 const speed = 1;
 
 const ScrollParallax = () => {
-    const viewportRef = useRef();
-    const backgroundPositionY = useParallax(viewportRef, imageHeight, imageOffset, direction, speed);
+    const [viewportRef, backgroundPositionY] = useParallax(imageHeight, imageOffset, direction, speed);
 
     return (
         <div>

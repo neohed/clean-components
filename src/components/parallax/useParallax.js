@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import useEventListener from "../../utility/useEventListener";
 
 function getElementInfo({current}) {
@@ -10,7 +10,8 @@ function getElementInfo({current}) {
     }
 }
 
-function useParallax(viewportRef, imageHeight, imageOffset, direction, speed) {
+function useParallax(imageHeight, imageOffset, direction, speed) {
+    const viewportRef = useRef();
     const [parallaxConstants, setParallaxConstants] = useState({
         top: 0,
         imageOverlap: imageHeight,
@@ -50,7 +51,10 @@ function useParallax(viewportRef, imageHeight, imageOffset, direction, speed) {
         viewportRef
     ])
 
-    return backgroundPositionY
+    return [
+        viewportRef,
+        backgroundPositionY
+    ]
 }
 
 export default useParallax;
