@@ -12,7 +12,7 @@ function getElementInfo({current}) {
 }
 
 const imageHeight = 3361;
-const imageOffset = 0;//-190;
+const imageOffset = 0; // -190;
 const direction = -1; // -1 == scroll image up, 1 === scroll image down.
 const speed = 1;
 
