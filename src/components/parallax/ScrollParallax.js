@@ -2,12 +2,12 @@ import React, {useEffect, useState, useRef} from 'react';
 import useEventListener from "../../utility/useEventListener";
 import './scroll-parallax.css'
 
-function offset(el) {
-    const rect = el.getBoundingClientRect();
+function getElementInfo({current}) {
+    const rect = current.getBoundingClientRect();
 
     return {
         top: rect.top,
-        left: rect.left
+        height: current.clientHeight
     }
 }
 
@@ -25,23 +25,19 @@ const ScrollParallax = () => {
 
     useEffect(() => {
         if (viewportRef.current) {
-            const vp = viewportRef.current;
-            const viewportHeight = vp.clientHeight;
-            const {top} = offset(vp);
+            const {top, height} = getElementInfo(viewportRef);
             setInitialTop(top)
-            const rih = imageHeight + imageOffset - viewportHeight;
+            const rih = imageHeight + imageOffset - height;
             setRemainingImageHeight(rih);
-            setRatio(rih / (top + viewportHeight) * speed);
-            setBackgroundPositionY(direction === -1 ? imageOffset : viewportHeight - imageHeight);
+            setRatio(rih / (top + height) * speed);
+            setBackgroundPositionY(direction === -1 ? imageOffset : height - imageHeight);
         }
     }, [viewportRef])
 
     useEventListener('scroll', () => {
         if (viewportRef.current) {
-            const vp = viewportRef.current;
-            const viewportHeight = vp.clientHeight;
-            const {top} = offset(vp);
-            if (top + viewportHeight > 0) {
+            const {top, height} = getElementInfo(viewportRef);
+            if (top + height > 0) {
                 const delta = (initialTop - top) * ratio;
                 const offset = direction === -1
                     ? delta
