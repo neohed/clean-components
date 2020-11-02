@@ -1,15 +1,6 @@
-import React, {useEffect, useState, useRef} from 'react';
-import useEventListener from "../../utility/useEventListener";
+import React, {useRef} from 'react';
+import useParallax from "./useParallax";
 import './scroll-parallax.css'
-
-function getElementInfo({current}) {
-    const rect = current.getBoundingClientRect();
-
-    return {
-        top: rect.top,
-        height: current.clientHeight
-    }
-}
 
 const imageHeight = 3361;
 const imageOffset = 0; // -190;
@@ -18,42 +9,7 @@ const speed = 1;
 
 const ScrollParallax = () => {
     const viewportRef = useRef();
-    const [parallaxConstants, setParallaxConstants] = useState({
-        top: 0,
-        imageOverlap: imageHeight,
-        ratio: 1
-    });
-    const [backgroundPositionY, setBackgroundPositionY] = useState(0)
-
-    useEffect(() => {
-        if (viewportRef.current) {
-            const {top, height} = getElementInfo(viewportRef);
-            const imageOverlap = imageHeight + imageOffset - height;
-            setParallaxConstants({
-                top,
-                imageOverlap,
-                ratio: imageOverlap / (top + height) * speed
-            })
-            setBackgroundPositionY(direction === -1 ? imageOffset : height - imageHeight);
-        }
-    }, [viewportRef])
-
-    useEventListener('scroll', () => {
-        if (viewportRef.current) {
-            const {top, height} = getElementInfo(viewportRef);
-            if (top + height > 0) {
-                const delta = (parallaxConstants.top - top) * parallaxConstants.ratio;
-                const offset = direction === -1
-                    ? delta
-                    : parallaxConstants.imageOverlap - delta;
-                const floorOffset = Math.floor(offset);
-
-                if (floorOffset < parallaxConstants.imageOverlap) {
-                    setBackgroundPositionY(imageOffset - floorOffset);
-                }
-            }
-        }
-    });
+    const backgroundPositionY = useParallax(viewportRef, imageHeight, imageOffset, direction, speed);
 
     return (
         <div>

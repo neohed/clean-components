@@ -7,10 +7,8 @@
 }
 
 .parallax-viewport {
-    background-color: hotpink;
     background-image: url('../../image/City_skyline_2020.jpg');
     background-size: initial;
     background-position-x: center;
-    /*background-position-y: -190px;*/
     background-repeat: no-repeat;
 }
