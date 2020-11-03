@@ -16,13 +16,8 @@ function calculateOffset(imageOverlap, top, ratio) {
 
 function useParallax(imageHeight, imageOffset, direction, speed) {
     const viewportRef = useRef();
-    const [parallaxConstants, setParallaxConstants] = useState({
-        top: 0,
-        rangeTop: 0,
-        rangeBottom: 0,
-        imageOverlap: imageHeight,
-        ratio: 1
-    });
+    const [ratio, setRatio] = useState(1);
+    const [over, setOver] = useState(1);
     const [backgroundPositionY, setBackgroundPositionY] = useState(0);
 
     useEffect(() => {
@@ -30,7 +25,6 @@ function useParallax(imageHeight, imageOffset, direction, speed) {
             const windowTop  = window.pageYOffset || document.documentElement.scrollTop;
             const windowHeight = window.innerHeight;
             const documentHeight = document.body.clientHeight;
-
             const {top, height} = getElementInfo(viewportRef);
 
             const rangeTop = Math.min(windowTop + top, documentHeight);
@@ -38,15 +32,10 @@ function useParallax(imageHeight, imageOffset, direction, speed) {
             const range = rangeTop - rangeBottom;
             const imageOverlap = imageHeight + imageOffset - height;
             const ratio = imageOverlap / range * speed;
-            setParallaxConstants({
-                top,
-                rangeTop,
-                rangeBottom,
-                imageOverlap,
-                ratio
-            })
+            setOver(imageOverlap)
+            setRatio(ratio)
 
-            setBackgroundPositionY(imageOffset - calculateOffset(imageOverlap, Math.max(top, 0), ratio));
+            setBackgroundPositionY(imageOffset - calculateOffset(imageOverlap, Math.min(Math.max(top, 0), windowHeight), ratio));
             // direction === -1 ? imageOffset : height - imageHeight
         }
     }, [
@@ -70,10 +59,12 @@ function useParallax(imageHeight, imageOffset, direction, speed) {
                     : parallaxConstants.imageOverlap - delta;
                 const floorOffset = Math.floor(offset);
                  */
-                
-                const offset = calculateOffset(imageOffset, top, parallaxConstants.ratio);
 
-                setBackgroundPositionY(offset);
+                const offset = calculateOffset(imageOffset, top, ratio);
+
+                setBackgroundPositionY(direction === -1
+                    ? offset
+                    : over - offset);
             }
         }
     });
