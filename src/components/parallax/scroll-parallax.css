@@ -2,12 +2,25 @@
     height: 600px;
 }
 
-.content {
-    height: 500px;
+.spacer-content {
+    height: 300px;
+}
+
+.image-content {
+    height: 450px;
 }
 
 .parallax-viewport {
+    background-color: hotpink;
     background-image: url('../../image/City_skyline_2020.jpg');
+    background-size: initial;
+    background-position-x: center;
+    background-repeat: no-repeat;
+}
+
+.parallax-viewport-2 {
+    background-color: hotpink;
+    background-image: url('../../image/Amazon-river.jpg');
     background-size: initial;
     background-position-x: center;
     background-repeat: no-repeat;
