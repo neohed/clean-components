@@ -10,6 +10,10 @@ function getElementInfo({current}) {
     }
 }
 
+function calculateOffset(imageOverlap, top, ratio) {
+    return Math.floor(imageOverlap - top * ratio);
+}
+
 function useParallax(imageHeight, imageOffset, direction, speed) {
     const viewportRef = useRef();
     const [parallaxConstants, setParallaxConstants] = useState({
@@ -21,33 +25,32 @@ function useParallax(imageHeight, imageOffset, direction, speed) {
     });
     const [backgroundPositionY, setBackgroundPositionY] = useState(0);
 
-    const windowTop  = window.pageYOffset || document.documentElement.scrollTop;
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.body.clientHeight;
-
     useEffect(() => {
         if (viewportRef.current) {
+            const windowTop  = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.body.clientHeight;
+
             const {top, height} = getElementInfo(viewportRef);
 
             const rangeTop = Math.min(windowTop + top, documentHeight);
             const rangeBottom = Math.max(windowTop - windowHeight + top + height, 0);
             const range = rangeTop - rangeBottom;
             const imageOverlap = imageHeight + imageOffset - height;
-            console.log('*************************')
-            console.log({top, windowTop, imageOverlap})
-            console.log({rangeTop, rangeBottom, range, ratio: imageOverlap / range * speed})
+            const ratio = imageOverlap / range * speed;
             setParallaxConstants({
                 top,
                 rangeTop,
                 rangeBottom,
                 imageOverlap,
-                ratio: imageOverlap / range * speed
+                ratio
             })
-            setBackgroundPositionY(direction === -1 ? imageOffset : height - imageHeight);
+
+            setBackgroundPositionY(imageOffset - calculateOffset(imageOverlap, Math.max(top, 0), ratio));
+            // direction === -1 ? imageOffset : height - imageHeight
         }
     }, [
         viewportRef,
-        documentHeight,
         imageHeight,
         imageOffset,
         direction,
@@ -57,9 +60,9 @@ function useParallax(imageHeight, imageOffset, direction, speed) {
     useEventListener('scroll', () => {
         if (viewportRef.current) {
             const {top, height} = getElementInfo(viewportRef);
-//console.log({top, rangeTop: parallaxConstants.rangeTop, rangeBottom: parallaxConstants.rangeBottom, ratio: parallaxConstants.ratio, windowTop})
-            if (top > 0 && (top + height) < windowHeight) {
+            const windowHeight = window.innerHeight;
 
+            if (top > 0 && (top + height) < windowHeight) {
                 /*
                 const delta = (parallaxConstants.top - top) * parallaxConstants.ratio;
                 const offset = direction === -1
@@ -69,8 +72,7 @@ function useParallax(imageHeight, imageOffset, direction, speed) {
                  */
                 const x = parallaxConstants.imageOverlap - (top) * parallaxConstants.ratio; //  - parallaxConstants.rangeBottom
                 const floorOffset = Math.floor(x);
-//console.log({top, ratio: parallaxConstants.ratio, floorOffset})
-//console.log({floorOffset, Y: imageOffset - floorOffset, topRatio: top * parallaxConstants.ratio})
+
                 if (true || floorOffset < parallaxConstants.imageOverlap) {
                     setBackgroundPositionY(imageOffset - floorOffset);
                 }
