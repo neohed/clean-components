@@ -18,8 +18,8 @@ import './scroll-parallax.css'
         height = image.height;
  */
 const ScrollParallax = () => {
-    const [viewportRef, backgroundPositionY] = useParallax(3361, 0, -1, 1);
-// [null,1];//
+    const [viewportRef, backgroundPositionY] = useParallax(3361, 0, 1, 1);
+
     const [viewportRef2, backgroundPositionY2] = useParallax(3084, 0, -1, 1);
     return (
         <div>
