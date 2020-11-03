@@ -70,12 +70,10 @@ function useParallax(imageHeight, imageOffset, direction, speed) {
                     : parallaxConstants.imageOverlap - delta;
                 const floorOffset = Math.floor(offset);
                  */
-                const x = parallaxConstants.imageOverlap - (top) * parallaxConstants.ratio; //  - parallaxConstants.rangeBottom
-                const floorOffset = Math.floor(x);
+                
+                const offset = calculateOffset(imageOffset, top, parallaxConstants.ratio);
 
-                if (true || floorOffset < parallaxConstants.imageOverlap) {
-                    setBackgroundPositionY(imageOffset - floorOffset);
-                }
+                setBackgroundPositionY(offset);
             }
         }
     });
