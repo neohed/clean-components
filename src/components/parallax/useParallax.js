@@ -36,8 +36,8 @@ function useParallax(imageHeight, imageOffset, direction, speed) {
             const range = rangeTop - rangeBottom;
             const imageOverlap = imageHeight + imageOffset - height;
             const r = imageOverlap / range * speed;
-            setImageRemaining(imageOverlap)
-            setRatio(r)
+            setImageRemaining(imageOverlap);
+            setRatio(r);
 
             const t = Math.min(Math.max(top, 0), windowHeight - height);
             setBackgroundPositionY(calculateOffset(imageOffset, t, r, direction, imageOverlap));
