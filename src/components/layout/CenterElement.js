@@ -6,7 +6,8 @@ const CenterElement = ({children, ...rest}) => {
             margin: 'auto',
             width: '200px',
             textAlign: 'center',
-        }} {...rest}>
+            ...rest
+        }}>
             {
                 children
             }
