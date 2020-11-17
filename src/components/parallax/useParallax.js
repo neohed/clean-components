@@ -1,5 +1,6 @@
 import {useEffect, useRef, useState} from 'react';
 import useEventListener from "../../utility/useEventListener";
+import {easing} from "../../utility/easingFunctions";
 
 function getElementInfo({current}) {
     const rect = current.getBoundingClientRect();
@@ -10,12 +11,14 @@ function getElementInfo({current}) {
     }
 }
 
-function calculateOffset(imageOffset, top, ratio, direction, imageRemaining) {
+//TODO Parameterise easing function.
+function calculateOffset(imageOffset, top, ratio, direction, imageRemaining, range) {
     const offset = Math.floor(imageOffset - top * ratio);
+    const easedOffset = offset * easing.easeInOutSine(-offset / range)
 
     return direction === -1
-        ? offset
-        : -(imageRemaining + offset)
+        ? easedOffset
+        : -(imageRemaining + easedOffset)
 }
 
 function useParallax(imageHeight, imageOffset, direction, speed) {
@@ -23,6 +26,7 @@ function useParallax(imageHeight, imageOffset, direction, speed) {
     const [ratio, setRatio] = useState(1);
     const [imageRemaining, setImageRemaining] = useState(1);
     const [backgroundPositionY, setBackgroundPositionY] = useState(0);
+    const [range, setRange] = useState(0);
 
     useEffect(() => {
         if (viewportRef.current) {
@@ -37,10 +41,11 @@ function useParallax(imageHeight, imageOffset, direction, speed) {
             const imageOverlap = imageHeight + imageOffset - height;
             const r = imageOverlap / range * speed;
             setImageRemaining(imageOverlap);
+            setRange(range * r);
             setRatio(r);
 
             const t = Math.min(Math.max(top, 0), windowHeight - height);
-            setBackgroundPositionY(calculateOffset(imageOffset, t, r, direction, imageOverlap));
+            setBackgroundPositionY(calculateOffset(imageOffset, t, r, direction, imageOverlap,range * r));
         }
     }, [
         viewportRef,
@@ -56,7 +61,7 @@ function useParallax(imageHeight, imageOffset, direction, speed) {
             const windowHeight = window.innerHeight;
 
             if (top > 0 && (top + height) < windowHeight) {
-                const offset = calculateOffset(imageOffset, top, ratio, direction, imageRemaining);
+                const offset = calculateOffset(imageOffset, top, ratio, direction, imageRemaining, range);
 
                 setBackgroundPositionY(offset);
             }
