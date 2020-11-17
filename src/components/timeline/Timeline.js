@@ -70,7 +70,7 @@ function makeRow(time, cellCount) {
         </td>
     ];
     for (let i = 0; i < cellCount; i++) {
-        cells.push(<td />)
+        cells.push(<td key={i} />)
     }
 
     return cells
@@ -79,7 +79,7 @@ function makeRow(time, cellCount) {
 function makeRows(cellCount) {
     const rows = [];
     for (let i = 0; i < 24; i++) {
-        rows.push(<tr>
+        rows.push(<tr key={i}>
             {
                 makeRow(('00' + i).slice(-2) + ':00', cellCount)
             }
