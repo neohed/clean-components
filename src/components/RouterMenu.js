@@ -33,6 +33,9 @@ function RouterMenu() {
                     <Link to="header-shrink-2">Header Padding</Link>
                 </li>
                 <li>
+                    <Link to="header-shrink-3">Header IntersectionObserver</Link>
+                </li>
+                <li>
                     <Link to="two-columns">Two Columns</Link>
                 </li>
                 <li>

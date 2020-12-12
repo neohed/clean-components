@@ -1,5 +1,5 @@
 import React from 'react'
-import './cleanButton.css'
+import './clean-button.css'
 
 const CleanButton = ({text, id, clickHandler}) => (
     <button

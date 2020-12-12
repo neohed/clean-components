@@ -23,7 +23,7 @@ import SimpleHeader from "./components/header/SimpleHeader";
 import ScrollParallax from "./components/parallax/ScrollParallax";
 import TimeLineDemo from "./components/TimeLineDemo";
 import BackgroundOffset from "./components/backgrounds/BackgroundOffset";
-//import AspectImage from "./components/AspectImage";
+import ShrinkHeaderDemo3 from "./components/ShrinkHeaderDemo3";
 
 function App() {
     return (
@@ -56,6 +56,9 @@ function App() {
                     </Route>
                     <Route path="/header-shrink-2">
                         <ShrinkHeaderDemo2/>
+                    </Route>
+                    <Route path="/header-shrink-3">
+                        <ShrinkHeaderDemo3 />
                     </Route>
                     <Route path="/two-columns">
                         <TwoColumns/>

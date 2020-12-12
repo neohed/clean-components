@@ -1,5 +1,5 @@
 import React from 'react';
-import './fakeButton.css';
+import './fake-button.css';
 
 const FakeButton = ({text}) => (
     <div className={'fake-button'}>
