@@ -20,9 +20,7 @@ const stopEventBubbling = (e) => {
     e.preventDefault()
     e.stopPropagation()
 }
-const onDragOver = (e) => {
-    stopEventBubbling(e);
-};
+const onDragOver = (e) => stopEventBubbling(e);
 
 const FileUpload = ({children, dropHandler}) => {
     const fileUpload = useRef();
