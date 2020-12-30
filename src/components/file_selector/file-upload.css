@@ -1,0 +1,35 @@
+.file-upload {
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: black 1px solid;
+    margin: auto;
+    text-align: center;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+.file-drop {
+    border: dashed grey 2px;
+    background-color: rgba(255,255,255,.8);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.file-drop + div {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 6px;
+}

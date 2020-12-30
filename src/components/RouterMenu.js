@@ -62,6 +62,15 @@ function RouterMenu() {
                 <li>
                     <Link to="background-offset">Background Offset</Link>
                 </li>
+                <li>
+                    <Link to="svg-file">SVG from file</Link>
+                </li>
+                <li>
+                    <Link to="svg-tag">SVG tag</Link>
+                </li>
+                <li>
+                    <Link to="file-upload">File Upload</Link>
+                </li>
             </ul>
         </div>
     );

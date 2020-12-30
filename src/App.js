@@ -24,6 +24,9 @@ import ScrollParallax from "./components/parallax/ScrollParallax";
 import TimeLineDemo from "./components/TimeLineDemo";
 import BackgroundOffset from "./components/backgrounds/BackgroundOffset";
 import ShrinkHeaderDemo3 from "./components/ShrinkHeaderDemo3";
+import UploadTest from "./components/file_selector/UploadTest";
+import SvgFile from "./components/svg/SvgFile";
+import SvgTag from "./components/svg/SvgTag";
 
 function App() {
     return (
@@ -32,6 +35,15 @@ function App() {
                 <Switch>
                     <Route exact path="/">
                         <RouterMenu />
+                    </Route>
+                    <Route path="/file-upload">
+                        <UploadTest/>
+                    </Route>
+                    <Route path="/svg-tag">
+                        <SvgTag/>
+                    </Route>
+                    <Route path="/svg-file">
+                        <SvgFile/>
                     </Route>
                     <Route path="/tabs">
                         <TabDemo/>

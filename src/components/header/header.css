@@ -1,6 +1,7 @@
 body {
     font-family: sans-serif;
 }
+
 @media (max-width: 600px) {
     .site-header {
         flex-wrap: wrap;
@@ -11,12 +12,14 @@ body {
         width: 100%;
     }
 }
+
 .site-header {
     background: #0d1313;
     color: white;
     display: flex;
     align-items: center;
 }
+
 .logo {
     text-decoration: none;
     color: white;
@@ -25,12 +28,14 @@ body {
     letter-spacing: 3px;
     padding: 10px;
 }
+
 .site-nav ul {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
 }
+
 .site-nav a {
     text-transform: uppercase;
     text-decoration: none;
@@ -38,23 +43,28 @@ body {
     padding: 20px;
     display: inline-block;
 }
+
 .site-nav .active a {
     font-weight: bold;
     color: #62debe;
     background: #14604c;
 }
+
 .actions {
     margin-left: auto;
     display: flex;
     align-items: center;
     margin-right: 10px;
 }
+
 .actions a {
     color: white;
     font-size: 0.8rem;
 }
+
 .register-link {
 }
+
 .log-in-link {
     margin: 0 14px 0 14px;
 }

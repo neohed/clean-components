@@ -1,13 +1,12 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, {useRef, useEffect} from 'react';
 import useIntersectionObserver from "./useIntersectionObserver";
 import './shrinkHeader.css'
 
-const ShrinkHeaderIntersectionObserver = ({title, startStyle, scrollStyle}) => {
+const ShrinkHeaderIntersectionObserver = ({title, startStyle}) => {
     const headerRef = useRef(null);
-    const [headerStyle, setHeaderStyle] = useState(startStyle);
 
     const elementRef = useRef(null);
-    const [inView, entry] = useIntersectionObserver(elementRef, {
+    const [inView] = useIntersectionObserver(elementRef, {
         threshold: 0.4
     });
 
@@ -17,7 +16,7 @@ const ShrinkHeaderIntersectionObserver = ({title, startStyle, scrollStyle}) => {
 
     return (
         <header
-            style={headerStyle}
+            style={startStyle}
             className='shrinking-header'
             ref={headerRef}
         >
