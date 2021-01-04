@@ -1,0 +1,8 @@
+.range-lock-button {
+    cursor: pointer;
+}
+
+.range-lock-button img {
+    width: 24px;
+    height: 24px;
+}

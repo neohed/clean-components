@@ -71,6 +71,9 @@ function RouterMenu() {
                 <li>
                     <Link to="file-upload">File Upload</Link>
                 </li>
+                <li>
+                    <Link to="range-group">Range Group</Link>
+                </li>
             </ul>
         </div>
     );

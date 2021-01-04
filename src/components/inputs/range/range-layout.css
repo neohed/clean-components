@@ -1,0 +1,59 @@
+.range-layout {
+    display: grid;
+    padding: 1em;
+    background: #f9f9f9;
+    border: 1px solid #c1c1c1;
+    margin: 2rem auto 0 auto;
+    max-width: 600px;
+}
+
+.range-layout input {
+    background: #fff;
+    border: 1px solid #9c9c9c;
+}
+
+.range-layout button {
+    background: lightgrey;
+    padding: 0.7em;
+    border: 0;
+}
+
+.range-layout button:hover {
+    background: gold;
+}
+
+.range-layout label {
+    padding: 0.5em 0.5em 0.5em 0;
+}
+
+.range-layout input {
+    padding: 0.7em;
+    margin-bottom: 0.5rem;
+}
+
+.range-layout input:focus {
+    outline: 3px solid gold;
+}
+
+@media (min-width: 400px) {
+    .range-layout {
+        grid-template-columns: 200px 1fr 3em 64px;
+        grid-gap: 16px;
+    }
+
+    .range-layout label {
+        grid-column: 1;
+    }
+
+    .range-layout input[type="text"] {
+        grid-column: 2;
+    }
+
+    .range-layout input[type="number"] {
+        grid-column: 3;
+    }
+
+    .range-layout button {
+        grid-column: 4;
+    }
+}
