@@ -3,7 +3,7 @@ import RangeLayout from "./RangeLayout";
 import Range from "./Range";
 import ButtonWrapper from "../ButtonWrapper";
 import IconLock from './lock.svg';
-import UnlockIcon from './unlock.svg';
+import IconUnlock from './unlock.svg';
 import './range-group.css';
 
 const LockButton = ({clickHandler, id}) => <ButtonWrapper
@@ -19,7 +19,7 @@ const UnlockButton = ({clickHandler, id}) => <ButtonWrapper
     clickHandler={clickHandler}
     className='range-lock-button'
 >
-    <img src={UnlockIcon} alt="unlocked padlock icon"/>
+    <img src={IconUnlock} alt="unlocked padlock icon"/>
 </ButtonWrapper>
 
 const RangeGroup = ({data, labelPropName, valuePropName}) => {
