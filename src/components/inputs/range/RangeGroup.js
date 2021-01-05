@@ -32,19 +32,31 @@ const BalanceButton = ({clickHandler, id}) => <ButtonWrapper
 </ButtonWrapper>
 
 const countLockedRanges = (dataItems) => dataItems.reduce((count, item) => count + item.isLocked, 0);
-const summariseLockedRanges = (dataItems, id) => dataItems.reduce(([sum, count], item, i) => {
-    if (item.isLocked || i === id) {
+const summariseLockedRanges = (dataItems) => dataItems.reduce(([sum, count], item, i) => {
+    if (item.isLocked) {
         return [sum + item.value, count + 1]
     }
 
     return [sum, count]
-}, [0, 0])
+}, [0, 0]);
+const balanceRanges = (dataItems) => {
+    const [sumLocked, countLocked] = summariseLockedRanges(dataItems);
+    const rem = (100 - sumLocked) / (dataItems.length - countLocked);
+
+    return dataItems.map(({label, isLocked, value}) => ({
+        label,
+        isLocked,
+        value: isLocked
+            ? value
+            : rem
+    }))
+}
 
 const RangeGroup = ({data, labelPropName, valuePropName}) => {
     const [dataItems, setDataItems] = useState([]);
 
     useEffect(() => {
-        setDataItems(data.reduce((acc, item, i) => {
+        setDataItems(balanceRanges(data.reduce((acc, item) => {
             acc.push({
                 label: item[labelPropName],
                 value: item[valuePropName],
@@ -52,12 +64,12 @@ const RangeGroup = ({data, labelPropName, valuePropName}) => {
             });
 
             return acc
-        }, []))
+        }, [])))
     }, [data, labelPropName, valuePropName])
 
     const lockButtonClickHandler = (id) => {
         const lockedItemCount = countLockedRanges(data);
-        if (lockedItemCount + 2 >= dataItems.length) {
+        if (lockedItemCount + 2 === dataItems.length) {
             return // Makes no sense to have only 1 locked item.
         }
         const {label, value, isLocked} = dataItems[id];
@@ -71,9 +83,10 @@ const RangeGroup = ({data, labelPropName, valuePropName}) => {
     }
 
     const rangeChangeHandler = (id, value) => {
-        const validatedValue = Math.min(Math.max(0, value), 100);
         const [sumLocked, countLocked] = summariseLockedRanges(dataItems, id);
-        const rem = (100 - sumLocked) / (dataItems.length - countLocked);
+        const rem = 100 - sumLocked;
+        const validatedValue = Math.min(Math.max(0, value), rem);
+        const fr = (rem - validatedValue) / (dataItems.length - countLocked);
 
         setDataItems(dataItems.map(({label, isLocked, value}, i) => ({
             label,
@@ -82,26 +95,15 @@ const RangeGroup = ({data, labelPropName, valuePropName}) => {
                 ? validatedValue
                 : (isLocked) // Brackets not needed and likely transpiled away but make code more readable by emphasising conditions.
                     ? value
-                    : rem
+                    : fr
         })))
     }
 
-    const balanceClickHandler = () => {
-        const [sumLocked, countLocked] = summariseLockedRanges(dataItems, -1); //HACK we don't have an "in use" range.
-        const rem = (100 - sumLocked) / (dataItems.length - countLocked);
-
-        setDataItems(dataItems.map(({label, isLocked, value}) => ({
-            label,
-            isLocked,
-            value: isLocked
-                ? value
-                : rem
-        })))
-    }
+    const balanceRangesClickHandler = () => setDataItems(balanceRanges(dataItems))
 
     return (
         <div>
-            <BalanceButton id='balance' clickHandler={balanceClickHandler} />
+            <BalanceButton id='balance' clickHandler={balanceRangesClickHandler} />
             <RangeLayout>
                 {
                     dataItems.map(({label, value, isLocked}, i) => [
@@ -111,7 +113,7 @@ const RangeGroup = ({data, labelPropName, valuePropName}) => {
                             label={label}
                             value={value}
                             changeHandler={rangeChangeHandler}
-                            readonly={isLocked}
+                            readOnly={isLocked}
                         />,
                         isLocked
                             ? <LockButton
