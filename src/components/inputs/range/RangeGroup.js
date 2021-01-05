@@ -6,7 +6,6 @@ import ButtonLock from "./ButtonLock";
 import ButtonUnlock from "./ButtonUnlock";
 import './range-group.css';
 
-const countLockedRanges = (dataItems) => dataItems.reduce((count, item) => count + item.isLocked, 0);
 const summariseLockedRanges = (dataItems) => dataItems.reduce(([sum, count], item) => {
     if (item.isLocked) {
         return [sum + item.value, count + 1]
