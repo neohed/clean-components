@@ -1,8 +1,13 @@
-.range-lock-button {
+.range-lock-button, .scales-button {
     cursor: pointer;
 }
 
 .range-lock-button img {
+    width: 24px;
+    height: 24px;
+}
+
+.scales-button img {
     width: 24px;
     height: 24px;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import './range.css';
 
-const Range = ({id, min = 1, max = 100, label, value, changeHandler}) => {
+const Range = ({id, min = 1, max = 100, label, value, changeHandler, ...rest}) => {
     const onChange = ({target}) => {
         const {value} = target;
 
@@ -28,6 +28,7 @@ const Range = ({id, min = 1, max = 100, label, value, changeHandler}) => {
                 value={value}
                 className="range-slider"
                 onChange={onChange}
+                {...rest}
             />,
             <input
                 key={id + '_txt'}
@@ -38,6 +39,7 @@ const Range = ({id, min = 1, max = 100, label, value, changeHandler}) => {
                 value={value}
                 className="range-number"
                 onChange={onChange}
+                {...rest}
             />
         ]
     );
