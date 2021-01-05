@@ -51,10 +51,6 @@ const RangeGroup = ({data, labelPropName, valuePropName}) => {
     }, [data, labelPropName, valuePropName])
 
     const lockButtonClickHandler = (id) => {
-        const lockedItemCount = countLockedRanges(data);
-        if (lockedItemCount + 2 === dataItems.length) {
-            return // Makes no sense to have only 1 locked item.
-        }
         const {label, value, isLocked} = dataItems[id];
         const copy = dataItems.slice();
         copy[id] = {
