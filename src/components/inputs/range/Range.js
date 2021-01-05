@@ -1,7 +1,7 @@
 import React from 'react';
 import './range.css';
 
-const Range = ({id, min = 1, max = 100, label, value, changeHandler, ...rest}) => {
+const Range = ({id, min = 0, max = 100, label, value, changeHandler, ...rest}) => {
     const onChange = ({target}) => {
         const {value} = target;
 
