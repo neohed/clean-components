@@ -33,6 +33,7 @@ const balanceRanges = (dataItems, id = -1, value = 0) => {
                 : quotient + (remainder-- > 0 ? 1 : 0) // Equitably split the remainder.
     }))
 }
+const countLockedRanges = (dataItems) => dataItems.reduce((count, item) => count + item.isLocked, 0);
 
 const RangeGroup = ({data, labelPropName, valuePropName}) => {
     const [dataItems, setDataItems] = useState([]);
@@ -51,6 +52,9 @@ const RangeGroup = ({data, labelPropName, valuePropName}) => {
 
     const lockButtonClickHandler = (id) => {
         const {label, value, isLocked} = dataItems[id];
+        if (!isLocked && countLockedRanges(dataItems) + 2 === dataItems.length) {
+            return // Always need at least 2 sliders unlocked.
+        }
         const copy = dataItems.slice();
         copy[id] = {
             label,
