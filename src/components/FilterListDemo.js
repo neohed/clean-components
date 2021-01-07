@@ -27,9 +27,20 @@ const data = [
 const FilterListDemo = () => {
     return (
         <div>
-            <FilterList data={data}>
+            <FilterList
+                data={data}
+            >
                 {
-                    ({id, name}) => <div key={id}>{name}</div>
+                    ({id, name}) => <div
+                        key={id}
+                        style={{
+                            padding: '2px'
+                        }}
+                    >
+                        {
+                            name
+                        }
+                    </div>
                 }
             </FilterList>
         </div>

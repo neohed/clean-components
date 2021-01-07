@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import './filter-list.css';
 
-const FilterList = ({data, children, filterItem = (item) => item.name}) => {
+const defaultFilterItem = (item) => item.name;
+
+const FilterList = ({data, children, filterItem = defaultFilterItem}) => {
     const [filter, setFilter] = useState('');
     const [elements, setElements] = useState([]);
 
@@ -16,7 +18,7 @@ const FilterList = ({data, children, filterItem = (item) => item.name}) => {
                 )
             )
         }
-    }, [data, filter])
+    }, [data, filter, filterItem])
 
     return (
         <div
