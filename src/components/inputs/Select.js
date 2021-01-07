@@ -12,6 +12,7 @@ const Select = ({
     return (
         [
             labelText && <label
+                key={id + '_lbl'}
                 htmlFor={id}
             >
                 {
@@ -19,6 +20,7 @@ const Select = ({
                 }
             </label>,
             <select
+                key={id + '_select'}
                 id={id}
                 name={id}
                 onChange={changeHandler}
@@ -27,12 +29,12 @@ const Select = ({
                     !selectedValue && <option disabled selected value/>
                 }
                 {
-                    options.map(option => {
+                    options.map((option,i) => {
                         const value = option[valueProp];
                         const text = option[textProp];
 
                         return <option
-                            key={value}
+                            key={i}
                             value={value}
                             selected={value === selectedValue}
                         >
