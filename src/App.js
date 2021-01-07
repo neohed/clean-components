@@ -28,6 +28,7 @@ import UploadTest from "./components/file_selector/UploadTest";
 import SvgFile from "./components/svg/SvgFile";
 import SvgTag from "./components/svg/SvgTag";
 import RangeGroupDemo from "./components/RangeGroupDemo";
+import FilterListDemo from "./components/FilterListDemo";
 
 function App() {
     return (
@@ -102,6 +103,9 @@ function App() {
                     </Route>
                     <Route path="/range-group">
                         <RangeGroupDemo />
+                    </Route>
+                    <Route path="/filter-list">
+                        <FilterListDemo />
                     </Route>
                 </Switch>
             </Router>

@@ -1,0 +1,15 @@
+.filter-list-wrapper {
+    border: #333333 1px solid;
+    margin: 4px;
+    padding: 6px;
+}
+
+.filter-list-wrapper input {
+    width: calc(100% - 12px);
+}
+
+.filter-list {
+    padding: 14px 0 14px 8px;
+    max-height: 300px;
+    overflow: scroll;
+}

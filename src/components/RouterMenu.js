@@ -74,6 +74,9 @@ function RouterMenu() {
                 <li>
                     <Link to="range-group">Range Group</Link>
                 </li>
+                <li>
+                    <Link to="filter-list">Filter List</Link>
+                </li>
             </ul>
         </div>
     );
