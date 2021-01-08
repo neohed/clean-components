@@ -95,6 +95,11 @@ const RangeGroup = ({data, labelPropName, valuePropName}) => {
                             />,
                         <button
                             className='remove-button'
+                            onClick={() => {
+                                const newDataItems = dataItems.slice();
+                                newDataItems.splice(i, 1);
+                                setDataItems(newDataItems)
+                            }}
                         >
                             X
                         </button>
