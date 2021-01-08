@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Checkbox from "./inputs/Checkbox";
 import CleanButton from "./inputs/CleanButton";
 import Select from "./inputs/Select";
+import Expander from "./Expander";
 
 const FormDemo = () => {
     const [isChecked, setIsChecked] = useState(false);
@@ -36,6 +37,22 @@ const FormDemo = () => {
                 selectedValue={selectedValue}
                 changeHandler={setSelectedValue}
             />
+            <Expander
+                headerContent={isOpen => <div>Click to {isOpen ? 'close' : 'open'}</div>}
+            >
+                <ul>
+                    <li>Lorem ipsum dolor sit amet</li>
+                    <li>consectetur</li>
+                    <li>adipisicing elit.</li>
+                    <li>Dolor doloribus eligendi</li>
+                    <li>labore nihil</li>
+                    <li>optio possimus soluta vel.</li>
+                    <li>A consequuntur dolore dolorum, laborum</li>
+                    <li>molestiae perferendis,</li>
+                    <li>quisquam quo ratione</li>
+                    <li>eprehenderit tempore tenetur?</li>
+                </ul>
+            </Expander>
         </div>
     )
 };
