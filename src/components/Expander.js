@@ -13,8 +13,8 @@ const Expander = ({headerContent, children, isCollapsed = true}) => {
                 }
             </header>
             <div
-                style={{
-                    visibility: isOpen ? 'visible' : 'hidden'
+                style={isOpen ? {} : {
+                    display: 'none'
                 }}
             >
                 {
