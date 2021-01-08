@@ -1,4 +1,4 @@
-.range-lock-button, .scales-button {
+.range-lock-button, .scales-button, .remove-button {
     cursor: pointer;
 }
 
@@ -10,4 +10,12 @@
 .scales-button img {
     width: 24px;
     height: 24px;
+}
+
+.remove-button {
+    width: 42px;
+    height: 46px;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 0;
 }

@@ -14,7 +14,7 @@
 
 .range-layout button {
     background: lightgrey;
-    padding: 0.7em;
+    padding: 3px;
     border: 0;
 }
 
@@ -37,7 +37,7 @@
 
 @media (min-width: 400px) {
     .range-layout {
-        grid-template-columns: 200px 1fr 5em 64px;
+        grid-template-columns: 200px 1fr 5em 42px 42px;
         grid-gap: 16px;
     }
 
@@ -49,11 +49,16 @@
         grid-column: 2;
     }
 
-    .range-layout input[type="number"] {
+    .range-layout input[type="number"],
+    .range-layout .scales-button {
         grid-column: 3;
     }
 
-    .range-layout button {
+    .range-layout .range-lock-button {
         grid-column: 4;
+    }
+
+    .range-layout .remove-button {
+        grid-column: 5;
     }
 }

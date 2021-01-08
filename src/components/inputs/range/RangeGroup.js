@@ -69,8 +69,8 @@ const RangeGroup = ({data, labelPropName, valuePropName}) => {
 
     return (
         <div>
-            <ButtonBalance id='balance' clickHandler={balanceRangesClickHandler} />
             <RangeLayout>
+                <ButtonBalance id='balance' clickHandler={balanceRangesClickHandler} />
                 {
                     dataItems.map(({label, value, isLocked}, i) => [
                         <Range
@@ -92,7 +92,12 @@ const RangeGroup = ({data, labelPropName, valuePropName}) => {
                                 key='unlock-btn'
                                 id={i}
                                 clickHandler={lockButtonClickHandler}
-                            />
+                            />,
+                        <button
+                            className='remove-button'
+                        >
+                            X
+                        </button>
                     ])
                 }
             </RangeLayout>
