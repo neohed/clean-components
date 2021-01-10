@@ -8,7 +8,7 @@ const Checkbox = ({isChecked, id, label, changeHandler}) => (
             id={id}
             name={id}
             checked={isChecked}
-            onChange={({target}) => changeHandler(target.value, !isChecked)}
+            onChange={({target}) => changeHandler(!isChecked, target.value)}
         />,
         <label
             key={id + '_lbl'}

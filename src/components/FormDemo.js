@@ -3,6 +3,32 @@ import Checkbox from "./inputs/Checkbox";
 import CleanButton from "./inputs/CleanButton";
 import Select from "./inputs/Select";
 import Expander from "./Expander";
+import CheckBoxRange from "./inputs/CheckBoxRange";
+
+const selectOptions = [
+    {value: 1, text: 'One'},
+    {value: 2, text: 'Two'},
+    {value: 3, text: 'Three'},
+    {value: 4, text: 'Four'}
+];
+
+const checkBoxOptions = [
+    {
+        label: 'first',
+        value: 'first',
+        isChecked: 0
+    },
+    {
+        label: 'second',
+        value: 'second',
+        isChecked: 0
+    },
+    {
+        label: '3rd',
+        value: '2rd',
+        isChecked: 0
+    },
+]
 
 const FormDemo = () => {
     const [isChecked, setIsChecked] = useState(false);
@@ -16,7 +42,7 @@ const FormDemo = () => {
                 id={'chk1'}
                 isChecked={isChecked}
                 label={'Click me!'}
-                changeHandler={(ctrl, checked) => setIsChecked(checked)}
+                changeHandler={(checked) => setIsChecked(checked)}
             />
             <hr/>
             <br/>
@@ -28,14 +54,12 @@ const FormDemo = () => {
             <br/>
             <Select
                 label={'A Select'}
-                options={[
-                    {value: 1, text: 'One'},
-                    {value: 2, text: 'Two'},
-                    {value: 3, text: 'Three'},
-                    {value: 4, text: 'Four'}
-                ]}
+                options={selectOptions}
                 selectedValue={selectedValue}
                 changeHandler={setSelectedValue}
+            />
+            <CheckBoxRange
+                data={checkBoxOptions}
             />
             <Expander
                 headerContent={isOpen => <div>Click to {isOpen ? 'close' : 'open'}</div>}
