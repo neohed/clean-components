@@ -1,10 +1,10 @@
 import React from 'react';
 
-const CenterElement = ({children, ...rest}) => {
+const CenterElement = ({children, width = 200, ...rest}) => {
     return (
         <div style={{
             margin: 'auto',
-            width: '200px',
+            width: width + 'px',
             textAlign: 'center',
             ...rest
         }}>
