@@ -5,6 +5,7 @@ import Select from "./inputs/Select";
 import Expander from "./Expander";
 import CheckBoxRange from "./inputs/CheckBoxRange";
 import TitleBox from "./TitleBox";
+import TextInput from "./inputs/TextInput";
 
 const dividerRow = {
     padding: '10px',
@@ -42,6 +43,14 @@ const FormDemo = () => {
 
     return (
         <div>
+            <div style={dividerRow}>
+                <TextInput
+                    label='Type Something'
+                    style={{
+                        width: '350px'
+                    }}
+                />
+            </div>
             <div style={dividerRow}>
                 <Checkbox
                     id={'chk1'}
