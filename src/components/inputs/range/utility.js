@@ -7,22 +7,23 @@ const summariseLockedRanges = (dataItems) => dataItems.reduce(([sum, count], ite
 }, [0, 0]);
 
 //TODO rangeChangeHandler should adjust unlocked ranges proportionally so their relative ratios are maintained.
-const balanceRanges = (dataItems, index = -1, value = 0) => {
+const balanceRanges = (dataItems, index = -1, newPercentage = 0) => {
     const [sumLocked, countLocked] = summariseLockedRanges(dataItems);
     const range1 = 100 - sumLocked;
-    const validatedValue = Math.min(Math.max(0, value), range1);
+    const validatedValue = Math.min(Math.max(0, newPercentage), range1);
     const range2 = range1 - validatedValue;
     const unlockedRanges = dataItems.length - (countLocked + (index > -1 ? 1 : 0));
     const quotient = Math.floor(range2 / unlockedRanges);
     let remainder = range2 % unlockedRanges;
 
-    return dataItems.map(({label, isLocked, value}, i) => ({
+    return dataItems.map(({id, label, percentage, isLocked}, i) => ({
+        id,
         label,
         isLocked,
-        value: (i === index)
+        percentage: (i === index)
             ? validatedValue
             : (isLocked) // Brackets not needed and likely transpiled away but make code more readable by emphasising conditions.
-                ? value
+                ? newPercentage
                 : quotient + (remainder-- > 0 ? 1 : 0) // Equitably split the remainder.
     }))
 }

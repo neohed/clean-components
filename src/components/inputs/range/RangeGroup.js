@@ -17,6 +17,16 @@ const RangeGroup = ({
                     }) => {
     const [dataItems, setDataItems] = useState([]);
 
+    const callChangeHandler = (newDataItems) => {
+        const output = newDataItems.map(({id, label, percentage}) => ({
+            [idPropName]: id,
+            [labelPropName]: label,
+            [percentagePropName]: percentage
+        }));
+
+        changeHandler && changeHandler(output)
+    }
+
     useEffect(() => {
         const newDataItems = balanceRanges(data.reduce((acc, item) => {
             acc.push({
@@ -30,6 +40,7 @@ const RangeGroup = ({
         }, []));
 
         setDataItems(newDataItems);
+        callChangeHandler(newDataItems)
     }, [data, idPropName, labelPropName, percentagePropName])
 
     const lockButtonClickHandler = (index) => {
@@ -47,8 +58,8 @@ const RangeGroup = ({
         setDataItems(copy)
     }
 
-    const rangeChangeHandler = (index, value) => {
-        const newData = balanceRanges(dataItems, index, value);
+    const rangeChangeHandler = (index, percentage) => {
+        const newData = balanceRanges(dataItems, index, percentage);
         setDataItems(newData);
         changeHandler && changeHandler(newData)
     }
@@ -65,12 +76,12 @@ const RangeGroup = ({
                     }}
                 />
                 {
-                    dataItems.map(({label, value, isLocked}, i) => [
+                    dataItems.map(({label, percentage, isLocked}, i) => [
                         <Range
                             key={i}
                             id={i}
                             label={label}
-                            value={value}
+                            value={percentage}
                             changeHandler={rangeChangeHandler}
                             readOnly={isLocked}
                             disabled={isLocked}
@@ -92,12 +103,10 @@ const RangeGroup = ({
                             onClick={() => {
                                 const newDataItems = dataItems.slice();
                                 newDataItems.splice(i, 1);
-                                setDataItems(newDataItems);
-                                changeHandler && changeHandler(newDataItems.map(({label, id, percentage}) => ({
-                                    [idPropName]: id,
-                                    [labelPropName]: label,
-                                    [percentagePropName]: percentage
-                                })))
+                                const balancedData = balanceRanges(newDataItems);
+
+                                setDataItems(balancedData);
+                                callChangeHandler(balancedData)
                             }}
                         >
                             <img
