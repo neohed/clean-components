@@ -70,7 +70,13 @@ const RangeGroup = ({data, labelPropName, valuePropName}) => {
     return (
         <div>
             <RangeLayout>
-                <ButtonBalance id='balance' clickHandler={balanceRangesClickHandler} />
+                <ButtonBalance
+                    id='balance'
+                    clickHandler={balanceRangesClickHandler}
+                    style={{
+                        visibility: (dataItems.length < 2) ? 'hidden' : 'visible'
+                    }}
+                />
                 {
                     dataItems.map(({label, value, isLocked}, i) => [
                         <Range
