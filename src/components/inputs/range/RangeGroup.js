@@ -4,67 +4,54 @@ import Range from "./Range";
 import ButtonBalance from "./ButtonBalance";
 import ButtonLock from "./ButtonLock";
 import ButtonUnlock from "./ButtonUnlock";
+import {balanceRanges, countLockedRanges} from './utility';
+import IconClose from '../../img/close.svg';
 import './range-group.css';
 
-const summariseLockedRanges = (dataItems) => dataItems.reduce(([sum, count], item) => {
-    if (item.isLocked) {
-        return [sum + item.value, count + 1]
-    }
-
-    return [sum, count]
-}, [0, 0]);
-//TODO rangeChangeHandler should adjust unlocked ranges proportionally so their relative ratios are maintained.
-const balanceRanges = (dataItems, id = -1, value = 0) => {
-    const [sumLocked, countLocked] = summariseLockedRanges(dataItems);
-    const range1 = 100 - sumLocked;
-    const validatedValue = Math.min(Math.max(0, value), range1);
-    const range2 = range1 - validatedValue;
-    const unlockedRanges = dataItems.length - (countLocked + (id > -1 ? 1 : 0));
-    const quotient = Math.floor(range2 / unlockedRanges);
-    let remainder = range2 % unlockedRanges;
-
-    return dataItems.map(({label, isLocked, value}, i) => ({
-        label,
-        isLocked,
-        value: (i === id)
-            ? validatedValue
-            : (isLocked) // Brackets not needed and likely transpiled away but make code more readable by emphasising conditions.
-                ? value
-                : quotient + (remainder-- > 0 ? 1 : 0) // Equitably split the remainder.
-    }))
-}
-const countLockedRanges = (dataItems) => dataItems.reduce((count, item) => count + item.isLocked, 0);
-
-const RangeGroup = ({data, labelPropName, valuePropName}) => {
+const RangeGroup = ({
+                        data,
+                        changeHandler,
+                        idPropName = 'id',
+                        labelPropName = 'name',
+                        percentagePropName = 'percentage'
+                    }) => {
     const [dataItems, setDataItems] = useState([]);
 
     useEffect(() => {
-        setDataItems(balanceRanges(data.reduce((acc, item) => {
+        const newDataItems = balanceRanges(data.reduce((acc, item) => {
             acc.push({
+                id: item[idPropName],
                 label: item[labelPropName],
-                value: item[valuePropName],
+                percentage: item[percentagePropName],
                 isLocked: false
             });
 
             return acc
-        }, [])))
-    }, [data, labelPropName, valuePropName])
+        }, []));
 
-    const lockButtonClickHandler = (id) => {
-        const {label, value, isLocked} = dataItems[id];
+        setDataItems(newDataItems);
+    }, [data, idPropName, labelPropName, percentagePropName])
+
+    const lockButtonClickHandler = (index) => {
+        const {id, label, percentage, isLocked} = dataItems[index];
         if (!isLocked && countLockedRanges(dataItems) + 2 === dataItems.length) {
             return // Always need at least 2 sliders unlocked.
         }
         const copy = dataItems.slice();
-        copy[id] = {
+        copy[index] = {
+            id,
             label,
-            value,
+            percentage,
             isLocked: !isLocked
         };
         setDataItems(copy)
     }
 
-    const rangeChangeHandler = (id, value) => setDataItems(balanceRanges(dataItems, id, value));
+    const rangeChangeHandler = (index, value) => {
+        const newData = balanceRanges(dataItems, index, value);
+        setDataItems(newData);
+        changeHandler && changeHandler(newData)
+    }
     const balanceRangesClickHandler = () => setDataItems(balanceRanges(dataItems));
 
     return (
@@ -100,14 +87,26 @@ const RangeGroup = ({data, labelPropName, valuePropName}) => {
                                 clickHandler={lockButtonClickHandler}
                             />,
                         <button
+                            key='remove-btn'
                             className='remove-button'
                             onClick={() => {
                                 const newDataItems = dataItems.slice();
                                 newDataItems.splice(i, 1);
-                                setDataItems(newDataItems)
+                                setDataItems(newDataItems);
+                                changeHandler && changeHandler(newDataItems.map(({label, id, percentage}) => ({
+                                    [idPropName]: id,
+                                    [labelPropName]: label,
+                                    [percentagePropName]: percentage
+                                })))
                             }}
                         >
-                            X
+                            <img
+                                style={{
+                                    width: '28px',
+                                }}
+                                src={IconClose}
+                                alt="X close icon"
+                            />
                         </button>
                     ])
                 }
