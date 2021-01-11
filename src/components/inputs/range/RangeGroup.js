@@ -18,13 +18,11 @@ const RangeGroup = ({
     const [dataItems, setDataItems] = useState([]);
 
     const callChangeHandler = (newDataItems) => {
-        const output = newDataItems.map(({id, label, percentage}) => ({
+        changeHandler && changeHandler(newDataItems.map(({id, label, percentage}) => ({
             [idPropName]: id,
             [labelPropName]: label,
             [percentagePropName]: percentage
-        }));
-
-        changeHandler && changeHandler(output)
+        })))
     }
 
     useEffect(() => {
@@ -61,7 +59,7 @@ const RangeGroup = ({
     const rangeChangeHandler = (index, percentage) => {
         const newData = balanceRanges(dataItems, index, percentage);
         setDataItems(newData);
-        changeHandler && changeHandler(newData)
+        callChangeHandler(newData)
     }
     const balanceRangesClickHandler = () => setDataItems(balanceRanges(dataItems));
 
