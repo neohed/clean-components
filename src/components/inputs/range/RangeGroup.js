@@ -5,12 +5,13 @@ import ButtonBalance from "./ButtonBalance";
 import ButtonLock from "./ButtonLock";
 import ButtonUnlock from "./ButtonUnlock";
 import {balanceRanges, countLockedRanges} from './utility';
-import IconClose from '../../img/close.svg';
+import IconClose from './close.svg';
 import './range-group.css';
 
 const RangeGroup = ({
                         data,
-                        changeHandler,
+                        itemRemovedHandler,
+                        percentagesUpdatedHandler,
                         idPropName = 'id',
                         labelPropName = 'name',
                         percentagePropName = 'percentage'
@@ -18,7 +19,7 @@ const RangeGroup = ({
     const [dataItems, setDataItems] = useState([]);
 
     const callChangeHandler = (newDataItems) => {
-        changeHandler && changeHandler(newDataItems.map(({id, label, percentage}) => ({
+        percentagesUpdatedHandler && percentagesUpdatedHandler(newDataItems.map(({id, label, percentage}) => ({
             [idPropName]: id,
             [labelPropName]: label,
             [percentagePropName]: percentage
@@ -36,7 +37,6 @@ const RangeGroup = ({
 
             return acc
         }, []));
-
         setDataItems(newDataItems);
         callChangeHandler(newDataItems)
     }, [data, idPropName, labelPropName, percentagePropName])
@@ -74,10 +74,10 @@ const RangeGroup = ({
                     }}
                 />
                 {
-                    dataItems.map(({label, percentage, isLocked}, i) => [
+                    dataItems.map(({id, label, percentage, isLocked}, index) => [
                         <Range
-                            key={i}
-                            id={i}
+                            key={index}
+                            id={index}
                             label={label}
                             value={percentage}
                             changeHandler={rangeChangeHandler}
@@ -87,25 +87,18 @@ const RangeGroup = ({
                         isLocked
                             ? <ButtonLock
                                 key='lock-btn'
-                                id={i}
+                                id={index}
                                 clickHandler={lockButtonClickHandler}
                             />
                             : <ButtonUnlock
                                 key='unlock-btn'
-                                id={i}
+                                id={index}
                                 clickHandler={lockButtonClickHandler}
                             />,
                         <button
                             key='remove-btn'
                             className='remove-button'
-                            onClick={() => {
-                                const newDataItems = dataItems.slice();
-                                newDataItems.splice(i, 1);
-                                const balancedData = balanceRanges(newDataItems);
-
-                                setDataItems(balancedData);
-                                callChangeHandler(balancedData)
-                            }}
+                            onClick={() => itemRemovedHandler(id, index)}
                         >
                             <img
                                 style={{

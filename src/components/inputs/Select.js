@@ -24,9 +24,10 @@ const Select = ({
                 id={id}
                 name={id}
                 onChange={changeHandler}
+                value={selectedValue}
             >
                 {
-                    !selectedValue && <option disabled selected value/>
+                    !selectedValue && <option value/>
                 }
                 {
                     options.map((option,i) => {
@@ -36,7 +37,6 @@ const Select = ({
                         return <option
                             key={i}
                             value={value}
-                            selected={value === selectedValue}
                         >
                             {
                                 text
