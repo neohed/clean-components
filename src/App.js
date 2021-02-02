@@ -29,6 +29,7 @@ import SvgFile from "./components/svg/SvgFile";
 import SvgTag from "./components/svg/SvgTag";
 import RangeGroupDemo from "./components/RangeGroupDemo";
 import FilterListDemo from "./components/FilterListDemo";
+import HeaderMobileDemo from "./components/HeaderMobileDemo";
 
 function App() {
     return (
@@ -61,6 +62,9 @@ function App() {
                     </Route>
                     <Route path="/simple-header">
                         <SimpleHeader/>
+                    </Route>
+                    <Route path="/mobile-header">
+                        <HeaderMobileDemo/>
                     </Route>
                     <Route path="/flexbox-header">
                         <HeaderDemo/>

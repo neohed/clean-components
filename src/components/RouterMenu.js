@@ -21,6 +21,9 @@ function RouterMenu() {
                     <Link to="scroll-parallax">Scroll Parallax</Link>
                 </li>
                 <li>
+                    <Link to="mobile-header">Mobile Header</Link>
+                </li>
+                <li>
                     <Link to="simple-header">Simple Flexbox Header</Link>
                 </li>
                 <li>
