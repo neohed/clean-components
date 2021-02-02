@@ -7,6 +7,12 @@ import {
 } from "react-device-detect";
 import BurgerMenu from './navigation-menu.svg';
 import './header.css'
+/*
+ * TODO:
+ *  On mobile make menu full screen.
+ *  After clicking the menu close it back to burger menu.
+ *  Make burger icon appear top right.
+ */
 
 function renderHeaderContent() {
     return [
