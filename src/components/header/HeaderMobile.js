@@ -10,7 +10,7 @@ import './header-mobile.css'
  * TODO:
  *  On mobile make menu full screen.
  *  After clicking the menu close it back to burger menu.
- *  Make burger icon appear top right.
+ *  Change to render prop pattern.
  */
 //const isMobile = true;
 
