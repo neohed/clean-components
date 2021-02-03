@@ -6,3 +6,21 @@
     cursor: pointer;
     padding: 3px 6px 0 6px;
 }
+
+@media screen and (min-width: 415px),
+       screen and (min-height: 415px) {
+    .site-header-sm {
+        visibility: hidden;
+    }
+}
+
+@media screen and (max-width: 414px),
+       screen and (max-height: 414px) {
+    .site-header {
+        visibility: hidden;
+    }
+
+    .site-header-sm {
+        visibility: visible;
+    }
+}
