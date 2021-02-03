@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {
     isBrowser,
-    //isMobile
+    isMobile
 } from "react-device-detect";
 import BurgerMenu from './navigation-menu.svg';
 import './header.css'
@@ -12,7 +12,7 @@ import './header-mobile.css'
  *  After clicking the menu close it back to burger menu.
  *  Make burger icon appear top right.
  */
-const isMobile = true;
+//const isMobile = true;
 
 function renderHeaderMenu() {
     return [
