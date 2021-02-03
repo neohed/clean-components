@@ -1,20 +1,20 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import {
-    BrowserView,
-    MobileView,
     isBrowser,
-    isMobile
+    //isMobile
 } from "react-device-detect";
 import BurgerMenu from './navigation-menu.svg';
 import './header.css'
+import './header-mobile.css'
 /*
  * TODO:
  *  On mobile make menu full screen.
  *  After clicking the menu close it back to burger menu.
  *  Make burger icon appear top right.
  */
+const isMobile = true;
 
-function renderHeaderContent() {
+function renderHeaderMenu() {
     return [
         <a href="/" className="logo">Logo</a>,
 
@@ -45,21 +45,21 @@ const HeaderMobile = () => {
             } : {}}
         >
             {
-                isBrowser
-                    ? renderHeaderContent()
-                    : showHeader
-                    ? renderHeaderContent()
-                    : <img
-                        style={{
-                            cursor: 'pointer',
-                            color: 'white',
-                            width: '48px',
-                            height: '48px'
-                        }}
-                        src={BurgerMenu}
-                        alt="Burger Menu Icon"
-                        onClick={() => setShowHeader(true)}
-                    />
+                (isBrowser || showHeader)
+                    ? renderHeaderMenu()
+                    : <div
+                        className='burger-menu'
+                    >
+                        <img
+                            style={{
+                                width: '48px',
+                                height: '48px'
+                            }}
+                            src={BurgerMenu}
+                            alt="Burger Menu Icon"
+                            onClick={() => setShowHeader(true)}
+                        />
+                    </div>
             }
         </header>
     )
