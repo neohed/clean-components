@@ -1,0 +1,15 @@
+.emoji-container div {
+    float: left;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.emoji-container div:hover {
+    padding: 4px;
+    border: 1px solid black;
+}
+
+.emoji-container h4 {
+    clear: left;
+    margin: 12px 0 4px 5px;
+}

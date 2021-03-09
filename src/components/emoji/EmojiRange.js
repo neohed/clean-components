@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {getSurrogatePairInt, intToCodeUnit} from './unicode';
+import './emoji-range.css';
 
 const dingbats = {
     from: 0x2702,
@@ -26,40 +27,53 @@ const ranges = {
     }
 }
 
+function toEmoji(i) {
+    const [a, b] = getSurrogatePairInt(i);
+    return intToCodeUnit(a) + intToCodeUnit(b)
+}
+
 const EmojiRange = () => {
+    const [selected, setSelected] = useState('');
     const codes = [];
     const keys = Object.keys(ranges);
 
     keys.forEach(key => {
-        codes.push(<li key={key}>
-            <h4>
+        codes.push(
+            <h4
+                key={key}
+            >
                 {
                     key
                 }
             </h4>
-        </li>)
+        )
         const {from, to} = ranges[key];
         for (let i = from; i <= to; i++) {
-            const [a, b] = getSurrogatePairInt(i);
-
-            codes.push(<li key={i}>
+            codes.push(<div
+                key={i}
+                onClick={() => {
+                    setSelected(i)
+                }}
+            >
                 {
-                    intToCodeUnit(a) + intToCodeUnit(b)
+                    toEmoji(i)
                 }
-            </li>)
+            </div>)
         }
     })
-    
+
     return (
         <div>
-            <h4>
-                Emojis
-            </h4>
-            <ul>
+            {
+                toEmoji(selected)
+            }
+            <div
+                className='emoji-container'
+            >
                 {
                     codes
                 }
-            </ul>
+            </div>
         </div>
     );
 };
