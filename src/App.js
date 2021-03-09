@@ -30,6 +30,7 @@ import SvgTag from "./components/svg/SvgTag";
 import RangeGroupDemo from "./components/RangeGroupDemo";
 import FilterListDemo from "./components/FilterListDemo";
 import HeaderMobileDemo from "./components/HeaderMobileDemo";
+import EmojiRange from "./components/emoji/EmojiRange";
 
 function App() {
     return (
@@ -110,6 +111,9 @@ function App() {
                     </Route>
                     <Route path="/filter-list">
                         <FilterListDemo />
+                    </Route>
+                    <Route path="/emojis">
+                        <EmojiRange />
                     </Route>
                 </Switch>
             </Router>
