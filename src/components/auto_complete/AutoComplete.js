@@ -1,5 +1,11 @@
 import React, {useRef, useState, useEffect} from 'react'
-import { isEscapeKeyCode, getOffsetText, getWordBehindCursor, mergeSuggestionIntoInput, formatStringForSearch } from './autoCompleteUtils'
+import {
+    isEscapeKeyCode,
+    getOffsetText,
+    getWordBehindCursor,
+    mergeSuggestionIntoInput,
+    formatStringForSearch
+} from './autoCompleteUtils'
 import useGetComputedFontStyles from './useGetComputedFontStyles'
 import useDetermineInputWidthFromText from "./useDetermineInputWidthFromText";
 import useAddEventListener from "./useAddEventListener";
@@ -7,9 +13,9 @@ import SearchIcon from "./SearchIcon";
 import './autoComplete.css'
 
 const AutoComplete = ({
-    searchTextCallback,
-    suggestions = [],
-}) => {
+                          searchTextCallback,
+                          suggestions = [],
+                      }) => {
     const autoComplete = useRef();
     const searchInput = useRef();
     const [inputText, setInputText] = useState('');
@@ -43,7 +49,7 @@ const AutoComplete = ({
 
     useAddEventListener('keydown', (event) => {
         const keyCode = event.keyCode;
-        if(isEscapeKeyCode(keyCode)) {
+        if (isEscapeKeyCode(keyCode)) {
             setHideSuggestions(true)
         }
     });
@@ -93,13 +99,20 @@ const AutoComplete = ({
                 }
             }}
         >
-            <div className='autocomplete-input-container' style={displaySuggestions ? {
-                borderBottomRightRadius: '0',
-                borderBottomLeftRadius: '0',
-                borderBottom: 'none'
-            } : {}}>
-                <div style={displaySuggestions ? { borderBottom: '1px solid #9AA0A6' } : {}}>
-                    <SearchIcon />
+            <div
+                className='autocomplete-input-container'
+                style={displaySuggestions ? {
+                    borderBottomRightRadius: '0',
+                    borderBottomLeftRadius: '0',
+                    borderBottom: 'none'
+                } : {}}
+            >
+                <div
+                    style={displaySuggestions ? {
+                        borderBottom: '1px solid #9AA0A6'
+                    } : {}}
+                >
+                    <SearchIcon/>
                     <input
                         className='autocomplete-input'
                         type='text'
@@ -130,13 +143,13 @@ const AutoComplete = ({
 };
 
 const Suggestions = ({
-    matches,
-    searchWord,
-    offsetTextWidth,
-    updateSearchText,
-    highlightIndex,
-    setHighlightIndex,
-}) => {
+                         matches,
+                         searchWord,
+                         offsetTextWidth,
+                         updateSearchText,
+                         highlightIndex,
+                         setHighlightIndex,
+                     }) => {
     return (
         <div
             style={{visibility: matches.length > 0 ? 'visible' : 'hidden'}}
@@ -156,7 +169,7 @@ const Suggestions = ({
                             key={id}
                             onClick={() => updateSearchText(name)}
                             style={(i === highlightIndex) ? {
-                                backgroundColor:  '#ddd'
+                                backgroundColor: '#ddd'
                             } : {}}
                         >
                             <Suggestion
