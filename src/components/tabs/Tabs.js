@@ -1,8 +1,8 @@
+import React, { useState } from 'react';
+import './tabs.css'
 /*
     Based on: https://alligator.io/react/tabs-component/
 */
-import React, { useState } from 'react';
-import './tabs.css'
 
 const Tabs = ({children}) => {
     const [activeTab, setActiveTab] = useState(children[0].props.label);
