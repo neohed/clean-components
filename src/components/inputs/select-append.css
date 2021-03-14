@@ -1,0 +1,7 @@
+.select-append div {
+    display: flex;
+}
+
+.select-append div button {
+    margin-left: 3px;
+}

@@ -6,18 +6,19 @@ import Expander from "./Expander";
 import CheckBoxRange from "./inputs/CheckBoxRange";
 import TitleBox from "./TitleBox";
 import TextInput from "./inputs/TextInput";
+import SelectAppend from "./inputs/SelectAppend";
 
 const dividerRow = {
     padding: '10px',
     margin: '10px'
 }
 
-const selectOptions = [
+const selectOptions = () => ([
     {value: 1, text: 'One'},
     {value: 2, text: 'Two'},
     {value: 3, text: 'Three'},
     {value: 4, text: 'Four'}
-];
+])
 
 const checkBoxOptions = [
     {
@@ -40,6 +41,7 @@ const checkBoxOptions = [
 const FormDemo = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [selectedValue, setSelectedValue] = useState();
+    const [items, setItems] = useState(selectOptions())
 
     return (
         <div>
@@ -68,7 +70,7 @@ const FormDemo = () => {
             <div style={dividerRow}>
                 <Select
                     label={'A Select'}
-                    options={selectOptions}
+                    options={selectOptions()}
                     selectedValue={selectedValue}
                     changeHandler={setSelectedValue}
                 />
@@ -99,6 +101,23 @@ const FormDemo = () => {
                         <li>eprehenderit tempore tenetur?</li>
                     </ul>
                 </Expander>
+            </div>
+            <div>
+                <SelectAppend
+                    options={items}
+                    valueProp='value'
+                    textProp='text'
+                    addNewHandler={(newItem) => {
+                        setItems([
+                            ...items,
+                            {
+                                value: items.length + 1,
+                                text: newItem
+                            }
+                        ])
+                    }}
+                    selectionChangedHandler={(v) => console.log(v)}
+                />
             </div>
         </div>
     )
