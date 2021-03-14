@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Select from "./Select";
 import './select-append.css';
 
-const SelectAppend = ({options, textProp, valueProp, selectionChangedHandler, addNewHandler}) => {
+const SelectAppend = ({options, textProp, valueProp = 'value', selectionChangedHandler, addNewHandler, selectedValue}) => {
     const [selectMode, setSelectMode] = useState(true);
     const [newItem, setNewItem] = useState('');
     const addNew = ' - Add New - ';
@@ -33,6 +33,7 @@ const SelectAppend = ({options, textProp, valueProp, selectionChangedHandler, ad
                         valueProp={valueProp}
                         options={optionsAppend}
                         changeHandler={onChangeHandler}
+                        selectedValue={selectedValue}
                     />
                     : <div>
                         <input
