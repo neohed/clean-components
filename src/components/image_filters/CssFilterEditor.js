@@ -70,7 +70,6 @@ const reducer = (state, {name, value}) => ({
 
 const CssFilterEditor = ({onCssChanged}) => {
     const [cssFilters, dispatch] = useReducer(reducer, {});
-    //const css = Object.keys(cssFilters).reduce((filters, key) => filters + cssFilters[key], '')
     const css = Object.values(cssFilters).join(' ');
     useEffect(() => {
         onCssChanged && onCssChanged(css)
