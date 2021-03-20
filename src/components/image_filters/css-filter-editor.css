@@ -1,0 +1,22 @@
+.css-filter-editor {
+    display:grid;
+    grid-template-columns: 30px 80px 100px 20px;
+    grid-gap: 2px;
+}
+
+.css-filter-editor input[type='checkbox'] {
+    grid-column: 1 / 1;
+}
+
+.css-filter-editor label {
+    text-align: right;
+    grid-column: 2 / 1;
+}
+
+.css-filter-editor input[type='text'] {
+    grid-column: 3 / 1;
+}
+
+.css-filter-editor span {
+    grid-column: 4 / 1;
+}

@@ -83,6 +83,9 @@ function RouterMenu() {
                 <li>
                     <Link to="emojis">Emojis</Link>
                 </li>
+                <li>
+                    <Link to="css-filters">CSS Filters</Link>
+                </li>
             </ul>
         </div>
     );

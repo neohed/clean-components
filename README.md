@@ -21,12 +21,9 @@ Try creating a single demo / API doc / playground page with live DnD editing.
 * Tab component originally based on: [alligator.io](https://alligator.io/react/tabs-component/)
 * Scroller from [SO](https://stackoverflow.com/questions/16688545/scroll-div-over-another-div)
 
-## Todo
+## Links
 
-* Add "zoom" effect - mouseover causes the image to expand slightly.
-* Create better "menu" / demo page showing off things...
-* Checkbox multi select in expander.
-* Responsiveness: https://developers.google.com/web/fundamentals/design-and-ux/responsive
+* https://frontendresource.com/css-filters/
 
 * Media queries:
 

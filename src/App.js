@@ -31,6 +31,7 @@ import RangeGroupDemo from "./components/RangeGroupDemo";
 import FilterListDemo from "./components/FilterListDemo";
 import HeaderMobileDemo from "./components/HeaderMobileDemo";
 import EmojiRange from "./components/emoji/EmojiRange";
+import DemoCssFilters from "./components/DemoCssFilters";
 
 function App() {
     return (
@@ -114,6 +115,9 @@ function App() {
                     </Route>
                     <Route path="/emojis">
                         <EmojiRange />
+                    </Route>
+                    <Route path="/css-filters">
+                        <DemoCssFilters />
                     </Route>
                 </Switch>
             </Router>
