@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useReducer, useState, useEffect} from 'react';
 import './css-filter-editor.css';
 
 //https://www.w3schools.com/CSSref/css3_pr_filter.asp
@@ -72,9 +72,14 @@ const filters = [
     },
 ]
 
+const reducer = (state, {name, value}) => ({
+    ...state,
+    [name]: value
+})
+
 const CssFilterEditor = ({onCssChanged}) => {
-    const [cssFilters, setCssFilters] = useState({});
-    const css = Object.values(cssFilters).join();
+    const [cssFilters, dispatch] = useReducer(reducer, {});
+    const css = Object.keys(cssFilters).reduce((filters, key) => filters + cssFilters[key], '')
     useEffect(() => {
         onCssChanged && onCssChanged(css)
     }, [css])
@@ -85,58 +90,65 @@ const CssFilterEditor = ({onCssChanged}) => {
         >
             {
                 filters.map(filter => <CssFilterRow
+                    key={filter.name}
                     {...filter}
-                    addCss={setCssFilters}
+                    dispatch={dispatch}
                 />)
             }
-            <div>
-                {
-                    css
-                }
-            </div>
         </div>
     );
 };
 
-const CssFilterRow = ({name, template, unit, addCss}) => {
+const CssFilterRow = ({name, template, unit, dispatch}) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const [value, setValue] = useState(0);
 
     return (
-        <div>
+        [
             <input
+                key='chk'
                 type="checkbox"
-                value={isEnabled}
+                checked={isEnabled}
                 onChange={() => {
-                    if (!isEnabled) {
-                        addCss(name, template(value))
-                    }
+                    dispatch({
+                        name,
+                        value: isEnabled ? '' : template(value)
+                    })
+
                     setIsEnabled(!isEnabled)
                 }}
-            />
+            />,
             <label
+                key='lbl'
                 htmlFor={name}
             >
                 {
                     name
                 }
-            </label>
+            </label>,
             <input
+                key='txt'
                 name={name}
                 type="text"
                 value={value}
                 onChange={({target}) => {
                     const {value} = target;
-                    addCss(name, template(value))
-                    setValue(parseInput(value, unit))
+                    dispatch({
+                        name,
+                        value: template(value)
+                    })
+                    setValue(parseInput(value, unit));
+                    setIsEnabled(true)
                 }}
-            />
-            <span>
+            />,
+            <span
+                key='span'
+            >
                 {
                     unit
                 }
             </span>
-        </div>
+        ]
     )
 }
 

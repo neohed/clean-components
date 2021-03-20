@@ -1,22 +1,25 @@
 .css-filter-editor {
     display:grid;
-    grid-template-columns: 30px 80px 100px 20px;
+    grid-template-columns: 20px 90px 70px 10px;
     grid-gap: 2px;
+    margin: 8px;
 }
 
 .css-filter-editor input[type='checkbox'] {
-    grid-column: 1 / 1;
+    grid-column: 1 / 2;
+    margin: 3px;
 }
 
 .css-filter-editor label {
     text-align: right;
-    grid-column: 2 / 1;
+    grid-column: 2 / 3;
 }
 
 .css-filter-editor input[type='text'] {
-    grid-column: 3 / 1;
+    grid-column: 3 / 4;
+    margin: 0 3px 2px 3px;
 }
 
 .css-filter-editor span {
-    grid-column: 4 / 1;
+    grid-column: 4 / 5;
 }
