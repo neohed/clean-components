@@ -1,21 +1,34 @@
 import React, {useState} from 'react';
 import CssFilterEditor from "./image_filters/CssFilterEditor";
+import img from '../image/City_skyline_2020.jpg';
 
 const DemoCssFilters = () => {
-    const [css, setCss] = useState('');
+    const [filterCss, setFilterCss] = useState('');
 
     return (
         <div>
             <CssFilterEditor
-                onCssChanged={setCss}
+                onCssChanged={setFilterCss}
             />
             <div>
                 {
-                    css
+                    filterCss
                 }
+            </div>
+            <div>
+            <img
+                style={{
+                    ...(filterCss === '' ? {} : {
+                        filter: filterCss
+                    })
+                }}
+                src={img}
+                width='100%'
+                alt="city skyline"
+            />
             </div>
         </div>
     );
-};
+}
 
 export default DemoCssFilters;

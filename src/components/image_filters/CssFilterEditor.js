@@ -27,47 +27,38 @@ const parseInput = (x, type) => {
 const filters = [
     {
         name: 'brightness',
-        template: (percent) => `-webkit-filter:brightness(${percent}%); filter:brightness(${percent}%);`,
         unit: '%',
     },
     {
         name: 'contrast',
-        template: (percent) => `-webkit-filter:contrast(${percent}%); filter:contrast(${percent}%);`,
         unit: '%',
     },
     {
         name: 'blur',
-        template: (pixel) => `-webkit-filter:blur(${pixel}px); filter:blur(${pixel}px);`,
         unit: 'px',
     },
     {
         name: 'grayscale',
-        template: (percent) => `-webkit-filter:grayscale(${percent}%); filter:grayscale(${percent}%);`,
         unit: '%',
     },
     {
         name: 'hue-rotate',
-        template: (degrees) => `-webkit-filter:hue-rotate(${degrees}deg); filter:hue-rotate(${degrees}deg);`,
         unit: 'deg',
     },
     {
         name: 'invert',
-        template: (percent) => `-webkit-filter:invert(${percent}%); filter:invert(${percent}%);`,
         unit: '%',
     },
     {
         name: 'opacity',
-        template: (percent) => `-webkit-filter:opacity(${percent}%); filter:opacity(${percent}%);`,
         unit: '%',
     },
     {
         name: 'sepia',
-        template: (percent) => `-webkit-filter:sepia(${percent}%); filter:sepia(${percent}%);`,
         unit: '%',
     },
     {
         name: 'saturate',
-        template: (percent) => `-webkit-filter:saturate(${percent}%); filter:saturate(${percent}%);`,
         unit: '%',
     },
 ]
@@ -79,7 +70,8 @@ const reducer = (state, {name, value}) => ({
 
 const CssFilterEditor = ({onCssChanged}) => {
     const [cssFilters, dispatch] = useReducer(reducer, {});
-    const css = Object.keys(cssFilters).reduce((filters, key) => filters + cssFilters[key], '')
+    //const css = Object.keys(cssFilters).reduce((filters, key) => filters + cssFilters[key], '')
+    const css = Object.values(cssFilters).join(' ');
     useEffect(() => {
         onCssChanged && onCssChanged(css)
     }, [css])
@@ -99,7 +91,7 @@ const CssFilterEditor = ({onCssChanged}) => {
     );
 };
 
-const CssFilterRow = ({name, template, unit, dispatch}) => {
+const CssFilterRow = ({name, unit, dispatch}) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const [value, setValue] = useState(0);
 
@@ -112,7 +104,7 @@ const CssFilterRow = ({name, template, unit, dispatch}) => {
                 onChange={() => {
                     dispatch({
                         name,
-                        value: isEnabled ? '' : template(value)
+                        value: isEnabled ? '' : `${name}(${value}${unit})`
                     })
 
                     setIsEnabled(!isEnabled)
@@ -135,7 +127,7 @@ const CssFilterRow = ({name, template, unit, dispatch}) => {
                     const {value} = target;
                     dispatch({
                         name,
-                        value: template(value)
+                        value: `${name}(${value}${unit})`
                     })
                     setValue(parseInput(value, unit));
                     setIsEnabled(true)
