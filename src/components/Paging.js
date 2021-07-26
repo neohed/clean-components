@@ -1,6 +1,6 @@
 import React from 'react';
 import './paging.css';
-
+//TODO use render props to customize...
 const RANGE = 5;
 
 const IndexDiv = ({index}) => (
