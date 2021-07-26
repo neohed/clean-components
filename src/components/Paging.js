@@ -5,7 +5,6 @@ const RANGE = 5;
 
 const IndexDiv = ({index}) => (
     <div
-        key={index}
         className='index-div'
     >
         {
@@ -16,7 +15,6 @@ const IndexDiv = ({index}) => (
 
 const IndexButton = ({index, onClick}) => (
     <button
-        key={index}
         className='link-button'
         onClick={onClick}
     >
