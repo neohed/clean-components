@@ -1,0 +1,30 @@
+.paging {
+    display: flex;
+}
+
+.paging .link-button {
+    background: none;
+    border: none;
+    padding: 0 3px 0 3px;
+    font-family: arial, sans-serif;
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.paging .selected {
+    padding: 0 3px 0 3px;
+    font-weight: bold;
+}
+
+.paging .unselected {
+    padding: 0 3px 0 3px;
+}
+
+.paging .prev {
+    margin-right: 3px;
+}
+
+.paging .next {
+    margin-left: 3px;
+}

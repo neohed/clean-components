@@ -7,6 +7,7 @@ import CheckBoxRange from "./inputs/CheckBoxRange";
 import TitleBox from "./TitleBox";
 import TextInput from "./inputs/TextInput";
 import SelectAppend from "./inputs/SelectAppend";
+import Paging from "./Paging";
 
 const dividerRow = {
     padding: '10px',
@@ -117,6 +118,14 @@ const FormDemo = () => {
                         ])
                     }}
                     selectionChangedHandler={(v) => console.log(v)}
+                />
+            </div>
+            <div
+                style={dividerRow}
+            >
+                <Paging
+                    maxPage={6}
+                    currentPage={1}
                 />
             </div>
         </div>
