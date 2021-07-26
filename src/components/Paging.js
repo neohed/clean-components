@@ -28,7 +28,7 @@ const IndexButton = ({index, onClick}) => (
     </button>
 )
 
-const Paging = ({minPage = 1, maxPage, currentPage, onChange = () => null}) => {
+const Paging = ({minPage = 1, maxPage, currentPage = minPage, onChange = () => null}) => {
     const numberLinks = [];
     if (maxPage < 7) {
         for (let i = 1; i <= maxPage; i++) {
