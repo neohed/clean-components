@@ -1,13 +1,15 @@
 import React from 'react';
 import './paging.css';
 
+const RANGE = 7;
+
 const IndexDiv = ({index, isSelected = false}) => (
     <div
         key={index}
-        className={
-            isSelected
-                ? 'selected'
-                : 'unselected'
+        className={'index' +
+            (isSelected
+                    ? ' selected'
+                    : '')
         }
     >
         {
@@ -30,31 +32,20 @@ const IndexButton = ({index, onClick}) => (
 
 const Paging = ({minPage = 1, maxPage, currentPage = minPage, onChange = () => null}) => {
     const numberLinks = [];
-    if (maxPage < 7) {
-        for (let i = 1; i <= maxPage; i++) {
-            numberLinks.push(
-                (i === currentPage)
-                    ? <IndexDiv index={i} isSelected={true} />
-                    : <IndexButton index={i} onClick={() => onChange(i)} />
-            )
-        }
-    } else {
+    const clippedRange = Math.min(RANGE, (maxPage - minPage + 1))
+    const div = Math.floor(clippedRange / 2);
+    const from = currentPage - div < minPage
+        ? minPage
+        : currentPage + div > maxPage
+            ? maxPage - clippedRange + 1
+            : currentPage - div;
+    const to = from + clippedRange;
+
+    for (let i = from; i < to; i++) {
         numberLinks.push(
-            currentPage === minPage
-                ? <IndexDiv key={1} index={minPage} isSelected={true} />
-                : <IndexButton key={1} index={minPage} onClick={() => onChange(minPage)} />
-        )
-        numberLinks.push(<div key={2}>...</div>)
-        if (currentPage !== 1 && currentPage !== maxPage) {
-            numberLinks.push(
-                    <IndexDiv key={3} index={currentPage} isSelected={true} />
-            )
-            numberLinks.push(<div key={4}>...</div>)
-        }
-        numberLinks.push(
-            currentPage === maxPage
-                ? <IndexDiv key={5} index={maxPage} isSelected={true} />
-                : <IndexButton key={5} index={maxPage}  onClick={() => onChange(maxPage)} />
+            (i === currentPage)
+                ? <IndexDiv index={i} isSelected={true} />
+                : <IndexButton index={i} onClick={() => onChange(i)} />
         )
     }
 
@@ -75,9 +66,13 @@ const Paging = ({minPage = 1, maxPage, currentPage = minPage, onChange = () => n
             >
                 &lt;
             </button>
-            {
-                numberLinks
-            }
+            <div
+                className='pager-numbers'
+            >
+                {
+                    numberLinks
+                }
+            </div>
             <button
                 disabled={currentPage === maxPage}
                 className='next'

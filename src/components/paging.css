@@ -2,6 +2,11 @@
     display: flex;
 }
 
+.pager-numbers {
+    display: flex;
+    width: 170px;
+}
+
 .paging .link-button {
     background: none;
     border: none;
@@ -10,21 +15,24 @@
     color: #069;
     text-decoration: underline;
     cursor: pointer;
+    flex: 1;
+    text-align: center;
+}
+
+.paging .index {
+    padding: 0 3px 0 3px;
+    flex: 1;
+    text-align: center;
 }
 
 .paging .selected {
-    padding: 0 3px 0 3px;
     font-weight: bold;
 }
 
-.paging .unselected {
-    padding: 0 3px 0 3px;
-}
-
 .paging .prev {
-    margin-right: 3px;
+    margin-right: 5px;
 }
 
 .paging .next {
-    margin-left: 3px;
+    margin-left: 5px;
 }

@@ -125,7 +125,7 @@ const FormDemo = () => {
                 style={dividerRow}
             >
                 <Paging
-                    maxPage={6}
+                    maxPage={50}
                     currentPage={selectedPage}
                     onChange={page => setSelectedPage(page)}
                 />
