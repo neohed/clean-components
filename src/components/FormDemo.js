@@ -43,6 +43,7 @@ const FormDemo = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [selectedValue, setSelectedValue] = useState();
     const [items, setItems] = useState(selectOptions())
+    const [selectedPage, setSelectedPage] = useState(1);
 
     return (
         <div>
@@ -125,8 +126,14 @@ const FormDemo = () => {
             >
                 <Paging
                     maxPage={6}
-                    currentPage={1}
+                    currentPage={selectedPage}
+                    onChange={page => setSelectedPage(page)}
                 />
+                <div>
+                    <div>
+                        Selected page: {selectedPage}
+                    </div>
+                </div>
             </div>
         </div>
     )
