@@ -3,14 +3,10 @@ import './paging.css';
 
 const RANGE = 7;
 
-const IndexDiv = ({index, isSelected = false}) => (
+const IndexDiv = ({index}) => (
     <div
         key={index}
-        className={'index' +
-            (isSelected
-                    ? ' selected'
-                    : '')
-        }
+        className='index-div'
     >
         {
             index
@@ -44,7 +40,7 @@ const Paging = ({minPage = 1, maxPage, currentPage = minPage, onChange = () => n
     for (let i = from; i < to; i++) {
         numberLinks.push(
             (i === currentPage)
-                ? <IndexDiv index={i} isSelected={true} />
+                ? <IndexDiv index={i} />
                 : <IndexButton index={i} onClick={() => onChange(i)} />
         )
     }
