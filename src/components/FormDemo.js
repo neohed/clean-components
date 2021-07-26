@@ -53,6 +53,8 @@ const FormDemo = () => {
                     style={{
                         width: '350px'
                     }}
+                    value={''}
+                    changeHandler={txt => console.log(txt)}
                 />
             </div>
             <div style={dividerRow}>

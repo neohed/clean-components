@@ -1,7 +1,7 @@
 import React from 'react';
 import './paging.css';
 
-const RANGE = 7;
+const RANGE = 5;
 
 const IndexDiv = ({index}) => (
     <div
@@ -35,14 +35,30 @@ const Paging = ({minPage = 1, maxPage, currentPage = minPage, onChange = () => n
         : currentPage + div > maxPage
             ? maxPage - clippedRange + 1
             : currentPage - div;
-    const to = from + clippedRange;
+    const to = from + clippedRange - 1;
 
-    for (let i = from; i < to; i++) {
+    if (from > minPage) {
+        numberLinks.push(<IndexButton key={minPage} index={minPage} onClick={() => onChange(minPage)} />)
+
+        if (from > minPage + 1) {
+            numberLinks.push(<div key='el-01'>...</div>)
+        }
+    }
+
+    for (let i = from; i <= to; i++) {
         numberLinks.push(
             (i === currentPage)
-                ? <IndexDiv index={i} />
-                : <IndexButton index={i} onClick={() => onChange(i)} />
+                ? <IndexDiv key={i} index={i} />
+                : <IndexButton key={i} index={i} onClick={() => onChange(i)} />
         )
+    }
+
+    if (to < maxPage) {
+        if (to < maxPage - 1) {
+            numberLinks.push(<div key='el-02'>...</div>)
+        }
+
+        numberLinks.push(<IndexButton key={maxPage} index={maxPage} onClick={() => onChange(maxPage)} />)
     }
 
     return (
