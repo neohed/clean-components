@@ -1,22 +1,22 @@
 .title-box {
-    border: 1px solid #000;
+    border: 1px solid #44464b;
     padding: 8px;
-    margin: 6px;
+    margin: 16px 0 0 6px;
 }
 
-.title-box h1 {
-    text-align: center;
+.title-box > h1 {
+    padding-left: 2em;
     margin-top: -1.5em;
     height: 20px;
     line-height: 20px;
     font-size: 15px;
 }
 
-.title-box h1 span {
+.title-box > h1 > span {
     background-color: white;
     padding: 0 .5em 0 .5em;
 }
 
-.title-box div {
-    padding: 12px;
+.title-box > div {
+    padding: 6px 16px 0 16px;
 }
