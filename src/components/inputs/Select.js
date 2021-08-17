@@ -23,7 +23,9 @@ const Select = ({
                 key={id + '_select'}
                 id={id}
                 name={id}
-                onChange={changeHandler}
+                onChange={
+                    ({target}) => changeHandler(target.value)
+                }
                 value={selectedValue}
             >
                 {
