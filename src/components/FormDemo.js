@@ -8,6 +8,7 @@ import TitleBox from "./TitleBox";
 import TextInput from "./inputs/TextInput";
 import SelectAppend from "./inputs/SelectAppend";
 import Paging from "./Paging";
+import RatioChart from "./RatioChart";
 
 const dividerRow = {
     padding: '10px',
@@ -136,6 +137,19 @@ const FormDemo = () => {
                         Selected page: {selectedPage}
                     </div>
                 </div>
+            </div>
+            <div
+                style={{
+                    ...dividerRow,
+                    width: '800px',
+                }}
+            >
+                <RatioChart
+                    r1={1367}
+                    r2={2134}
+                    t1={'A number'}
+                    t2={'Another number'}
+                />
             </div>
         </div>
     )
