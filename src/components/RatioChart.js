@@ -38,6 +38,7 @@ const RatioChart = ({t1, r1, t2, r2}) => {
                     backgroundColor: 'rgb(255, 255, 179)',
                     marginBottom: '4px',
                 }}
+                n={r1}
             />
             <Ratio
                 width={ratios[1]}
@@ -45,6 +46,7 @@ const RatioChart = ({t1, r1, t2, r2}) => {
                 css={{
                     backgroundColor: 'rgb(141, 211, 199)',
                 }}
+                n={r2}
             />
         </div>
     );
@@ -52,15 +54,20 @@ const RatioChart = ({t1, r1, t2, r2}) => {
 
 export default RatioChart;
 
-const Ratio = ({width, title, css}) => (
+const Ratio = ({width, title, css, n}) => (
     <div
         style={{
-            width: Math.floor(width) + 'px',
+            width: width + 'px',
             ...css
         }}
     >
         {
             title
         }
+        <div>
+            {
+                n
+            }
+        </div>
     </div>
 )
