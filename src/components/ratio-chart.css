@@ -1,14 +1,20 @@
 .ratio-chart {
     width: 100%;
+    border: 1px solid #44464b;
+    padding: 2px;
 }
 
 .ratio-chart > div {
     font-size: 16px;
     height: 2em;
-    padding: 1em 0 0 2em;
 }
 
-.ratio-chart > div  > div {
+.ratio-chart > div > div.title {
+    padding: 8px 0 0 1em;
+    display: inline-block;
+}
+
+.ratio-chart > div > div.quantity {
     float: right;
-    padding-right: 6px;
+    padding: 2px 6px 0 0;
 }

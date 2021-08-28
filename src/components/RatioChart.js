@@ -2,21 +2,21 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import useEventListener from "../utility/useEventListener";
 import './ratio-chart.css'
 
-const RatioChart = ({t1, r1, t2, r2}) => {
+const RatioChart = ({title1, ratio1, title2, ratio2}) => {
     const containerRef = useRef();
     const [ratios, setRatios] = useState([0, 0]);
 
     const updateDimensions = useCallback(() => {
         if (containerRef.current) {
             const {offsetWidth} = containerRef.current;
-            const x = offsetWidth / Math.max(r1, r2);
+            const x = offsetWidth / Math.max(ratio1, ratio2);
 
             setRatios([
-                Math.floor(r1 * x),
-                Math.floor(r2 * x)
+                Math.floor(ratio1 * x),
+                Math.floor(ratio2 * x)
             ])
         }
-    }, [r1, r2])
+    }, [ratio1, ratio2])
 
     useEffect(() => { // Initial load
         updateDimensions()
@@ -33,20 +33,20 @@ const RatioChart = ({t1, r1, t2, r2}) => {
         >
             <Ratio
                 width={ratios[0]}
-                title={t1}
+                title={title1}
                 css={{
                     backgroundColor: 'rgb(255, 255, 179)',
                     marginBottom: '4px',
                 }}
-                n={r1}
+                quantity_label={ratio1}
             />
             <Ratio
                 width={ratios[1]}
-                title={t2}
+                title={title2}
                 css={{
                     backgroundColor: 'rgb(141, 211, 199)',
                 }}
-                n={r2}
+                quantity_label={ratio2}
             />
         </div>
     );
@@ -54,19 +54,25 @@ const RatioChart = ({t1, r1, t2, r2}) => {
 
 export default RatioChart;
 
-const Ratio = ({width, title, css, n}) => (
+const Ratio = ({width, title, css, quantity_label}) => (
     <div
         style={{
             width: width + 'px',
             ...css
         }}
     >
-        {
-            title
-        }
-        <div>
+        <div
+            className='title'
+        >
             {
-                n
+                title
+            }
+        </div>
+        <div
+            className='quantity'
+        >
+            {
+                quantity_label
             }
         </div>
     </div>

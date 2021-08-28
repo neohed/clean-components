@@ -145,10 +145,10 @@ const FormDemo = () => {
                 }}
             >
                 <RatioChart
-                    r1={1367}
-                    r2={2134}
-                    t1={'A number'}
-                    t2={'Another number'}
+                    ratio1={1367}
+                    ratio2={2134}
+                    title1={'A number'}
+                    title2={'Another number'}
                 />
             </div>
         </div>
