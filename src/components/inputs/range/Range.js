@@ -3,9 +3,9 @@ import './range.css';
 
 const Range = ({id, min = 0, max = 100, label, value, changeHandler, ...rest}) => {
     const onChange = ({target}) => {
-        const {value} = target;
+        const {valueAsNumber} = target;
 
-        changeHandler(id, value)
+        changeHandler(id, valueAsNumber)
     }
 
     return (

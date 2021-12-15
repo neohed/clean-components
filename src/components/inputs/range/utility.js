@@ -6,7 +6,6 @@ const summariseLockedRanges = (dataItems) => dataItems.reduce(([sum, count], ite
     return [sum, count]
 }, [0, 0]);
 
-//TODO rangeChangeHandler should adjust unlocked ranges proportionally so their relative ratios are maintained.
 const balanceRanges = (dataItems, index = -1, newPercentage = 0) => {
     const [sumLocked, countLocked] = summariseLockedRanges(dataItems);
     const range1 = 100 - sumLocked;

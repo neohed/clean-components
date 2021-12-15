@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import RangeLayout from "./RangeLayout";
 import Range from "./Range";
 import ButtonBalance from "./ButtonBalance";
@@ -18,13 +18,13 @@ const RangeGroup = ({
                     }) => {
     const [dataItems, setDataItems] = useState([]);
 
-    const callChangeHandler = (newDataItems) => {
+    const callChangeHandler = useCallback((newDataItems) => {
         percentagesUpdatedHandler && percentagesUpdatedHandler(newDataItems.map(({id, label, percentage}) => ({
             [idPropName]: id,
             [labelPropName]: label,
             [percentagePropName]: percentage
         })))
-    }
+    }, [idPropName, labelPropName, percentagePropName, percentagesUpdatedHandler])
 
     useEffect(() => {
         const newDataItems = balanceRanges(data.reduce((acc, item) => {
@@ -39,7 +39,7 @@ const RangeGroup = ({
         }, []));
         setDataItems(newDataItems);
         callChangeHandler(newDataItems)
-    }, [data, idPropName, labelPropName, percentagePropName])
+    }, [data, idPropName, labelPropName, percentagePropName, callChangeHandler])
 
     const lockButtonClickHandler = (index) => {
         const {id, label, percentage, isLocked} = dataItems[index];
