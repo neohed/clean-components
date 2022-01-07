@@ -45,6 +45,7 @@ const FormDemo = () => {
     const [selectedValue, setSelectedValue] = useState();
     const [items, setItems] = useState(selectOptions())
     const [selectedPage, setSelectedPage] = useState(1);
+    const [text, setText] = useState('')
 
     return (
         <div>
@@ -54,8 +55,8 @@ const FormDemo = () => {
                     style={{
                         width: '350px'
                     }}
-                    value={''}
-                    changeHandler={txt => console.log(txt)}
+                    value={text}
+                    changeHandler={({target}) => setText(target.value)}
                 />
             </div>
             <div style={dividerRow}>
