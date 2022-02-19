@@ -6,7 +6,6 @@ import {
 } from 'react-router-dom';
 import TabDemo from './components/TabDemo'
 import FormDemo from './components/FormDemo'
-import './App.css';
 import RouterMenu from "./components/RouterMenu";
 import ScrollOver from "./components/parallax/ScrollOver";
 import HeaderDemo from "./components/HeaderDemo";
@@ -32,6 +31,7 @@ import FilterListDemo from "./components/FilterListDemo";
 import HeaderMobileDemo from "./components/HeaderMobileDemo";
 import EmojiRange from "./components/emoji/EmojiRange";
 import DemoCssFilters from "./components/DemoCssFilters";
+import './App.css';
 
 function App() {
     return (
