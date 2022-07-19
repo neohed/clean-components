@@ -9,10 +9,10 @@ function RouterMenu() {
             <h4>Click a link to see demo</h4>
             <ul>
                 <li>
-                    <Link to="tabs">Tabs</Link>
+                    <Link to="scroll-parallax">Scroll Parallax</Link>
                 </li>
                 <li>
-                    <Link to="scroll-parallax">Scroll Parallax</Link>
+                    <Link to="tabs">Tabs</Link>
                 </li>
                 <li>
                     <Link to="auto-complete">Auto Complete</Link>
@@ -34,6 +34,12 @@ function RouterMenu() {
                 </li>
                 <li>
                     <Link to="card">Card</Link>
+                </li>
+                <li>
+                    <Link to="file-upload">File Upload</Link>
+                </li>
+                <li>
+                    <Link to="filter-list">Filter List</Link>
                 </li>
                 <li>
                     <Link to="form">Form</Link>
@@ -75,13 +81,7 @@ function RouterMenu() {
                     <Link to="svg-tag">SVG tag</Link>
                 </li>
                 <li>
-                    <Link to="file-upload">File Upload</Link>
-                </li>
-                <li>
                     <Link to="range-group">Range Group</Link>
-                </li>
-                <li>
-                    <Link to="filter-list">Filter List</Link>
                 </li>
                 <li>
                     <Link to="css-filters">CSS Filters</Link>

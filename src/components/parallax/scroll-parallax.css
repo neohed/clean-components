@@ -11,7 +11,7 @@
 }
 
 .parallax-viewport {
-    background-color: hotpink;
+    background-color: #5995ca;
     background-image: url('../../image/City_skyline_2020.jpg');
     background-size: initial;
     background-position-x: center;
@@ -19,7 +19,7 @@
 }
 
 .parallax-viewport-2 {
-    background-color: hotpink;
+    background-color: #9cae41;
     background-image: url('../../image/Amazon-river.jpg');
     background-size: initial;
     background-position-x: center;
