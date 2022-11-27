@@ -44,4 +44,3 @@ Try creating a single demo / API doc / playground page with live DnD editing.
   - 4 image panels, responsive (4 full width, 2 by 2, 1 wide)
   - video player embedded
 * Change shrink header to be "transparent" with image underneath, text floating.  Then becoming opaque.
-* Add images, etc (other components) to parallax scroller.
