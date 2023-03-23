@@ -1,8 +1,7 @@
 import React from 'react';
 import {
-    HashRouter as Router,
-    Switch,
     Route,
+    Routes
 } from 'react-router-dom';
 import TabDemo from './components/TabDemo'
 import FormDemo from './components/FormDemo'
@@ -36,91 +35,35 @@ import './App.css';
 function App() {
     return (
         <div className="App">
-            <Router>
-                <Switch>
-                    <Route exact path="/">
-                        <RouterMenu />
-                    </Route>
-                    <Route path="/file-upload">
-                        <UploadTest/>
-                    </Route>
-                    <Route path="/svg-tag">
-                        <SvgTag/>
-                    </Route>
-                    <Route path="/svg-file">
-                        <SvgFile/>
-                    </Route>
-                    <Route path="/tabs">
-                        <TabDemo/>
-                    </Route>
-                    <Route path="/form">
-                        <FormDemo/>
-                    </Route>
-                    <Route path="/scroller">
-                        <ScrollOver/>
-                    </Route>
-                    <Route path="/scroll-parallax">
-                        <ScrollParallax/>
-                    </Route>
-                    <Route path="/simple-header">
-                        <SimpleHeader/>
-                    </Route>
-                    <Route path="/mobile-header">
-                        <HeaderMobileDemo/>
-                    </Route>
-                    <Route path="/flexbox-header">
-                        <HeaderDemo/>
-                    </Route>
-                    <Route path="/header-shrink-1">
-                        <ShrinkHeaderDemo/>
-                    </Route>
-                    <Route path="/header-shrink-2">
-                        <ShrinkHeaderDemo2/>
-                    </Route>
-                    <Route path="/header-shrink-3">
-                        <ShrinkHeaderDemo3 />
-                    </Route>
-                    <Route path="/two-columns">
-                        <TwoColumns/>
-                    </Route>
-                    <Route path="/center-box">
-                        <CenterBoxDemo/>
-                    </Route>
-                    <Route path="/center">
-                        <CenterDemo/>
-                    </Route>
-                    <Route path="/auto-complete">
-                        <AutoCompleteDemo/>
-                    </Route>
-                    <Route path="/card">
-                        <CardDemo/>
-                    </Route>
-                    <Route path="/layout-header-main">
-                        <LayoutHeaderMainDemo />
-                    </Route>
-                    <Route path="/as-many-as-fit">
-                        <AsManyAsFitDemo />
-                    </Route>
-                    <Route path="/timeline">
-                        <TimeLineDemo />
-                    </Route>
-                    <Route path="/background-offset">
-                        <BackgroundOffset />
-                    </Route>
-                    <Route path="/range-group">
-                        <RangeGroupDemo />
-                    </Route>
-                    <Route path="/filter-list">
-                        <FilterListDemo />
-                    </Route>
-                    <Route path="/emojis">
-                        <EmojiRange />
-                    </Route>
-                    <Route path="/css-filters">
-                        <DemoCssFilters />
-                    </Route>
-                </Switch>
-            </Router>
+            <Routes>
+                <Route path="/" element={<RouterMenu/>} />
+                <Route path="/file-upload" element={<UploadTest/>} />
+                <Route path="/svg-tag" element={<SvgTag/>} />
+                <Route path="/svg-file" element={<SvgFile/>} />
+                <Route path="/tabs" element={<TabDemo/>} />
+                <Route path="/form" element={<FormDemo/>} />
+                <Route path="/scroller" element={<ScrollOver/>} />
+                <Route path="/scroll-parallax" element={<ScrollParallax/>} />
+                <Route path="/simple-header" element={<SimpleHeader/>} />
+                <Route path="/mobile-header" element={<HeaderMobileDemo/>} />
+                <Route path="/flexbox-header" element={<HeaderDemo/>} />
+                <Route path="/header-shrink-1" element={<ShrinkHeaderDemo/>} />
+                <Route path="/header-shrink-2" element={<ShrinkHeaderDemo2/>} />
+                <Route path="/header-shrink-3" element={<ShrinkHeaderDemo3/>} />
+                <Route path="/two-columns" element={<TwoColumns/>} />
+                <Route path="/center-box" element={<CenterBoxDemo/>} />
+                <Route path="/center" element={<CenterDemo/>} />
+                <Route path="/auto-complete" element={<AutoCompleteDemo/>} />
+                <Route path="/card" element={<CardDemo/>} />
+                <Route path="/layout-header-main" element={<LayoutHeaderMainDemo/>} />
+                <Route path="/as-many-as-fit" element={<AsManyAsFitDemo/>} />
+                <Route path="/timeline" element={<TimeLineDemo/>} />
+                <Route path="/background-offset" element={<BackgroundOffset/>} />
+                <Route path="/range-group" element={<RangeGroupDemo/>} />
+                <Route path="/filter-list" element={<FilterListDemo/>} />
+                <Route path="/emojis" element={<EmojiRange/>} />
+                <Route path="/css-filters" element={<DemoCssFilters/>} />
+            </Routes>
         </div>
     );
 }
