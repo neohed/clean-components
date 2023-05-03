@@ -40,7 +40,6 @@ Try creating a single demo / API doc / playground page with live DnD editing.
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) { ... }
 
-* Components to add:
-  - 4 image panels, responsive (4 full width, 2 by 2, 1 wide)
-  - video player embedded
+## Todo
+* video player embedded
 * Change shrink header to be "transparent" with image underneath, text floating.  Then becoming opaque.
